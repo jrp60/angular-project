@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AutenticadoComponent } from './components/autenticado/autenticado.component';
 import { HomeComponent } from './components/home/home.component';
-import { PersonalAccountComponent } from './components/personal-account/personal-account.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
