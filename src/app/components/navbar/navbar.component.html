@@ -1,38 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Sobre mí</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Funcionalidades
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" [routerLink]="['home']" routerLinkActive="router-link-active" >Chat</a></li>
-              <li><a class="dropdown-item" [routerLink]="['home']" routerLinkActive="router-link-active" >Api Spotify</a></li>
-              <li><a class="dropdown-item" [routerLink]="['home']" routerLinkActive="router-link-active" >Api YouTube</a></li>
-              <li><a class="dropdown-item" [routerLink]="['home']" routerLinkActive="router-link-active" >Api Maps</a></li>
-              <li><a class="dropdown-item" [routerLink]="['home']" routerLinkActive="router-link-active" >Gestor imágenes</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
-      </div>
-      <span class="navbar-text">
-        <app-auth-button></app-auth-button>
-    </span>
-      <div class="justify-content-end w-100">
-       <!--  <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary me-1">Registro</button>
-          </li>
-          <li class="nav-item">
-            <button type="button" class="btn btn-outline-success">Login</button>
-          </li>
-        </ul> -->
-      </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Quién soy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Chat</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Api Spotify</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Api YouTube</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Api Maps</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Gestor imágenes</a></li>
+        <li class="nav-link" *ngIf="auth?.isAuthenticated$">
+          <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="router-link-active" >Mi perfil</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+    <div class="justify-content-end col-md-2">
+      <ul class="nav justify-content-end w-100">
+        <li class="nav-item w-100">
+          <span class="navbar-text">
+            <app-auth-button></app-auth-button>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

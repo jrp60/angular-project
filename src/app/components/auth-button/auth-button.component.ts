@@ -9,15 +9,14 @@ import { AuthService } from '@auth0/auth0-angular';
   template:
   `
     <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-      <button (click)="auth.logout({ returnTo: document.location.origin })">
+      <button class="btn btn-outline-danger me-3 w-100" (click)="auth.logout({ returnTo: document.location.origin })">
         Log out
       </button>
     </ng-container>
 
     <ng-template #loggedOut>
-      <button (click)="auth.loginWithRedirect()">Log in</button>
+      <button class="btn btn-outline-primary me-3 w-100" (click)="loginWithRedirect()">Login con Auth0</button>
     </ng-template>
-    <p>home works!</p>
   `,
   styles: [],
 })
@@ -28,6 +27,12 @@ export class AuthButtonComponent{
     
     console.log(auth);
     
+  }
+
+  loginWithRedirect(): void {
+    console.log("MTODO MIO");
+    
+    this.auth.loginWithRedirect({ redirect_uri: 'http://localhost:4200/perfil/',appState: { target: '/perfil' } });
   }
 
 }
