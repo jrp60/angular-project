@@ -9,12 +9,16 @@ import { SpotiComponent } from './components/spoti/spoti.component';
 import { YoutubeComponent } from './components/youtube/youtube.component';
 
 import { AuthGuard } from '@auth0/auth0-angular';
+import { SearchComponent } from './components/spoti/search/search.component';
+/* import { HomeSpotiComponent } from './components/spoti/home-spoti/home-spoti.component'; */
 
 export const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'perfil', component: AutenticadoComponent, canActivate: [AuthGuard], },
   { path: 'chat', component: ChatComponent },
-  { path: 'spoti', component: SpotiComponent },
+  { path: 'spotify', component: SpotiComponent },
+  /* { path: 'spoti/home', component: HomeSpotiComponent }, */
+  { path: 'spotify/search', component: SearchComponent },
   { path: 'youtube', component: YoutubeComponent },
   { path: 'maps', component: MapsComponent },
   { path: 'archivos', component: GestorArchivosComponent },

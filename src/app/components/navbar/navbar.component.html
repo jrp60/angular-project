@@ -7,7 +7,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-link"><a class="nav-link" [routerLink]="['chat']" routerLinkActive="router-link-active" >Chat</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['spoti']" routerLinkActive="router-link-active" >Api Spotify</a></li>
+        <li class="nav-link dropdown">
+          <a class="nav-link dropdown-toggle" [routerLink]="['spotify']" routerLinkActive="router-link-active" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Api Spotify
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="['spotify']" routerLinkActive="router-link-active" >Home</a></li>
+            <li><a class="dropdown-item" [routerLink]="['spotify/search']" routerLinkActive="router-link-active" >Search</a></li>
+          </ul>
+        </li>
         <li class="nav-link"><a class="nav-link" [routerLink]="['youtube']" routerLinkActive="router-link-active" >Api YouTube</a></li>
         <li class="nav-link"><a class="nav-link" [routerLink]="['maps']" routerLinkActive="router-link-active" >Api Maps</a></li>
         <li class="nav-link"><a class="nav-link" [routerLink]="['archivos']" routerLinkActive="router-link-active" >Gestor imágenes</a></li>

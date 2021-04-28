@@ -9,13 +9,13 @@ import { AuthService } from '@auth0/auth0-angular';
   template:
   `
     <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-      <button class="btn btn-outline-danger me-3 w-100" (click)="auth.logout({ returnTo: document.location.origin })">
+      <button class="btn btn-outline-danger  w-100" (click)="auth.logout({ returnTo: document.location.origin })">
         Log out
       </button>
     </ng-container>
 
     <ng-template #loggedOut>
-      <button class="btn btn-outline-primary me-3 w-100" (click)="loginWithRedirect()">Login con Auth0</button>
+      <button class="btn btn-outline-primary  w-100" (click)="loginWithRedirect()">Login con Auth0</button>
     </ng-template>
   `,
   styles: [],
