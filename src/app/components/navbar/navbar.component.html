@@ -6,12 +6,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Chat</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Api Spotify</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Api YouTube</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Api Maps</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active" >Gestor imágenes</a></li>
-        <li class="nav-link" *ngIf="auth?.isAuthenticated$">
+        <li class="nav-link"><a class="nav-link" [routerLink]="['chat']" routerLinkActive="router-link-active" >Chat</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['spoti']" routerLinkActive="router-link-active" >Api Spotify</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['youtube']" routerLinkActive="router-link-active" >Api YouTube</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['maps']" routerLinkActive="router-link-active" >Api Maps</a></li>
+        <li class="nav-link"><a class="nav-link" [routerLink]="['archivos']" routerLinkActive="router-link-active" >Gestor imágenes</a></li>
+        <li class="nav-link"  *ngIf="auth.isAuthenticated$ | async">
           <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="router-link-active" >Mi perfil</a>
         </li>
       </ul>
