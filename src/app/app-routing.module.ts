@@ -23,7 +23,7 @@ export const APP_ROUTES: Routes = [
   { path: 'maps', component: MapsComponent },
   { path: 'archivos', component: GestorArchivosComponent },
   /* { path: 'heroe/:id', component: personalAccount }, */
-  { path: '**', pathMatch: 'full', redirectTo: 'HomeComponent' }
+  { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
 @NgModule({
