@@ -23,15 +23,9 @@ import { AuthService } from '@auth0/auth0-angular';
 export class AuthButtonComponent{
   // Inject the authentication service into your component through the constructor
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {
-    console.log("auth constructor log");
-    
-    console.log(auth);
-    
   }
 
   loginWithRedirect(): void {
-    console.log("MTODO MIO");
-    
     this.auth.loginWithRedirect({ redirect_uri: 'http://localhost:4200/perfil/',appState: { target: '/perfil' } });
   }
 
