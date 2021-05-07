@@ -100,3 +100,6 @@ li.nav-link > a.router-link-active{
   margin-left: auto;
   margin-right: auto;
 }
+.m-right-10{
+  margin-right: 10px;
+}

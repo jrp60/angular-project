@@ -14,25 +14,10 @@ export class SpotiComponent implements OnInit {
   termino:string = "";
 
   constructor(private http:HttpClient,public _spotifyService:SpotifyService){
-    
+    this.getTokenAndReleases();
   }
 
   ngOnInit(): void {
-    
-    /* this.buscarArtista(); */
-    setTimeout(function(){ 
-      console.log("TIMEOUT");
-      console.log(this._spotifyService);
-      
-       this._spotifyService.getArtistas(this.termino)
-      .subscribe(
-        data => {
-          console.log('ESTO ES DEL SEARCH.COMPONENT');
-          console.log(data);
-          
-          
-        }
-      ); }, 3000);
   }
 
   buscarArtista(){
@@ -41,25 +26,27 @@ export class SpotiComponent implements OnInit {
       data => {
         console.log('ESTO ES DEL SEARCH.COMPONENT');
         console.log(data);
-        
-        
       }
     );
     return null;
   }
 
   getNewReleases(){
-    this._spotifyService.getNewReleasesS().subscribe(
-      data => {
-        console.log('ESTO ES DEL SEARCH.COMPONENT');
-        console.log(data);
-        
-        
-      }
-    );
+    console.log("RELEASES");
+    
+    return this._spotifyService.getNewReleasesS();
   }
   
+  createToken(){
+    return this._spotifyService.createToken();
+  }
 
+  getTokenAndReleases() {
+    this.createToken()
+      .subscribe(
+        () => this.getNewReleases().subscribe(()=> console.log("hola final"))
+      );
+  }
 
 
 }
