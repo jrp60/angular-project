@@ -10,7 +10,7 @@
     <div class="carousel-inner">
       <div class="carousel-item" *ngFor="let track of _spotifyService.releases; let isFirst = first" [ngClass]="{active:isFirst}">
         <img [src]="track.images | sinfoto" class="d-block carousel-img" alt="imagen del slide 1">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-md-block">
           <h2 class="carouselName">{{track.name}}</h2>
           <iframe [src]="track.uri | domseguro:'https://embed.spotify.com/?uri='" width="300" height="80" frameborder="0"></iframe>
         </div>
