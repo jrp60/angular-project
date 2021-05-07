@@ -1,0 +1,34 @@
+<div class="container main-container">
+  <h1>
+    <div class="imgContiner">
+      <img src="/assets/img/banner-ico.png" class="flexibleImg spotiLogo"> Api Spotify - <small>Top Lanzamientos</small>
+    </div>
+  </h1>
+</div>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" *ngIf="_spotifyService.releases.length>17;else charginData">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let track of _spotifyService.releases; let isFirst = first" [ngClass]="{active:isFirst}">
+        <img [src]="track.images | sinfoto" class="d-block carousel-img" alt="imagen del slide 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="carouselName">{{track.name}}</h2>
+          <iframe [src]="track.uri | domseguro:'https://embed.spotify.com/?uri='" width="300" height="80" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<ng-template #charginData>
+  <div class="container main-container">
+    <div class="alert alert-info" role="alert">
+      <h2>CARGANDO DATOS...</h2>
+    </div>
+  </div>
+</ng-template>

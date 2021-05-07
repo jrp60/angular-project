@@ -1,0 +1,31 @@
+<div class="container" *ngIf="auth?.user$ | async as user">
+    <h1>¡Hola {{user.given_name}}!</h1>
+    <h3>Ahora estás logeado, aunque lamentablemente no hay ninguna funcionalidad extra.</h3>
+    <br>
+    <table class="table">
+    <thead class="table-dark"> 
+        <tr>
+            <th></th>
+            <th>Tus datos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nombre: </td>
+            <td>{{user.name}}</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>{{user.email}}</td>
+        </tr>
+        <tr>
+            <td>Nick: </td>
+            <td>{{user.nickname}}</td>
+        </tr>
+        <tr>
+            <td>Imagen de perfil: </td>
+            <td><img [src]="user.picture" alt=""></td>
+        </tr>
+    </tbody>
+    </table>
+</div>

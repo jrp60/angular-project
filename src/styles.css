@@ -1,1 +1,105 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  background-color: black;
+  color: white !important;
+}
+
+hr{
+  border-color: white;
+}
+
+.jumbotron{
+  background-color: #171717;
+}
+
+.puntero{
+  cursor: pointer;
+}
+
+.carousel-item{
+  width: 100%;
+  height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.carouselName{
+  background-color: rgba(23, 23, 23, 0.613);
+  padding: 0.6em 0em 0.6em 0em;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1em;
+}
+li.nav-link > a.router-link-active{
+  color:aquamarine !important;
+}
+.navbar > div > a.router-link-active{
+  color:aquamarine !important;
+}
+
+@media (max-width: 600px) {
+  .carousel-item {
+    height: 280px;
+  }
+}
+
+.main-container{
+  margin-top: 30px;
+}
+
+.img-circle{
+  border-radius: 100%;
+}
+
+/* Animaciones */
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.spotiLogo{
+  margin-bottom: 10px;
+}
+.imgContainer {
+  width:auto; 
+}
+.flexibleImg {
+  width: auto;
+  height: 40px;
+}
+.img-50{
+  height: 50px;
+  width: 50px;
+}
+.carousel-img{
+  width: auto;
+  height:700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.m-right-10{
+  margin-right: 10px;
+}

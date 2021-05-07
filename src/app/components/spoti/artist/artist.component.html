@@ -1,0 +1,50 @@
+<div class="main-container container animated fadeIn fast" *ngIf="artista">
+    <div class="row">
+        <div class="col-md-3  text-center">
+            <img [src]="artista.images | sinfoto " class="img-circle img-thumbnail" alt="">
+        </div>
+        <div class="col-md-9">
+            <h1>{{artista.name}} <small>Popularidad {{artista.popularity}}%</small></h1>
+            <hr>
+            <a [href]="artista.external_urls?.spotify" class="btn btn-outline-success m-right-10">Abrir página Spotify</a>
+            <a [routerLink]="['/spotify/search']" routerLinkActive="router-link-active"  class="btn btn-outline-danger">Regresar</a>
+        </div>        
+    </div>
+    <div class="container  text-center" *ngIf="pistas">
+        <h3>Top tracks</h3>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Foto</th>
+                                <th>Canción</th>
+                                <th>Popularidad</th>
+                                <th>Preview</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pista of pistas; let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>
+                                    <img [src]="pista.album?.images | sinfoto" alt="" class="img-fluid img-50">
+                                </td>
+                                <td>{{pista.name}}</td>
+                                <td>{{pista.popularity}}%</td>
+                                <td>
+                                    <audio *ngIf="pista.preview_url;  else pistaUri" [src]="pista.preview_url" controls></audio>
+                                    <ng-template #pistaUri>
+                                        <iframe [src]="pista.uri | domseguro:'https://embed.spotify.com/?uri='" width="300" height="80" frameborder="0"></iframe>
+                                    </ng-template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
