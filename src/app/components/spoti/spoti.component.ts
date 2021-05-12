@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SpotifyService } from '../../services/spotify.service'
 
 @Component({
@@ -8,48 +7,58 @@ import { SpotifyService } from '../../services/spotify.service'
   styles: [
   ]
 })
-export class SpotiComponent implements OnInit {
+export class SpotiComponent {
 
   private token:string;
   termino:string = "";
 
-  constructor(private http:HttpClient,public _spotifyService:SpotifyService){
-    //get token from localstorage
-    //if not, create and store it
-    this.getTokenAndReleases();
+  constructor(public _spotifyService:SpotifyService){
     if (typeof(Storage) !== 'undefined') {
-      // Código cuando Storage es compatible
+      this.getTokenStorageAndReleases();
     } else {
-     // Código cuando Storage NO es compatible
+      this.getTokenAndReleasesWithoutStorage();
     }
   }
 
-  ngOnInit(): void {
-  }
-
-/*   buscarArtista(){
-    this._spotifyService.getArtistas(this.termino)
-    .subscribe(
-      data => {
-        console.log('ESTO ES DEL SEARCH.COMPONENT');
-        console.log(data);
-      }
-    );
-    return null;
-  } */
-
-  getNewReleases(){
-    return this._spotifyService.getNewReleasesS();
+  getNewReleases(token?:string){
+    return this._spotifyService.getNewReleasesS(token);
   }
   
   createToken(){
     return this._spotifyService.createToken();
   }
 
-  getTokenAndReleases() {
+  createTokenStorage(){
+    return this._spotifyService.createToken();
+  }
+
+  getTokenStorageAndReleases(){
+    this.token = sessionStorage.getItem('tokenSpotify');
+    console.log(this.token);
+    if(this.token==null || this.token=='' || this.token=='null'){
+      console.log("ESTAMOS EN NULL");
+      
+      this.createTokenStorage().subscribe((data) =>{
+        this.token = data;
+        console.log(this.token);
+        sessionStorage.setItem('tokenSpotify', this.token);
+        this.getNewReleases(this.token).subscribe(()=> {return} );
+      });
+      
+    }
+    else{
+      console.log("ELSE BLOCK");
+      console.log(this.token);
+      
+      this.getNewReleases(this.token).subscribe(()=> {return});
+    }
+    
+  }
+
+  getTokenAndReleasesWithoutStorage() {
     this.createToken()
       .subscribe(
-        () => this.getNewReleases().subscribe(()=> console.log("hola final"))
+        () => this.getNewReleases().subscribe(()=> {return})
       );
   }
 
