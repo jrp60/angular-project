@@ -14,13 +14,20 @@ export class SpotiComponent implements OnInit {
   termino:string = "";
 
   constructor(private http:HttpClient,public _spotifyService:SpotifyService){
+    //get token from localstorage
+    //if not, create and store it
     this.getTokenAndReleases();
+    if (typeof(Storage) !== 'undefined') {
+      // Código cuando Storage es compatible
+    } else {
+     // Código cuando Storage NO es compatible
+    }
   }
 
   ngOnInit(): void {
   }
 
-  buscarArtista(){
+/*   buscarArtista(){
     this._spotifyService.getArtistas(this.termino)
     .subscribe(
       data => {
@@ -29,11 +36,9 @@ export class SpotiComponent implements OnInit {
       }
     );
     return null;
-  }
+  } */
 
   getNewReleases(){
-    console.log("RELEASES");
-    
     return this._spotifyService.getNewReleasesS();
   }
   

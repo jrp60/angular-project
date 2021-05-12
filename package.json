@@ -22,8 +22,11 @@
     "@auth0/auth0-angular": "^1.4.1",
     "angular-cli-ghpages": "^1.0.0-rc.1",
     "angular-spotify": "^1.5.1",
+    "dotenv": "^9.0.2",
+    "path": "^0.12.7",
     "query-string": "^7.0.0",
     "rxjs": "~6.6.7",
+    "stream": "0.0.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
