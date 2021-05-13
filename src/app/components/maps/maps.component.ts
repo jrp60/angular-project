@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AgmCoreModule } from '@agm/core';
+import { NgModule } from '@angular/core';
 
+
+/* @NgModule({
+  imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDThwGxJqFsSN-etU1MGnLsXBc66dIRYsU'
+    })
+   ]
+ }) */
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
   styles: [
   ]
 })
-export class MapsComponent implements OnInit {
+ 
+export class MapsComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   lat = 51.678418;
   lng = 7.809007;
