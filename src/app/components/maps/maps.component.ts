@@ -21,8 +21,8 @@ export class MapsComponent {
 
   constructor() { }
 
-  lat = 51.678418;
-  lng = 7.809007;
-  zoom=20;
+  lat:number = 38.48420283763195;
+  lng:number = -0.7677831619109627;
+  zoom:number = 15;
 
 }
