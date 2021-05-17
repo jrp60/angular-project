@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
+import { MapasService } from "../../services/mapas.service";
+import { FormsModule } from '@angular/forms';
 
-
-/* @NgModule({
-  imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDThwGxJqFsSN-etU1MGnLsXBc66dIRYsU'
-    })
-   ]
- }) */
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',

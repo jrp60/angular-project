@@ -1,5 +1,66 @@
-<p>maps works!</p>
-
+<div class="container main-container">
+    <div class="row">
+      <br>
+      <div class="col-md-4" *ngIf="!marcadorSel">
+        <div class="alert alert-info">
+          Haga click en el mapa para crear un marcador o seleccione uno.
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="marcadorSel">
+        <h5>Marcador</h5>
+        <hr>
+        <div class="form-group">
+          <label for="">Titulo</label>
+          <input  type="text"
+                  [(ngModel)]="marcadorSel.titulo"
+                  name="titulo"
+                  class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Descripción</label>
+          <textarea   rows="5"
+                      [(ngModel)]="marcadorSel.desc"
+                      name="desc"
+                      class="form-control">
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="">Draggable</label>
+          <select [(ngModel)]="draggable" name="draggable" class="form-control" (change)="cambiarDraggable()">
+            <option value="1">True</option>
+            <option value="0">False</option>
+          </select>
+        </div>
+        <br>
+        <button type="button" class="btn btn-outline-primary w-100" (click)=_ms.guardarMarcadores()>
+          Guardar
+        </button>
+      </div>
+      <div class="col-md-8">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="clickMapa($event)">
+          <agm-marker *ngFor="let marcador of _ms.marcadores; let i = index"
+                      [latitude]="marcador.lat" 
+                      [longitude]="marcador.lng"
+                      [title]="marcador.titulo"
+                      [markerDraggable]="marcador.draggable"
+                      (markerClick)="clickMarcador(marcador, i)"
+                      (dragEnd)="dragEndMarcador(marcador, $event )">
+            <agm-info-window [disableAutoPan]="true">
+              <strong>{{marcador.titulo}}</strong>
+              <p *ngIf="marcador.desc">{{marcador.desc}}</p>
+              <p class="puntero">
+                <a (click)="_ms.borrarMarcador(i); marcadorSel=null" class="text-danger">
+                  Borrar marcador
+                </a>
+              </p>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>    
+      </div>
+    </div>
+  </div>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-    <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
+    <agm-marker [latitude]="lat" [longitude]="lng" >
+        
+    </agm-marker>
 </agm-map>
