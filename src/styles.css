@@ -108,3 +108,6 @@ li.nav-link > a.router-link-active{
 agm-map {
   height: 300px;
 }
+.agm-info-window-content{
+  color: black !important;
+}
