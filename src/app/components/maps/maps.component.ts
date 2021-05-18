@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
-import { NgModule } from '@angular/core';
 import { MapasService } from "../../services/mapas.service";
-import { FormsModule } from '@angular/forms';
 import { Marcador } from 'src/app/interfaces/marcador.interface';
 
 @Component({
@@ -23,12 +20,9 @@ export class MapsComponent {
   zoom:number = 15;
 
   marcadorSel:Marcador = null;
-  draggable:number = 1;
+  draggable:string = "1";
 
   clickMapa(evento){
-    console.log(evento);
-    console.log("hola");
-    
     let nuevoMarcador:Marcador = {
       lat: evento.coords.lat,
       lng: evento.coords.lng,
@@ -40,11 +34,11 @@ export class MapsComponent {
 
   clickMarcador(marcador:Marcador, i:number){
     this.marcadorSel = marcador;
-    this.draggable
+    
     if(this.marcadorSel.draggable){
-      this.draggable = 1;
+      this.draggable = "1";
     }else{
-      this.draggable = 0;
+      this.draggable = "0";
     }
   }
 
@@ -59,10 +53,10 @@ export class MapsComponent {
   }
 
   cambiarDraggable(){
-    if(this.draggable==1){
-      this.draggable = 0;
+    if(this.draggable == "1"){
+      this.marcadorSel.draggable = true;
     }else{
-      this.draggable = 1;
+      this.marcadorSel.draggable = false;
     }
   }
 
