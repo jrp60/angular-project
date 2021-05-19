@@ -12,8 +12,6 @@ export class AutenticadoComponent implements OnInit {
   constructor(public auth:AuthService) { }
 
   ngOnInit(): void {
-    console.log("perfil auth",this.auth);
-    
   }
 
 }
