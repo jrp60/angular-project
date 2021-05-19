@@ -21,7 +21,7 @@ export class YoutubeComponent implements OnInit {
       console.log(process.env.SPOTIFY_CLIENT_ID);
       
     } */
-    console.log(environment.SPOTIFY_CLIENT_ID);
+
   }
 
   ngOnInit(): void {
