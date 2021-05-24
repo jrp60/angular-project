@@ -6,7 +6,7 @@
     "config": "ts-node ./src/assets/setEnv.ts",
     "start": "npm run config -- --environment=dev && ng serve",
     "build": "npm run config -- --environment=prod && ng build --prod",
-    "deploy": "npm run config -- --environment=prod && ng build --prod --base-href=/angular-project/",
+    "deploy": "npm run config -- --environment=prod && ng deploy --prod --base-href=/angular-project/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
