@@ -10,6 +10,8 @@ export class YoutubeComponent implements OnInit {
 
   constructor() {
 /*     console.log(env.SPOTIFY_CLIENT_ID); */
+    console.log(environment.AUTH_DOMAIN);
+    
     
   }
 
