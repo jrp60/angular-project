@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 
 import { MapasService } from "./services/mapas.service";
+import { SpotifyService } from "./services/spotify.service";
+import { YoutubeService } from "./services/youtube.service";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +61,11 @@ import { environment } from '../environments/environment';
     })
     
   ],
-  providers: [MapasService],
+  providers: [
+    MapasService,
+    SpotifyService,
+    YoutubeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

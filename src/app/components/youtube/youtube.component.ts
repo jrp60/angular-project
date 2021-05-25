@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { YoutubeService } from "../../services/youtube.service";
 
 @Component({
   selector: 'app-youtube',
@@ -7,16 +8,30 @@ import { environment } from '../../../environments/environment';
   styles: [
   ]
 })
-export class YoutubeComponent implements OnInit {
+export class YoutubeComponent {
 
-  constructor() {
-/*     console.log(env.SPOTIFY_CLIENT_ID); */
-    console.log(environment.AUTH_DOMAIN);
-    
+  videos:any[] = [];
+  videoSel:any;
+
+  constructor(public _yts:YoutubeService) {
+    this._yts.getVideos().subscribe(videos => {
+      this.videos = videos;
+    });
     
   }
+  verVideo(video:any){
+    this.videoSel = video;
+  }
 
-  ngOnInit(): void {
+  cerrarModal(){
+    this.videoSel = null;
+
+  }
+
+  cargarMas(){
+    this._yts.getVideos().subscribe(videos=>{
+      this.videos.push.apply(this.videos, videos);
+    });
   }
 
 }

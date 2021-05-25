@@ -1,2 +1,34 @@
-<p>youtube works! para hacer commit, añadiendo mas cambios</p>
-<h2>a ver si se ve el cambio</h2>
+<div class="container main-container">
+    <h1>Api YuTube - Tendencias España</h1>
+    <hr>
+    <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="videos.length>0">
+        <div class="col" *ngFor="let video of videos">
+          <div class="card text-white bg-dark">
+            <img [src]="video.thumbnails.high.url" class="card-img-top" [alt]="video.title">
+            <div class="card-body">
+              <h5 class="card-title">{{video.title}}</h5>
+              <button (click)="verVideo(video)"  data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-outline-primary w-100">Ver video</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <button type="button" (click)="cargarMas()" class="btn btn-outline-primary w-100 mt-2 mb-5">Cargar más</button>
+</div>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content" *ngIf="videoSel">
+        <div class="modal-header">
+            <h5 class="modal-title">{{videoSel.title}}</h5>
+          </div>
+        <div class="modal-body">
+            <iframe width="100%" height="315" [src]="videoSel.resourceId.videoId | videoYoutube" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar Video</button>
+        </div>
+      </div>
+    </div>
+</div>
+
