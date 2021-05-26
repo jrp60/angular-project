@@ -29,6 +29,7 @@ import { SinfotoPipe } from './pipes/sinfoto.pipe';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 import { environment } from '../environments/environment';
+import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { environment } from '../environments/environment';
     SearchComponent,
     SinfotoPipe,
     DomseguroPipe,
-    ArtistComponent
+    ArtistComponent,
+    VideoYoutubePipe
   ],
   imports: [
     BrowserModule,

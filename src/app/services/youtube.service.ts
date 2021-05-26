@@ -14,7 +14,6 @@ export class YoutubeService{
     constructor(private http:HttpClient){}
 
     getVideos(){
-        let url=``;
         let params = new HttpParams();
     
         params = params.append('part', 'snippet');
@@ -23,17 +22,15 @@ export class YoutubeService{
         params = params.set('regionCode', 'ES');
         params = params.set('key', this.apikeyYT);
 
-        /* if(this.nextPageToken){
+        if(this.nextPageToken){
             params = params.set('pageToken', this.nextPageToken);
-        } */
+        }
 
         return this.http.get(this.youtubeUrl, {params: params}).pipe(map(res => {
-            console.log("data",res);
             this.nextPageToken = res['nextPageToken'];
             let videos:any[] = [];
             for(let video of res['items']){
-                let snippet = video['snippet'];
-                videos.push(snippet);
+                videos.push(video);
             }
             return videos;
         }));
