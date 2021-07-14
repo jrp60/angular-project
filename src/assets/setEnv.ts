@@ -55,6 +55,6 @@ const environmentFileContent = `
     };
 `;
 
-writeFileUsingFS(targetPath, environmentFileContent); // appending data into the target file
+writeFileUsingFS(targetPath, environmentFileContent.toString()); // appending data into the target file
 
 /* tslint:enable */
