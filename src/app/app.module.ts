@@ -7,9 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { CommonModule } from '@angular/common';
+
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
 import { YoutubeService } from "./services/youtube.service";
+import { CargaImagenesService } from "./services/carga-imagenes.service";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +35,8 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 import { environment } from '../environments/environment';
 import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
+import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +54,9 @@ import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
     SinfotoPipe,
     DomseguroPipe,
     ArtistComponent,
-    VideoYoutubePipe
+    VideoYoutubePipe,
+    FotosComponent,
+    NgDropFilesDirective
   ],
   imports: [
     BrowserModule,
@@ -60,13 +69,16 @@ import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
     FormsModule,
     AgmCoreModule.forRoot({
       apiKey: environment.AGM_APIKEY
-    })
-    
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    CommonModule
   ],
   providers: [
     MapasService,
     SpotifyService,
-    YoutubeService
+    YoutubeService,
+    CargaImagenesService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,20 @@
+
+/*{
+  "rules": {
+    "perfiles": {
+      "$user_id": {
+        ".read": "auth != null",
+        ".write": "$user_id === auth.uid"
+      }
+    }
+  }
+} */
+
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+
+

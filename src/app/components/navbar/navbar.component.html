@@ -18,7 +18,14 @@
         </li>
         <li class="nav-link"><a class="nav-link" [routerLink]="['youtube']" routerLinkActive="router-link-active" >Api YouTube</a></li>
         <li class="nav-link"><a class="nav-link" [routerLink]="['maps']" routerLinkActive="router-link-active" >Api Maps</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['archivos']" routerLinkActive="router-link-active" >Gestor imágenes</a></li>
+        <li class="nav-link dropdown">
+          <a class="nav-link dropdown-toggle" [routerLink]="['fotos']" routerLinkActive="router-link-active" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gestor imágenes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="['fotos/subir-imagen']" routerLinkActive="router-link-active" >Subir imágen</a></li>
+          </ul>
+        </li>
         <li class="nav-link"  *ngIf="auth.isAuthenticated$ | async">
           <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="router-link-active" >Mi perfil</a>
         </li>

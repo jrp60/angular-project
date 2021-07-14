@@ -13,6 +13,7 @@ import { MapsComponent } from './components/maps/maps.component';
 import { GestorArchivosComponent } from './components/gestor-archivos/gestor-archivos.component';
 import { SearchComponent } from './components/spoti/search/search.component';
 import { ArtistComponent } from './components/spoti/artist/artist.component';
+import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
 
 export const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,7 +24,8 @@ export const APP_ROUTES: Routes = [
   { path: 'spotify/search/:id', component: ArtistComponent },
   { path: 'youtube', component: YoutubeComponent },
   { path: 'maps', component: MapsComponent },
-  { path: 'archivos', component: GestorArchivosComponent },
+  { path: 'fotos/subir-imagen', component: GestorArchivosComponent },
+  { path: 'fotos', component: FotosComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

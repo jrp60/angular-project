@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fotos-app-779cb": {
+      "hosting": {
+        "personalApp": [
+          "fotos-app-779cb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fotos-app-779cb"
+  }
+}
