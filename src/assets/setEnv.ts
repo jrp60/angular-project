@@ -50,7 +50,8 @@ const environmentFileContent = `
         SPOTIFY_CLIENT_SECRET: '${process.env.SPOTIFY_CLIENT_SECRET}',
         AGM_APIKEY: '${process.env.AGM_APIKEY}',
         AUTH_CLIENT_ID: '${process.env.AUTH_CLIENT_ID}',
-        AUTH_DOMAIN: '${process.env.AUTH_DOMAIN}'
+        AUTH_DOMAIN: '${process.env.AUTH_DOMAIN}',
+        firebase: '${process.env.FIREBAE}',
     };
 `;
 
