@@ -13,6 +13,8 @@ function writeFileUsingFS(targetPath, environmentFileContent){
     writeFile(targetPath, environmentFileContent, function(err){
         if(err){
             console.log(err);
+            console.log("HOLITA");
+            
         }
 
         if(environmentFileContent !== ''){
@@ -25,13 +27,14 @@ function writeFileUsingFS(targetPath, environmentFileContent){
 //providing path to the `environments` directory
 const envDirectory = './src/environments';
 
+
 //creates the `environments` directory if does not exist
 if(!existsSync(envDirectory)){
     mkdirSync(envDirectory);
 }
 //creates the `enviroment.prod.ts` and `environment.ts` files if it does not exist
-writeFileUsingFS('./src/environments/environment.prod.ts');
-writeFileUsingFS('./src/environments/environment.ts');
+writeFileUsingFS('./src/environments/environment.prod.ts', '');
+writeFileUsingFS('./src/environments/environment.ts', '');
 
 const isProduction = environment === 'prod';
 
@@ -50,10 +53,11 @@ const environmentFileContent = `
         SPOTIFY_CLIENT_SECRET: '${process.env.SPOTIFY_CLIENT_SECRET}',
         AGM_APIKEY: '${process.env.AGM_APIKEY}',
         AUTH_CLIENT_ID: '${process.env.AUTH_CLIENT_ID}',
-        AUTH_DOMAIN: '${process.env.AUTH_DOMAIN}'
+        AUTH_DOMAIN: '${process.env.AUTH_DOMAIN}',
+        FIREBASE: {${process.env.FIREBASE}}
     };
 `;
 
-writeFileUsingFS(targetPath, environmentFileContent.toString()); // appending data into the target file
+writeFileUsingFS(targetPath, environmentFileContent); // appending data into the target file
 
 /* tslint:enable */

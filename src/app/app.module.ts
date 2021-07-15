@@ -70,7 +70,7 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
     AgmCoreModule.forRoot({
       apiKey: environment.AGM_APIKEY
     }),
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.FIREBASE),
     AngularFireDatabaseModule,
     CommonModule
   ],

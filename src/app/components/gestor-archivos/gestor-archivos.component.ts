@@ -11,7 +11,6 @@ import { CargaImagenesService } from 'src/app/services/carga-imagenes.service';
 export class GestorArchivosComponent implements OnInit {
 
   estaSobreDropZone:boolean = false;
-  permiteCargar:boolean = true;
   archivos:FileItem[] = [];
 
   constructor(public _cargaImagenes:CargaImagenesService){ }
@@ -24,13 +23,8 @@ export class GestorArchivosComponent implements OnInit {
   }
 
   cargarImagenesFirebase(){
-    this.permiteCargar = false;
-    this._cargaImagenes.charge_images(this.archivos);
+    this._cargaImagenes.newcharge2(this.archivos);
   }
 
-  limpiarArchivos(){
-    this.archivos = [];
-    this.permiteCargar = true;
-  }
 
 }

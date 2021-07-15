@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 //import { AngularFireModule } from "@angular/fire";
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import firebase from 'firebase/app';
 import { FileItem } from '../models/file-item';
 
@@ -36,6 +36,69 @@ export class CargaImagenesService {
     });
   }
 
+  newcharge(archivos: FileItem[]){
+    const promises = archivos.map((file, index) => {
+      console.log(file);
+      
+      let ref = firebase.storage().ref(`img/${file.archivo.name}`);
+      return ref.put(file[index]).then(() => ref.getDownloadURL());
+    })
+    Promise.all(promises)
+      .then((uploadedMediaList) => {
+        console.log(uploadedMediaList, 'all');
+      })
+      .catch((err) => alert(err.code));
+  }
+
+  newcharge2(archivos: FileItem[]){
+    archivos.map((file, index) => {
+      //console.log(file);
+      
+      let ref = firebase.storage().ref().child(`${this.CARPETA_IMAGENES}/${file.nombreArchivo}`);
+      ref.put(file.archivo).on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+      (snapshot) =>{
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        //console.log(snapshot);
+          
+        file.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused');
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running');
+            break;
+        }
+        
+
+      }, function(error) {
+        console.log("Error: ", error);
+      }, ()=> {
+        // Upload completed successfully, now we can get the download URL
+        console.log("upload completed successfully");
+        ref.getDownloadURL().then((downloadURL)=> {
+          file.url = downloadURL;
+          console.log("downloadURL",downloadURL);
+          
+          console.log("ITEM ", file);
+
+          
+          this.guardarImagen({nombre:file.nombreArchivo, url:file.url});
+          file.estaSubiendo = false;
+          
+        });
+        
+      }
+    );
+    })
+   /*  Promise.all(promises)
+      .then((uploadedMediaList) => {
+        console.log(uploadedMediaList, 'all');
+      })
+      .catch((err) => alert(err.code)); */
+  }
+
   /**
    * Add images to the firebase
    * 
@@ -61,6 +124,8 @@ export class CargaImagenesService {
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         (snapshot)=> {
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          console.log(snapshot);
+          
           item.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -69,6 +134,10 @@ export class CargaImagenesService {
             case firebase.storage.TaskState.RUNNING: // or 'running'
               console.log('Upload is running');
               break;
+            case firebase.storage.TaskState.SUCCESS:
+              console.log('Upload is SUCCESS');
+              
+              break;
           }
           
 
@@ -76,6 +145,7 @@ export class CargaImagenesService {
           console.log("Error: ", error);
         }, ()=> {
           // Upload completed successfully, now we can get the download URL
+          console.log("upload completed successfully");
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
             item.url = downloadURL;
             console.log("downloadURL",downloadURL);
@@ -87,6 +157,7 @@ export class CargaImagenesService {
             item.estaSubiendo = false;
             
           });
+          
         }
       );
     }
@@ -102,6 +173,8 @@ export class CargaImagenesService {
    * @return void
   */
   guardarImagen(imagen:any){
+    console.log("GUARDAR IMAGEN");
+    
     this.af.list(`/${this.CARPETA_IMAGENES}`).push(imagen);
 
     // Deprecated

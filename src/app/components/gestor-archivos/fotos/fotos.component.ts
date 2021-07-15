@@ -23,8 +23,6 @@ export class FotosComponent implements OnInit {
       this.imagenes = value.val();
       //this.keys = value.val();
       console.log("KEYSS", this.keys);
-
-      console.log(this.imagenes["-MeR8vyx1NHm3U93KEoq"]);
       
       
       console.log("IMAGENES EN COMPONENT",this.imagenes);

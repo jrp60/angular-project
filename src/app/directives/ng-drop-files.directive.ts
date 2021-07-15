@@ -39,9 +39,17 @@ export class NgDropFilesDirective {
       return;
     }
     /* de todos los fatos de la transferencia, agarramos solo los Files */
+    console.log(this.archivos);
+    
+    if(this.archivos.length != 0)
+      this.limpiarArchivos();
+    console.log(this.archivos);
+    
     this._agregarArchivos(transferencia.files);
     this.archivoSobre.emit(false);
     this._prevenirYdetener(event);
+    console.log(this.archivos);
+    
   }
 
   /* valida que en el evento haya algo que transferir */
@@ -94,7 +102,6 @@ export class NgDropFilesDirective {
     return(tipoArchivo == '' || tipoArchivo == undefined) ? false : tipoArchivo.startsWith("image");
   }
 
-
   /**
    * Add FileItems to the directive array of FileItems
    * 
@@ -107,14 +114,32 @@ export class NgDropFilesDirective {
    */ 
   private _agregarArchivos(archivosLista:FileList){
     /*  console.log(archivosLista); */
-     for(let propiedad in Object.getOwnPropertyNames(archivosLista)){
-       let archTemporal = archivosLista[propiedad];
-       if(this._archivoPuedeSerCargado(archTemporal)){
-         let nuevoArchivo = new FileItem(archTemporal);
-         this.archivos.push(nuevoArchivo);
-       }
-     }
-     console.log(this.archivos);
-   }
+    for(let propiedad in Object.getOwnPropertyNames(archivosLista)){
+      let archTemporal = archivosLista[propiedad];
+      if(this._archivoPuedeSerCargado(archTemporal)){
+        let nuevoArchivo = new FileItem(archTemporal);
+        this.archivos.push(nuevoArchivo);
+      }
+    }
+    console.log("agregar archivos", this.archivos);
+  }
+
+  limpiarArchivos(){
+    console.log("limpiamos");
+    
+    for(let archivo of this.archivos){
+      if(archivo.progreso != 100){
+        return;
+      }
+    }
+    let length =  this.archivos.length;
+    for (let i = 0; i <length; i++) {
+      console.log(i);
+      
+      this.archivos.pop();
+      
+    }
+    //this.archivos = [];
+  }
 
 }
