@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CargaImagenesService } from "../../../services/carga-imagenes.service";
-import { AngularFireList } from  '@angular/fire/database';
-
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-fotos',
@@ -11,42 +7,59 @@ import { CommonModule } from '@angular/common';
   styles: [
   ]
 })
-export class FotosComponent implements OnInit {
+export class FotosComponent {
 
-  imagenes = [];
-  keys = [];
+  files = [];
+  images = [];
+  cargadas:number = 0;
+  startAt:number = 0;
 
 
   constructor(public _cargaImagenes:CargaImagenesService){
-    //this.imagenes = _cargaImagenes.lastNImages(10);
-    _cargaImagenes.lastNImages(10).then(value =>{ 
-      this.imagenes = value.val();
-      //this.keys = value.val();
-      console.log("KEYSS", this.keys);
-      
-      
-      console.log("IMAGENES EN COMPONENT",this.imagenes);
-      let arr = [];  
-      Object.keys(this.imagenes).map((key, i=0)=>{ 
-        console.log("key:",key);
-        
-        arr.push({[i]:this.imagenes[key]});
-        i++;
-        //return arr;  
-      });  
-      console.log('Object=',this.imagenes);
-      console.log('Array=',arr);
-      this.keys = arr;
+    _cargaImagenes.getAllImages().then(value =>{ 
+      this.files = value.val();
+      let arr = []; 
+      if(this.files != null){
+        Object.keys(this.files).map((key, i=0)=>{ 
+          
+          arr.push({[i]:this.files[key]});
+          i++;  
+        });  
+        this.images = arr;
+        this.cargadas += this.images.length;
+      } 
     });
-
-    console.log("IMAGENES EN COMPONENT fuera",this.imagenes);
-
-    
-    
     
   }
 
-  ngOnInit(): void {
+  /* 
+  *Not used
+  */
+  cargarMasImagenes(){
+    this.startAt = this.cargadas;
+    this._cargaImagenes.fromStartToEnd(this.startAt.toString()).then(value =>{ 
+      this.files = value.val();
+      let arr = [];  
+      if(this.files == null){
+        return;
+      }
+      let firstTime = true;
+      let count=0;
+      Object.keys(this.files).map((key, i=this.startAt)=>{
+        if(firstTime){
+          count=this.startAt;
+          firstTime = false;
+        }
+        i=count;
+        
+        arr.push({[i]:this.files[key]});
+        i++;
+        count++; 
+      });  
+
+      this.images = this.images.concat(arr);
+      this.cargadas += this.images.length;
+    });
   }
 
 }

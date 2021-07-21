@@ -23,7 +23,7 @@ export class GestorArchivosComponent implements OnInit {
   }
 
   cargarImagenesFirebase(){
-    this._cargaImagenes.newcharge2(this.archivos);
+    this._cargaImagenes.charge_images(this.archivos);
   }
 
 

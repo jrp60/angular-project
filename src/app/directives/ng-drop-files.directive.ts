@@ -6,6 +6,7 @@ import { FileItem } from "../models/file-item";
 })
 export class NgDropFilesDirective {
 
+  /* decorator that makes angular automatically updates de value of 'archivos' from the DOM property of the template */
   @Input() archivos:FileItem[] = [];
   @Output() archivoSobre:EventEmitter<any> = new EventEmitter();
 
@@ -113,7 +114,6 @@ export class NgDropFilesDirective {
    * @return void
    */ 
   private _agregarArchivos(archivosLista:FileList){
-    /*  console.log(archivosLista); */
     for(let propiedad in Object.getOwnPropertyNames(archivosLista)){
       let archTemporal = archivosLista[propiedad];
       if(this._archivoPuedeSerCargado(archTemporal)){
@@ -121,12 +121,9 @@ export class NgDropFilesDirective {
         this.archivos.push(nuevoArchivo);
       }
     }
-    console.log("agregar archivos", this.archivos);
   }
 
   limpiarArchivos(){
-    console.log("limpiamos");
-    
     for(let archivo of this.archivos){
       if(archivo.progreso != 100){
         return;
@@ -134,12 +131,8 @@ export class NgDropFilesDirective {
     }
     let length =  this.archivos.length;
     for (let i = 0; i <length; i++) {
-      console.log(i);
-      
-      this.archivos.pop();
-      
+      this.archivos.pop(); 
     }
-    //this.archivos = [];
   }
 
 }

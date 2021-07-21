@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-//import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabase } from '@angular/fire/database';
 import firebase from 'firebase/app';
 import { FileItem } from '../models/file-item';
-
 import 'firebase/storage';  
-//import { url } from 'inspector';
-
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +10,20 @@ import 'firebase/storage';
 export class CargaImagenesService {
   private CARPETA_IMAGENES:string = 'img';
 
-  constructor(public af:AngularFireDatabase){
-  }
+  constructor(public af:AngularFireDatabase){}
 
-  lastNImages(n:number):Promise<any>{
-    const query = this.af.database.ref('img').orderByKey().limitToLast(n);
-
+  getAllImages():Promise<any>{
+    const query = this.af.database.ref('img').orderByKey();
     return query.once('value', function (){});
   }
 
+  /* Not used */
+  fromStartToEnd(startAt:string):Promise<any>{
+    const query = this.af.database.ref('img').orderByKey().startAt(startAt).limitToLast(9);
+    return query.once('value', function (){});
+  }
+
+  /* Not used */
   listaUltimasImagenes(){
     const dbRef = firebase.database().ref();
     let a = dbRef.get().then((snapshot) => {
@@ -36,10 +37,9 @@ export class CargaImagenesService {
     });
   }
 
+  /* Not used */
   newcharge(archivos: FileItem[]){
     const promises = archivos.map((file, index) => {
-      console.log(file);
-      
       let ref = firebase.storage().ref(`img/${file.archivo.name}`);
       return ref.put(file[index]).then(() => ref.getDownloadURL());
     })
@@ -50,16 +50,14 @@ export class CargaImagenesService {
       .catch((err) => alert(err.code));
   }
 
-  newcharge2(archivos: FileItem[]){
+  charge_images(archivos: FileItem[]){
     archivos.map((file, index) => {
-      //console.log(file);
-      
+      const shortid = require('shortid');
+      file.nombreArchivo = shortid.generate();
       let ref = firebase.storage().ref().child(`${this.CARPETA_IMAGENES}/${file.nombreArchivo}`);
       ref.put(file.archivo).on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       (snapshot) =>{
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        //console.log(snapshot);
-          
         file.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
         switch (snapshot.state) {
@@ -70,8 +68,6 @@ export class CargaImagenesService {
             console.log('Upload is running');
             break;
         }
-        
-
       }, function(error) {
         console.log("Error: ", error);
       }, ()=> {
@@ -79,27 +75,15 @@ export class CargaImagenesService {
         console.log("upload completed successfully");
         ref.getDownloadURL().then((downloadURL)=> {
           file.url = downloadURL;
-          console.log("downloadURL",downloadURL);
-          
-          console.log("ITEM ", file);
-
-          
           this.guardarImagen({nombre:file.nombreArchivo, url:file.url});
           file.estaSubiendo = false;
-          
         });
-        
       }
     );
     })
-   /*  Promise.all(promises)
-      .then((uploadedMediaList) => {
-        console.log(uploadedMediaList, 'all');
-      })
-      .catch((err) => alert(err.code)); */
   }
 
-  /**
+  /**  NOT USED 
    * Add images to the firebase
    * 
    * first charges the reference of the storage of firebase, the loops all the files we want to upload, for each one sets the estaSubiendo to true
@@ -111,21 +95,15 @@ export class CargaImagenesService {
    * 
    * @return boolean
    */
-  charge_images(archivos: FileItem[]){
+  old_charge_images(archivos: FileItem[]){
     let storageRef = firebase.storage().ref();
-
     for(let item of archivos){
-      console.log("ITEM LOOP");
-      
       item.estaSubiendo = true;
       var uploadTask = storageRef.child(`${this.CARPETA_IMAGENES}/${item.nombreArchivo}`).put(item.archivo);
 
       // Listen for state changes, errors, and completion of the upload.
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         (snapshot)=> {
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          console.log(snapshot);
-          
           item.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -136,11 +114,8 @@ export class CargaImagenesService {
               break;
             case firebase.storage.TaskState.SUCCESS:
               console.log('Upload is SUCCESS');
-              
               break;
           }
-          
-
         }, function(error) {
           console.log("Error: ", error);
         }, ()=> {
@@ -148,16 +123,9 @@ export class CargaImagenesService {
           console.log("upload completed successfully");
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
             item.url = downloadURL;
-            console.log("downloadURL",downloadURL);
-            
-            console.log("ITEM ", item);
-
-            
             this.guardarImagen({nombre:item.nombreArchivo, url:item.url});
             item.estaSubiendo = false;
-            
           });
-          
         }
       );
     }
@@ -165,23 +133,12 @@ export class CargaImagenesService {
 
   /**
    * Saves the routes of the images in the database
-   * 
-   * 
    *
    * @param any   $imagen 
    * 
    * @return void
   */
   guardarImagen(imagen:any){
-    console.log("GUARDAR IMAGEN");
-    
     this.af.list(`/${this.CARPETA_IMAGENES}`).push(imagen);
-
-    // Deprecated
-    /* const afList = this.af.list(`/${this.CARPETA_IMAGENES}`);
-    afList.push({ name: 'item' });
-    const listObservable = afList.snapshotChanges();
-    listObservable.subscribe(); */
-
   }
 }

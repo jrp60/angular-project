@@ -144,3 +144,12 @@ text-green{
   column-count: 3;
   display: inline-block;
 }
+
+@media (max-width:640px){
+  .card-columns {
+    column-count: 1;
+  }
+  .card{
+    margin-bottom: 0.7em;
+  }
+}

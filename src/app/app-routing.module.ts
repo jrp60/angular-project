@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '@auth0/auth0-angular';
+import { AuthFirebaseGuard } from "./guard/auth-firebase.guard";
 
 /* import { AppRoutingModule } from './app-routing.module'; */
 import { HomeComponent } from './components/home/home.component';
@@ -14,10 +15,22 @@ import { GestorArchivosComponent } from './components/gestor-archivos/gestor-arc
 import { SearchComponent } from './components/spoti/search/search.component';
 import { ArtistComponent } from './components/spoti/artist/artist.component';
 import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
+import { LoginFirebaseComponent } from './components/login-firebase/login-firebase.component';
+import { SignInComponent } from './components/firebaselogin/sign-in/sign-in.component';
+import { SignUpComponent } from './components/firebaselogin/sign-up/sign-up.component';
+import { DashboardComponent } from './components/firebaselogin/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from './components/firebaselogin/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/firebaselogin/verify-email/verify-email.component';
 
 export const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'perfil', component: AutenticadoComponent, canActivate: [AuthGuard], },
+  { path: 'login', component: LoginFirebaseComponent },
+  { path: 'sign-in', component: SignInComponent },
+  { path: 'register-user', component: SignUpComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthFirebaseGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'spotify', component: SpotiComponent },
   { path: 'spotify/search', component: SearchComponent },

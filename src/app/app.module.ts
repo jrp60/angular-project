@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,12 +9,14 @@ import { AgmCoreModule } from '@agm/core';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
 import { YoutubeService } from "./services/youtube.service";
 import { CargaImagenesService } from "./services/carga-imagenes.service";
+import { AuthFirebaseService } from "./services/authfirebase.service";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +39,12 @@ import { environment } from '../environments/environment';
 import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
 import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+import { LoginFirebaseComponent } from './components/login-firebase/login-firebase.component';
+import { DashboardComponent } from './components/firebaselogin/dashboard/dashboard.component';
+import { SignInComponent } from './components/firebaselogin/sign-in/sign-in.component';
+import { SignUpComponent } from './components/firebaselogin/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/firebaselogin/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/firebaselogin/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +64,13 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
     ArtistComponent,
     VideoYoutubePipe,
     FotosComponent,
-    NgDropFilesDirective
+    NgDropFilesDirective,
+    LoginFirebaseComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -72,13 +86,16 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
     }),
     AngularFireModule.initializeApp(environment.FIREBASE),
     AngularFireDatabaseModule,
-    CommonModule
+    CommonModule,
+    AngularFireAuthModule,
+    ReactiveFormsModule
   ],
   providers: [
     MapasService,
     SpotifyService,
     YoutubeService,
-    CargaImagenesService
+    CargaImagenesService,
+    AuthFirebaseService
   ],
   bootstrap: [AppComponent]
 })

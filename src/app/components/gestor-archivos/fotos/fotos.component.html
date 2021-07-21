@@ -1,9 +1,15 @@
 <div class="row">
-    <div class="card-columns">
-        <div class="card  text-white bg-dark" *ngFor="let imagen of keys | keyvalue; let i = index">
-            <img [src]="imagen.value[i]['url']" alt="" class="card-img-top img-fluid">
+    <div class="main-container" *ngIf="images.length == 0">
+        <div class="alert alert-warning" role="alert">
+            No hay imágenes subidas
+        </div>
+    </div>
+    
+    <div class="card-columns" *ngIf="images.length==cargadas">
+        <div class="card  text-white bg-dark" *ngFor="let imagen of images;let i = index">
+            <img [src]="imagen[i]['url']" alt="" class="card-img-top img-fluid">
             <div class="card-body">
-                <h4 class="card-title"> {{imagen.value[i]["nombre"]}}</h4>
+                <h4 class="card-title"> {{imagen[i]["nombre"]}}</h4>
             </div>
         </div>
     </div>
