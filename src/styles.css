@@ -153,7 +153,9 @@ text-green{
 .w26rem{
   width: 26rem;
 }
-
+.w40rem{
+  width: 40rem;
+}
 
 @media (max-width:640px){
   .card-columns {
@@ -164,5 +166,8 @@ text-green{
   }
   .w26rem{
     width: 94%;
+  }
+  .w40rem{
+    width: 95%;
   }
 }
