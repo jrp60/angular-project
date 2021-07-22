@@ -144,6 +144,16 @@ text-green{
   column-count: 3;
   display: inline-block;
 }
+.centered {
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, 0%);
+}
+.w26rem{
+  width: 26rem;
+}
+
 
 @media (max-width:640px){
   .card-columns {
@@ -151,5 +161,8 @@ text-green{
   }
   .card{
     margin-bottom: 0.7em;
+  }
+  .w26rem{
+    width: 94%;
   }
 }

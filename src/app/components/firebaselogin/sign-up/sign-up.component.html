@@ -1,46 +1,43 @@
-<div class="displayTable">
-    <div class="displayTableCell">
-  
-      <div class="authBlock">
-        <h3>Sign Up</h3>
-  
-        <div class="formGroup">
-          <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
-        </div>
-  
-        <div class="formGroup">
-          <input type="password" class="formControl" placeholder="Password" #userPwd required>
-        </div>
-  
-        <div class="formGroup">
-          <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)">
-        </div>
-  
-        <div class="formGroup">
-          <span class="or"><span class="orInner">Or</span></span>
-        </div>
-  
-        <!-- Continue with Google -->
-        <div class="formGroup">
-          <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
-            <i class="fab fa-google-plus-g"></i>
-            Continue with Google
-          </button>
-        </div>
-  
-        <!-- Continue with Facebook -->
-        <!-- <div class="formGroup">
-          <button type="button" class="btn facebookBtn" (click)="authService.FacebookAuth()">
-            <i class="fab fa-facebook"></i>
-            Continue with Facebook
-          </button>
-        </div> -->
-
+<div class="main-container">
+  <div class="card text-white bg-dark text-center centered w26rem">
+    <div class="card-body">
+      <!-- Calling SignIn Api from AuthService -->
+      <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuth()">
+        <i class="fab fa-google-plus-g"></i>
+        Continue with Google
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="card text-white bg-dark text-center centered w26rem">
+    <div class="card-body">
+      <div class="formGroup">
+        <input type="email" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userEmail required>
       </div>
-  
-      <div class="redirectToLogin">
-        <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
+
+      <div class="formGroup  mb-2">
+        <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPwd required>
+      </div>
+
+      <!-- Calling SignIn Api from AuthService -->
+      <div class="formGroup">
+        <button type="button" class="btn btn-primary w-75" (click)="authService.SignUp(userEmail.value, userPwd.value)">Sign Up</button>
       </div>
     </div>
-  
+    <div class="card-body">
+      <!-- Calling GoogleAuth Api from AuthService -->
+      <div class="formGroup">
+        <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+          <i class="fab fa-google-plus-g"></i>
+          Log in with Google
+        </button>
+      </div>
+      <div class="redirectToLogin">
+        <button type="button" class="btn btn-outline-success w-100" [routerLink]="'/sign-in'">
+          Already have an account? Sign In
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+  
