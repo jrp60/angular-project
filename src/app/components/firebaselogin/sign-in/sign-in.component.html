@@ -22,18 +22,10 @@
 
       <!-- Calling SignIn Api from AuthService -->
       <div class="formGroup">
-        <!-- <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)"> -->
         <button type="button" class="btn btn-primary w-75" (click)="authService.SignIn(userName.value, userPassword.value)">Enter</button>
       </div>
     </div>
     <div class="card-body">
-      <!-- Calling GoogleAuth Api from AuthService -->
-      <div class="formGroup">
-        <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
-          <i class="fab fa-google-plus-g"></i>
-          Log in with Google
-        </button>
-      </div>
       <div class="redirectToLogin">
         <button type="button" class="btn btn-outline-info w-100" [routerLink]="'/register-user'">
           Don't have an account? Sign Up
@@ -42,4 +34,3 @@
     </div>
   </div>
 </div>
-  

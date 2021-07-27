@@ -19,8 +19,8 @@
     <div class="card-body">
       
       <div class="redirectToLogin">
-        <button type="button" class="btn btn-outline-info w-100" [routerLink]="'/sign-in'">
-          Go back? Log In
+        <button type="button" (click)="authService.SignOut()" class="btn btn-danger w-100">
+          Log Out
         </button>
       </div>
     </div>

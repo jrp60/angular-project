@@ -3,8 +3,7 @@ import { AuthFirebaseService } from "../../../services/authfirebase.service";
 
 @Component({
   selector: 'app-verify-email',
-  templateUrl: './verify-email.component.html',
-  styleUrls: ['./verify-email.component.css']
+  templateUrl: './verify-email.component.html'
 })
 export class VerifyEmailComponent implements OnInit {
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,17 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  isLogged:boolean;
+  
+  constructor(public auth: AuthService, public afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.isLogged = true;
+      } else {
+        this.isLogged = false;
+      }
+    });
+  }
 
   ngOnInit() {
   }

@@ -15,7 +15,6 @@ import { GestorArchivosComponent } from './components/gestor-archivos/gestor-arc
 import { SearchComponent } from './components/spoti/search/search.component';
 import { ArtistComponent } from './components/spoti/artist/artist.component';
 import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
-import { LoginFirebaseComponent } from './components/login-firebase/login-firebase.component';
 import { SignInComponent } from './components/firebaselogin/sign-in/sign-in.component';
 import { SignUpComponent } from './components/firebaselogin/sign-up/sign-up.component';
 import { DashboardComponent } from './components/firebaselogin/dashboard/dashboard.component';
@@ -25,7 +24,6 @@ import { VerifyEmailComponent } from './components/firebaselogin/verify-email/ve
 export const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'perfil', component: AutenticadoComponent, canActivate: [AuthGuard], },
-  { path: 'login', component: LoginFirebaseComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthFirebaseGuard] },

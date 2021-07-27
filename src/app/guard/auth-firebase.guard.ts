@@ -18,6 +18,8 @@ export class AuthFirebaseGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if(this.authService.isLoggedIn !== true) {
+      console.log("navigate to signin");
+      
       this.router.navigate(['sign-in'])
     }
     return true;

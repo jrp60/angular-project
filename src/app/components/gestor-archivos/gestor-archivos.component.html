@@ -1,40 +1,83 @@
-<div class="row main-container text-center">
-    <div class="row">
-        <h3>Seleccione y arrastre los archivos que desea subir</h3>
-        <div NgDropFiles 
-             [ngClass]="{'file-over': estaSobreDropZone}" 
-             (archivoSobre)="archivoSobreDropZone($event)" 
-             [archivos]="archivos" 
-             class="well drop-zone">
-                <h4>Suelte los archivos aquí</h4>
-                <img src="/assets/img/drop-image.png">
+<div class="main-container text-center">
+    <div class="row" *ngIf="isLogged;else loggin">
+        <div class="row">
+            <h3>Seleccione y arrastre los archivos que desea subir</h3>
+            <div NgDropFiles 
+                [ngClass]="{'file-over': estaSobreDropZone}" 
+                (archivoSobre)="archivoSobreDropZone($event)" 
+                [archivos]="archivos" 
+                class="well drop-zone">
+                    <h4>Suelte los archivos aquí</h4>
+                    <img src="/assets/img/drop-image.png">
+            </div>
+        </div>
+        <div class="col-md-12 mt-4 mb-3">
+            <button (click)="cargarImagenesFirebase()" [disabled]="archivos.length == 0" type="button" class="btn btn-success ms-3">
+                Subir
+            </button>
+            <table class="table table-dark table-striped" *ngIf="archivos.length > 0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tamaño</th>
+                        <th>Progreso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let archivo of archivos">
+                        <td [ngClass]="{'text-green': archivo.estaSubiendo}">
+                            <strong>{{archivo.nombreArchivo}}</strong>
+                        </td>
+                        <td>{{archivo.archivo.size / 1024 / 1024 | number:'0.2'}}MB</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': archivo.progreso + '%'}" style="width: 25%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="col-md-12 mt-4 mb-3">
-        <button (click)="cargarImagenesFirebase()" [disabled]="archivos.length == 0" type="button" class="btn btn-success ms-3">
-            Subir
-        </button>
-        <table class="table table-dark table-striped" *ngIf="archivos.length > 0">
-            <thead class="table-dark">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Tamaño</th>
-                    <th>Progreso</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let archivo of archivos">
-                    <td [ngClass]="{'text-green': archivo.estaSubiendo}">
-                        <strong>{{archivo.nombreArchivo}}</strong>
-                    </td>
-                    <td>{{archivo.archivo.size / 1024 / 1024 | number:'0.2'}}MB</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': archivo.progreso + '%'}" style="width: 25%"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <ng-template #loggin>
+        <div class="alert alert-warning w-75 margin0 mb-3" role="alert">
+            <h1>You have to be logged in to upload images!</h1>
+        </div>
+        <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
+            
+            <div class="card-body">
+                <!-- Calling SignIn Api from AuthService -->
+                <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuthFileManager()">
+                <i class="fab fa-google-plus-g"></i>
+                    Log in with Google
+                </button>
+            </div>
+        </div>
+        <br>
+        <div class="card text-white bg-dark text-center margin0 w40rem">
+            <div class="card-body">
+                <div class="formGroup">
+                    <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userName required>
+                </div>
+        
+                <div class="formGroup  mb-2">
+                    <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPassword required>
+                    <a class="d-block" [routerLink]="['/forgot-password']">Forgot Password?</a>
+                </div>
+        
+                <!-- Calling SignIn Api from AuthService -->
+                <div class="formGroup">
+                    <!-- <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)"> -->
+                    <button type="button" class="btn btn-primary w-75" (click)="authService.SignInFileManager(userName.value, userPassword.value)">Enter</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="redirectToLogin">
+                    <button type="button" class="btn btn-outline-info w-100" [routerLink]="'/register-user'">
+                        Don't have an account? Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>

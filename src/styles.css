@@ -147,8 +147,10 @@ text-green{
 .centered {
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, 0%);
+}
+.margin0{
+  margin: 0 auto;
 }
 .w26rem{
   width: 26rem;

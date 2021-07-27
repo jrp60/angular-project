@@ -39,7 +39,6 @@ import { environment } from '../environments/environment';
 import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
 import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
-import { LoginFirebaseComponent } from './components/login-firebase/login-firebase.component';
 import { DashboardComponent } from './components/firebaselogin/dashboard/dashboard.component';
 import { SignInComponent } from './components/firebaselogin/sign-in/sign-in.component';
 import { SignUpComponent } from './components/firebaselogin/sign-up/sign-up.component';
@@ -65,7 +64,6 @@ import { VerifyEmailComponent } from './components/firebaselogin/verify-email/ve
     VideoYoutubePipe,
     FotosComponent,
     NgDropFilesDirective,
-    LoginFirebaseComponent,
     DashboardComponent,
     SignInComponent,
     SignUpComponent,

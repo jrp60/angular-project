@@ -35,9 +35,16 @@
       <ul class="nav justify-content-end w-100">
         <li class="nav-item w-100">
           <span class="navbar-text">
-            <button type="button" class="btn btn-outline-primary w-100 mb-1"  [routerLink]="'/sign-in'"><i class="fa fa-plus"></i>
-              Login with Firebase Auth  
-            </button>  
+            <div *ngIf="isLogged;else loggin">
+              <button type="button" class="btn btn-outline-success w-100 mb-1"  [routerLink]="'/dashboard'">
+                Dashboard 
+              </button>
+            </div>
+            <ng-template #loggin>
+              <button type="button" class="btn btn-outline-primary w-100 mb-1"  [routerLink]="'/sign-in'"><i class="fa fa-plus"></i>
+                Login with Firebase Auth  
+              </button>
+            </ng-template>
           </span>
         </li>
       </ul>
