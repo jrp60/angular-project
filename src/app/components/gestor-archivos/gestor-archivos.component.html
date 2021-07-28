@@ -44,9 +44,7 @@
             <h1>You have to be logged in to upload images!</h1>
         </div>
         <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
-            
             <div class="card-body">
-                <!-- Calling SignIn Api from AuthService -->
                 <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuthFileManager()">
                 <i class="fab fa-google-plus-g"></i>
                     Log in with Google
@@ -54,8 +52,9 @@
             </div>
         </div>
         <br>
-        <div class="card text-white bg-dark text-center margin0 w40rem">
+        <div class="card text-white bg-dark text-center margin0 w40rem mb-4">
             <div class="card-body">
+                <h2 class="mb-3">Enter into your account</h2>
                 <div class="formGroup">
                     <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userName required>
                 </div>
@@ -64,19 +63,28 @@
                     <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPassword required>
                     <a class="d-block" [routerLink]="['/forgot-password']">Forgot Password?</a>
                 </div>
-        
-                <!-- Calling SignIn Api from AuthService -->
                 <div class="formGroup">
-                    <!-- <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)"> -->
                     <button type="button" class="btn btn-primary w-75" (click)="authService.SignInFileManager(userName.value, userPassword.value)">Enter</button>
                 </div>
             </div>
             <div class="card-body">
-                <div class="redirectToLogin">
-                    <button type="button" class="btn btn-outline-info w-100" [routerLink]="'/register-user'">
-                        Don't have an account? Sign Up
-                    </button>
-                </div>
+            </div>
+        </div>
+        <h4 class="mb-4">Or</h4>
+        <div class="card text-white bg-dark text-center margin0 w40rem">
+            <div class="card-body mb-4">
+              <h2 class="mb-3">Create a new account</h2>
+              <div class="formGroup">
+                <input type="email" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userEmail required>
+              </div>
+              <div class="formGroup  mb-2">
+                <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPwd required>
+              </div>
+              <div class="formGroup">
+                <button type="button" class="btn btn-primary w-75" (click)="authService.SignUpFileManager(userEmail.value, userPwd.value)">
+                  Create account
+                </button>
+              </div>
             </div>
         </div>
     </ng-template>

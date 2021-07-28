@@ -72,6 +72,16 @@ export class AuthFirebaseService {
       })
   }
 
+  SignUpFileManager(email, password) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.SetUserData(result.user);
+        window.location.reload();
+      }).catch((error) => {
+        window.alert(error.message)
+      })
+  }
+
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.currentUser.then(u => u.sendEmailVerification())
@@ -79,6 +89,8 @@ export class AuthFirebaseService {
       this.router.navigate(['verify-email']);
     })
   }
+
+
 
   // Reset Forggot password
   ForgotPassword(passwordResetEmail) {
@@ -111,8 +123,6 @@ export class AuthFirebaseService {
   GoogleAuth() {
     this.AuthLogin(new firebase.auth.GoogleAuthProvider());
     this.router.navigate(['dashboard']);
-    console.log("google aut + dashboard");
-    
   }
 
   // Sign in with Google
@@ -145,7 +155,6 @@ export class AuthFirebaseService {
     return this.afAuth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {
-          //this.router.navigate(['fotos/subir-imagen']);
           window.location.reload();
         })
       this.SetUserData(result.user);
@@ -154,11 +163,8 @@ export class AuthFirebaseService {
     })
   }
 
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  /* Setting up userData in private attribute of the class and localStorage */
   SetUserData(user) {
-    //const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -170,10 +176,6 @@ export class AuthFirebaseService {
     this.userData = user;
     localStorage.setItem('user', JSON.stringify(this.userData));
     return true;
-    //falta el return delante
-    /* return userRef.set(userData, {
-      merge: true
-    }) */
   }
 
   // Sign out 

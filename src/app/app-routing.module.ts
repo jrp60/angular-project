@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '@auth0/auth0-angular';
 import { AuthFirebaseGuard } from "./guard/auth-firebase.guard";
+import { LoginFirebaseGuard } from "./guard/login-firebase.guard";
 
 /* import { AppRoutingModule } from './app-routing.module'; */
 import { HomeComponent } from './components/home/home.component';
@@ -24,11 +25,11 @@ import { VerifyEmailComponent } from './components/firebaselogin/verify-email/ve
 export const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'perfil', component: AutenticadoComponent, canActivate: [AuthGuard], },
-  { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-in', component: SignInComponent, canActivate: [LoginFirebaseGuard] },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthFirebaseGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent },
+  { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'spotify', component: SpotiComponent },
   { path: 'spotify/search', component: SearchComponent },

@@ -13,6 +13,11 @@
         <li class="list-group-item  bg-dark text-white border-light">User ID: <strong>{{user.uid}}</strong></li>
         <li class="list-group-item  bg-dark text-white border-light">Email: <strong>{{user.email}}</strong></li>
         <li class="list-group-item  bg-dark text-white border-light">Email Verified: <strong>{{user.emailVerified}}</strong></li>
+        <li  class="list-group-item  bg-dark text-white border-light" *ngIf="!user.emailVerified">
+          <button class="btn btn-outline-primary w-50 mb-1 mt-1" [routerLink]="'/verify-email'">
+            Verify Email
+          </button>
+        </li>
       </ul>
     </div>
     
