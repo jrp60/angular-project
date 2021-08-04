@@ -1,0 +1,138 @@
+/*C O L O R E S . . .
+#1F6BB6 AZUL
+#61C0BF VERDE
+#BBDED6 VERDE CLARO
+#FFB6B9 ROSA
+#FAE3D9 ROSA CLARO
+ background-color: #A4c869; COLOR DESCUBIERTO*/
+
+.h1cv {
+    cursor: pointer;
+    padding: 0px;
+    border: none;
+    font: normal 60px/1 "pacifico", Helvetica, sans-serif;
+    color: #BBDED6;
+    text-align: center;
+    text-overflow: clip;
+    text-shadow: 2px 1px 0 #1f6bb6, 3px 3px 0 #ffb6b9, 4px 4px 0 #ffb6b9, 5px 5px 0 #ffb6b9, 6px 6px 0 #ffb6b9, 9px 7px 0 #1f6bb6;
+}
+.container{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}
+.h1container{
+    background-color:#61C0BF; 
+    padding-top: 1.5em;
+    padding-bottom: 2em;
+    position: relative;
+}
+.h1container::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 20px;
+    background-size: 20px 20px;
+    background-image:
+    radial-gradient(circle at 10px -5px, transparent 12px, #FAE3D9 13px); 
+}
+/* .h1container::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 40px 20px;
+    background-image:
+    radial-gradient(circle at 10px 15px, #FAE3D9 12px, transparent 13px); 
+} */
+
+.cvImage{
+    width: auto;
+    height: 100%;
+    margin-left: -20px;
+}
+.circularImageDiv{
+    display: inline-block;
+    position: relative;
+    width: 363px;
+    height: 363px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 2em;
+}
+
+.personalInfo{
+    background-color: #FAE3D9;
+}
+.pinkContainer{
+    background-color: #FAE3D9;
+}
+.greenContainer{
+    background-color:#BBDED6;
+}
+.wavecomen{
+    background-color:#FAE3D9; /*color de la parte d arriba*/
+    height: 20px;
+    position: relative;
+}
+.wavecomen::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 20px 20px;
+    background-image:
+      radial-gradient(circle at 10px -5px, transparent 12px, #BBDED6  13px);
+}
+.wavecomen::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 30px 10px;
+    background-image:
+      radial-gradient(circle at 10px 15px, #BBDED6  12px, transparent 13px);
+}
+.wavecomen2{
+    background-color:#BBDED6; /*color de la parte d arriba*/
+    height: 30px;
+    position: relative;
+}
+.wavecomen2::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 20px 20px;
+    background-image:
+      radial-gradient(circle at 10px -5px, transparent 12px, #FAE3D9  13px);
+}
+.wavecomen2::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 30px 10px;
+    background-image:
+      radial-gradient(circle at 10px 15px, #FAE3D9  12px, transparent 13px);
+
+}
