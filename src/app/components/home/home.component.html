@@ -1,10 +1,13 @@
 <div class="container pinkContainer">
     <div class="h1container">
+        <div><a [href]="cvURL">a ver si funciona</a></div>
+        <br>
+        <a target="_blank" href="{{cvURL}}" download="PDFJAVIER">DESCARGA</a>
         <h1 class="h1cv mt-3 mb-5">Javier Ródenas Pérez CV</h1>
     </div>
     <div class="personalInfo row py-4">
         <div class="col-md-4 circularImageDiv">
-            <img src="../../../assets/img/JR-CV.jpg" alt="Foto de Javier Ródenas" class="cvImage">
+            <img [src]="cvImageUrl" alt="Foto de Javier Ródenas" class="cvImage">
         </div>
         <div class="col-md-8 personalInfoData">
             <div class="wavecomen"></div>
