@@ -4,7 +4,7 @@
 #BBDED6 VERDE CLARO
 #FFB6B9 ROSA
 #FAE3D9 ROSA CLARO
-background-color: #A4c869; COLOR DESCUBIERTO*/
+background-color: #A4c869;*/
 
 @font-face {
     font-family: "pacifico";
@@ -23,6 +23,7 @@ background-color: #A4c869; COLOR DESCUBIERTO*/
     text-align: center;
     text-overflow: clip;
     text-shadow: 2px 2px 0 #1f6bb6, 3px 3px 0 #ffb6b9, 4px 4px 0 #ffb6b9, 5px 5px 0 #ffb6b9, 5px 6px 0 #ffb6b9, 8px 8px 0 #1f6bb6;
+    margin-bottom: 1.7em !important;
 }
 .container{
     margin: 0;
@@ -35,6 +36,21 @@ background-color: #A4c869; COLOR DESCUBIERTO*/
     padding-top: 1.5em;
     padding-bottom: 2em;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.h1container div{
+    font-variant-caps: all-petite-caps;
+    font-size: 14.4px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.h1container div a{
+    width: 60%;
 }
 .h1container::before{
     content: "";

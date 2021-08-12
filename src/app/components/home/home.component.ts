@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import 'firebase/storage';
 import firebase from 'firebase/app';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+declare var require: any
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-home',
@@ -12,7 +17,7 @@ export class HomeComponent implements OnInit {
   cvImageUrl:string;
   cvURL:string;
 
-  constructor() {
+  constructor(private http:HttpClient) {
     let fbStorage = firebase.storage();
     fbStorage.ref('CV/jrp-cv.jpg').getDownloadURL().then((downloadURL)=> {
       this.cvImageUrl = downloadURL;
@@ -21,26 +26,25 @@ export class HomeComponent implements OnInit {
       this.cvURL = downloadURL;
     });
 
-    fbStorage.ref('CV/jrpCV.pdf').getDownloadURL().then(function(url) {
-
-      console.log("THIS LINE NEVER GETS PRINTED");
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      xhr.onload = function(event) {
-          Blob = xhr.response;  
-      };
-      xhr.open('GET', url);
-      xhr.send();
-
-      }).then(function() {
-          //some more code
-      }).catch(function(error) {
-          console.log(error);
-      });
-
   }
 
   ngOnInit() {
+  }
+
+  downloadPDF(): any {
+    return this.http.get(this.cvURL, { responseType: 'blob'}).pipe(map((res) => {
+      return new Blob([res], { type: 'application/pdf' });
+    }));
+  }
+
+  downloadAndOpenPDF(){
+    this.downloadPDF().subscribe(
+      (res) => {
+        FileSaver.saveAs(res, "Javier Ródenas Pérez CV.pdf"); 
+        //var fileURL = URL.createObjectURL(res);
+        //window.open(fileURL); 
+      }
+    );
   }
 
 }

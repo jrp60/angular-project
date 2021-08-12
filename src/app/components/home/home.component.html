@@ -1,9 +1,10 @@
 <div class="container pinkContainer">
     <div class="h1container">
-        <div><a [href]="cvURL">a ver si funciona</a></div>
-        <br>
-        <a target="_blank" href="{{cvURL}}" download="PDFJAVIER">DESCARGA</a>
-        <h1 class="h1cv mt-3 mb-5">Javier Ródenas Pérez CV</h1>
+        <div class="alert alert-warning text-center mx-5 mb-4 mt-2" role="alert">
+            Si eres muy Backend Developer también puedes descargarlo en un formato menos colorido 
+            <a (click)="downloadAndOpenPDF()" class="btn btn-outline-danger">CLICKANDO AQUÍ</a>
+        </div>
+        <h1 class="h1cv mt-4 mb-5">Javier Ródenas Pérez CV</h1>
     </div>
     <div class="personalInfo row py-4">
         <div class="col-md-4 circularImageDiv">
