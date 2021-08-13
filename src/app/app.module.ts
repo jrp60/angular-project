@@ -1,12 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AgmCoreModule } from '@agm/core';
-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -31,19 +28,20 @@ import { MapsComponent } from './components/maps/maps.component';
 import { GestorArchivosComponent } from './components/gestor-archivos/gestor-archivos.component';
 import { SearchComponent } from './components/spoti/search/search.component';
 import { ArtistComponent } from './components/spoti/artist/artist.component';
-
-import { SinfotoPipe } from './pipes/sinfoto.pipe';
-import { DomseguroPipe } from './pipes/domseguro.pipe';
-
-import { environment } from '../environments/environment';
-import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
-import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
-import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { DashboardComponent } from './components/firebaselogin/dashboard/dashboard.component';
 import { SignInComponent } from './components/firebaselogin/sign-in/sign-in.component';
 import { SignUpComponent } from './components/firebaselogin/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/firebaselogin/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/firebaselogin/verify-email/verify-email.component';
+import { FotosComponent } from './components/gestor-archivos/fotos/fotos.component';
+
+import { SinfotoPipe } from './pipes/sinfoto.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
+
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
