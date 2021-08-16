@@ -43,6 +43,7 @@ li.nav-link > a.router-link-active{
 }
 .main-container{
   margin-top: 30px;
+  margin-bottom: 3em;
 }
 .img-circle{
   border-radius: 100%;

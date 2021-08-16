@@ -4,9 +4,10 @@ import { AngularFireAuth } from "@angular/fire/auth";
 //import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import firebase from 'firebase/app';
+import {Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'platform'
 })
 
 export class AuthFirebaseService {
@@ -17,10 +18,9 @@ export class AuthFirebaseService {
     public router: Router,  
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {    
-    /* Saving user data in localstorage when 
-    logged in and setting up null when logged out */
+    /* Saving user data in localstorage when logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
-      console.log("user",user);
+      console.log("AuthFirebaseService User Constructor",user);
       
       if (user) {
         this.userData = user;
@@ -47,7 +47,7 @@ export class AuthFirebaseService {
         window.alert(error.message)
       })
   }
-  SignInFileManager(email, password) {
+  SignInFileWithReload(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
@@ -72,7 +72,7 @@ export class AuthFirebaseService {
       })
   }
 
-  SignUpFileManager(email, password) {
+  SignUpFileWithReload(email, password) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
@@ -118,7 +118,6 @@ export class AuthFirebaseService {
     }
     //return (user !== null) ? true : false;
   }
-
   // Sign in with Google
   GoogleAuth() {
     this.AuthLogin(new firebase.auth.GoogleAuthProvider());
@@ -126,8 +125,8 @@ export class AuthFirebaseService {
   }
 
   // Sign in with Google
-  GoogleAuthFileManager() {
-    return this.AuthLoginFileManager(new firebase.auth.GoogleAuthProvider());
+  GoogleAuthWithReload() {
+    return this.AuthLoginWithReload(new firebase.auth.GoogleAuthProvider());
   }
 
   // Auth logic to run auth providers
@@ -151,7 +150,7 @@ export class AuthFirebaseService {
       window.alert(error)
     })
   }
-  AuthLoginFileManager(provider) {
+  AuthLoginWithReload(provider) {
     return this.afAuth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {

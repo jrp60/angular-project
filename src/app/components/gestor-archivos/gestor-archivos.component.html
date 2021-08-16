@@ -45,7 +45,7 @@
         </div>
         <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
             <div class="card-body">
-                <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuthFileManager()">
+                <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuthWithReload()">
                 <i class="fab fa-google-plus-g"></i>
                     Log in with Google
                 </button>
@@ -64,7 +64,7 @@
                     <a class="d-block" [routerLink]="['/forgot-password']">Forgot Password?</a>
                 </div>
                 <div class="formGroup">
-                    <button type="button" class="btn btn-primary w-75" (click)="authService.SignInFileManager(userName.value, userPassword.value)">Enter</button>
+                    <button type="button" class="btn btn-primary w-75" (click)="authService.SignInFileWithReload(userName.value, userPassword.value)">Enter</button>
                 </div>
             </div>
             <div class="card-body">
@@ -81,7 +81,7 @@
                 <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPwd required>
               </div>
               <div class="formGroup">
-                <button type="button" class="btn btn-primary w-75" (click)="authService.SignUpFileManager(userEmail.value, userPwd.value)">
+                <button type="button" class="btn btn-primary w-75" (click)="authService.SignUpFileWithReload(userEmail.value, userPwd.value)">
                   Create account
                 </button>
               </div>

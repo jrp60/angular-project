@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ChatService } from "../../services/chat.service";
+import { AuthFirebaseService } from "../../services/authfirebase.service";
 
 @Component({
   selector: 'app-chat',
@@ -10,12 +11,31 @@ import { ChatService } from "../../services/chat.service";
 export class ChatComponent implements OnInit {
 
   mensaje:string = "";
+  elemento:any;
+  isLogged:boolean;
+  usuario: any = {};
 
-  constructor(public _cs:ChatService){
-    this._cs.cargarMensajes().subscribe();
+  constructor( public authService: AuthFirebaseService, public _cs:ChatService){
+    this.isLogged = this.authService.isLoggedIn;
+    console.log("Is logged: ", this.isLogged);
   }
 
   ngOnInit(): void {
+    this._cs.cargarMensajes().subscribe( ()=>{
+      //to set the scroll bar down when charge or new message
+      setTimeout( ()=>{
+        this.elemento = document.getElementById('app-mensajes');
+        this.elemento.scrollTop = this.elemento.scrollHeight;
+      }, 20);
+    });
+
+    let userAux = JSON.parse(localStorage.getItem('user'));
+    this.usuario.nombre = userAux.displayName;
+    this.usuario.id = userAux.uid;
+    this.usuario.fotoUrl = userAux.photoURL;
+    this.usuario.email = userAux.email;
+    this.usuario.isVerified = userAux.emailVerified;
+    console.log("USUARIO after LOCALSTORAGE", this.usuario);
   }
 
   enviar_mensaje(){
