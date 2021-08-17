@@ -1,19 +1,18 @@
 <div class="main-container text-center container">
-    <h1>Firechat</h1>
-    <div class="chat-window" *ngIf="isLogged;else loggin">
+    <h1>Chat with firestore database</h1>
+    <div class="chat-window mt-4" *ngIf="isLogged;else loggin">
         <h2>Chat</h2>
         <hr>
-        <div class="app-mensajes" id="app-mensajes" #myOverlay>
-            <div class="text-end" *ngFor="let chat of _cs.chats">
-                <span class="badge bg-primary">Fernando</span>
+        <div class="app-mensajes text-start" id="app-mensajes" #myOverlay>
+            <div class="text-center" (click)="cargarMasMensajes()"><h1><button class="btn btn-outline-light"><b>+</b></button></h1></div>
+            <div [ngClass]="{'text-end': usuario.id == chat.uid}" *ngFor="let chat of _cs.chats">
+                <span class="badge" [ngClass]="{'bg-primary': usuario.id == chat.uid, 'bg-success': usuario.id != chat.uid}">
+                    {{chat.nombre}}
+                </span>
                 <p>{{chat.mensaje}}</p>
             </div>
-            <!-- <div class="mensaje">
-                <span class="badge bg-success">María</span>
-                <p>Este es un mensaje</p>
-            </div> -->
         </div>
-        <input type="text" class="form-control" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()" placeholder="Enviar mensaje">
+        <input type="text" class="form-control inputChat" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()" placeholder="Enviar mensaje">
     </div>
 
     <ng-template #loggin>

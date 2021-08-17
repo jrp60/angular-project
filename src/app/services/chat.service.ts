@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { map, reduce } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Mensaje } from "../interfaces/mensaje.interface";
 
 @Injectable({
@@ -11,32 +10,40 @@ export class ChatService {
   private itemsCollection: AngularFirestoreCollection<Mensaje>;
   public chats: Mensaje[] = [];
   public usuario: any = {};
+  public cargados:number = 0;
 
-  constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth){
-    //afAuth
-  }
+  constructor(private afs: AngularFirestore){}
 
   cargarMensajes(){
-    this.itemsCollection = this.afs.collection<Mensaje>('chats', ref=> ref.orderBy('fecha', 'desc').limit(5));
+    this.itemsCollection = this.afs.collection<Mensaje>('chats', ref=> ref.orderBy('fecha', 'desc').limit(10));
+    this.cargados = 10;
     return this.itemsCollection.valueChanges().pipe(map((mensajes: Mensaje[] )=>{
-      console.log(mensajes);
       this.chats = [];
       for(let mensaje of mensajes){
         this.chats.unshift(mensaje);
       }
-      //this.chats = mensajes;
     }));
   }
 
-  agregarMensaje(texto:string){
+  cargarMasMensajes(){
+    console.log("CARGAR MAS");
+    this.cargados +=10;
+    this.itemsCollection = this.afs.collection<Mensaje>('chats', ref=> ref.orderBy('fecha', 'desc').limit(this.cargados));
+    return this.itemsCollection.valueChanges().pipe(map((mensajes: Mensaje[] )=>{
+      this.chats = [];
+      for(let mensaje of mensajes){
+        this.chats.unshift(mensaje);
+      }
+    }));
+  }
 
-    // TODO falta el UID del usuario
+  agregarMensaje(texto:string, usuario:string, uid:string){
     let mensaje: Mensaje = {
-      nombre:'Demo',
+      nombre: usuario,
       mensaje: texto,
-      fecha: new Date().getTime()
+      fecha: new Date().getTime(),
+      uid: uid
     }
-
     return this.itemsCollection.add(mensaje);
   }
 

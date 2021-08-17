@@ -157,14 +157,18 @@ text-green{
 }
 .chat-window{
   padding: 10px;
-  width: 300px;
-  height: 400px;
+  padding-bottom: 15px;
+  max-width: 400px;
   overflow: hidden;
-  border: 1px solid #4080FF;
+  border: 1px solid #4a80ee;
   border-radius: 20px;
+  margin: 0 auto;
 }
 .app-mensajes{
   overflow-y:scroll;
   height:270px;
   padding: 5px;
+}
+.inputChat{
+  margin-top: 1em;
 }

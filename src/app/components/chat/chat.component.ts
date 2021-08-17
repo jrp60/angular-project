@@ -14,6 +14,7 @@ export class ChatComponent implements OnInit {
   elemento:any;
   isLogged:boolean;
   usuario: any = {};
+  //mensajes: Mensaje[] = [];
 
   constructor( public authService: AuthFirebaseService, public _cs:ChatService){
     this.isLogged = this.authService.isLoggedIn;
@@ -21,7 +22,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._cs.cargarMensajes().subscribe( ()=>{
+    this._cs.cargarMasMensajes().subscribe( ()=>{
       //to set the scroll bar down when charge or new message
       setTimeout( ()=>{
         this.elemento = document.getElementById('app-mensajes');
@@ -35,8 +36,17 @@ export class ChatComponent implements OnInit {
     this.usuario.fotoUrl = userAux.photoURL;
     this.usuario.email = userAux.email;
     this.usuario.isVerified = userAux.emailVerified;
-    console.log("USUARIO after LOCALSTORAGE", this.usuario);
   }
+
+  cargarMasMensajes(){
+    this._cs.cargarMasMensajes().subscribe();
+    //this.getMensajes();
+  }
+
+  /* getMensajes(){
+    this.mensajes = this._cs.getMensajes();
+    console.log(this.mensajes);
+  } */
 
   enviar_mensaje(){
     console.log(this.mensaje);
@@ -44,7 +54,7 @@ export class ChatComponent implements OnInit {
       return;
     }
 
-    this._cs.agregarMensaje(this.mensaje)
+    this._cs.agregarMensaje(this.mensaje, this.usuario.nombre, this.usuario.id)
         .then( ()=>{ 
           console.log('Mensaje enviado'); 
           this.mensaje = "";
