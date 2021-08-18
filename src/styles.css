@@ -60,6 +60,12 @@ li.nav-link > a.router-link-active{
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+.slow{
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -48,13 +48,13 @@ export class AuthFirebaseService {
         window.alert(error.message)
       })
   }
-  SignInFileWithReload(email, password, username) {
+  SignInFileWithReload(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
           window.location.reload();
         });
-        this.SetUserData(result.user, username);
+        this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -73,10 +73,10 @@ export class AuthFirebaseService {
       })
   }
 
-  SignUpFileWithReload(email, password, username) {
+  SignUpFileWithReload(email, password) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user, username);
+        this.SetUserData(result.user);
         window.location.reload();
       }).catch((error) => {
         window.alert(error.message)
