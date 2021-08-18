@@ -20,19 +20,26 @@ export class AuthFirebaseService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
+        //to set the Username in 'this.userData'
+        if(this.userData.displayname == null){
+          let userAux = JSON.parse(localStorage.getItem('user'));
+          Object.defineProperty(this.userData, 'displayName', {
+            writable: true,
+            value: userAux.displayName
+          });
+        }
+        
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
       } else {
         localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
       }
     })
   }
 
-  SignIn(email, password) {
+  SignIn(email, password, username) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        if(this.SetUserData(result.user)){
+        if(this.SetUserData(result.user, username)){
           this.ngZone.run(() => {
             this.router.navigate(['dashboard']);
           });
@@ -41,35 +48,35 @@ export class AuthFirebaseService {
         window.alert(error.message)
       })
   }
-  SignInFileWithReload(email, password) {
+  SignInFileWithReload(email, password, username) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
           window.location.reload();
         });
-        this.SetUserData(result.user);
+        this.SetUserData(result.user, username);
       }).catch((error) => {
         window.alert(error.message)
       })
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
+  SignUp(email, password, username) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        this.SetUserData(result.user, username);
       }).catch((error) => {
         window.alert(error.message)
       })
   }
 
-  SignUpFileWithReload(email, password) {
+  SignUpFileWithReload(email, password, username) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        this.SetUserData(result.user, username);
         window.location.reload();
       }).catch((error) => {
         window.alert(error.message)
@@ -147,15 +154,27 @@ export class AuthFirebaseService {
   }
 
   /* Setting up userData in private attribute of the class and localStorage */
-  SetUserData(user) {
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+  SetUserData(user, username?) {
+    if(username !=null){
+      const userData: User = {
+        uid: user.uid,
+        email: user.email,
+        displayName: username,
+        photoURL: user.photoURL,
+        emailVerified: user.emailVerified
+      }
+      this.userData = userData;
+    }else{
+      const userData: User = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        emailVerified: user.emailVerified
+      }
+      this.userData = userData;
     }
-    this.userData = user;
+    
     localStorage.setItem('user', JSON.stringify(this.userData));
     return true;
   }

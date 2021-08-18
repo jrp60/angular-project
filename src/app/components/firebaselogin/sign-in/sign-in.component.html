@@ -11,10 +11,13 @@
   <br>
   <div class="card text-white bg-dark text-center centered w26rem">
     <div class="card-body">
-      <div class="formGroup">
-        <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userName required>
-      </div>
 
+      <div class="formGroup">
+        <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Username" #userName required>
+      </div>
+      <div class="formGroup">
+        <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userEmail required>
+      </div>
       <div class="formGroup  mb-2">
         <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPassword required>
         <a class="d-block" [routerLink]="['/forgot-password']">Forgot Password?</a>
@@ -22,7 +25,7 @@
 
       <!-- Calling SignIn Api from AuthService -->
       <div class="formGroup">
-        <button type="button" class="btn btn-primary w-75" (click)="authService.SignIn(userName.value, userPassword.value)">Enter</button>
+        <button type="button" class="btn btn-primary w-75" (click)="authService.SignIn(userEmail.value, userPassword.value, userName.value)">Enter</button>
       </div>
     </div>
     <div class="card-body">

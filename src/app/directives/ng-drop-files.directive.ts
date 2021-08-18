@@ -40,16 +40,13 @@ export class NgDropFilesDirective {
       return;
     }
     /* de todos los fatos de la transferencia, agarramos solo los Files */
-    console.log(this.archivos);
-    
+
     if(this.archivos.length != 0)
       this.limpiarArchivos();
-    console.log(this.archivos);
     
     this._agregarArchivos(transferencia.files);
     this.archivoSobre.emit(false);
     this._prevenirYdetener(event);
-    console.log(this.archivos);
     
   }
 
@@ -117,7 +114,10 @@ export class NgDropFilesDirective {
     for(let propiedad in Object.getOwnPropertyNames(archivosLista)){
       let archTemporal = archivosLista[propiedad];
       if(this._archivoPuedeSerCargado(archTemporal)){
-        let nuevoArchivo = new FileItem(archTemporal);
+        let userAux = JSON.parse(localStorage.getItem('user'));
+        let user = userAux.displayName;
+        let nuevoArchivo = new FileItem(archTemporal, user);
+        
         this.archivos.push(nuevoArchivo);
       }
     }

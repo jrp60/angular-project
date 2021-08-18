@@ -4,9 +4,11 @@ export class FileItem{
     public url:string = '';
     public estaSubiendo:boolean = false;
     public progreso:number = 0;
+    public user:string;
 
-    constructor(archivo:File){
+    constructor(archivo:File, user:string){
         this.archivo = archivo;
         this.nombreArchivo = archivo.name;
+        this.user = user;
     }
 }

@@ -75,7 +75,7 @@ export class CargaImagenesService {
         console.log("upload completed successfully");
         ref.getDownloadURL().then((downloadURL)=> {
           file.url = downloadURL;
-          this.guardarImagen({nombre:file.nombreArchivo, url:file.url});
+          this.guardarImagen({nombre:file.nombreArchivo, url:file.url, user:file.user});
           file.estaSubiendo = false;
         });
       }
@@ -123,7 +123,7 @@ export class CargaImagenesService {
           console.log("upload completed successfully");
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
             item.url = downloadURL;
-            this.guardarImagen({nombre:item.nombreArchivo, url:item.url});
+            this.guardarImagen({nombre:item.nombreArchivo, url:item.url, user:item.user});
             item.estaSubiendo = false;
           });
         }
