@@ -8,8 +8,5 @@ import { AuthFirebaseService } from "./services/authfirebase.service";
 })
 export class AppComponent {
   title = 'personalApp';
-  constructor(public authService:AuthFirebaseService) {
-    console.log("app component constructor with authservice");
-    
-  }
+  constructor(public authService:AuthFirebaseService) {}
 }

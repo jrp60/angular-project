@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
     this.downloadPDF().subscribe(
       (res) => {
         FileSaver.saveAs(res, "Javier Ródenas Pérez CV.pdf"); 
+        //To open file too
         //var fileURL = URL.createObjectURL(res);
         //window.open(fileURL); 
       }

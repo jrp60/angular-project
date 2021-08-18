@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service'
 
 @Component({
@@ -34,22 +34,16 @@ export class SpotiComponent {
 
   getTokenStorageAndReleases(){
     this.token = sessionStorage.getItem('tokenSpotify');
-    console.log(this.token);
     if(this.token==null || this.token=='' || this.token=='null'){
-      console.log("ESTAMOS EN NULL");
       
       this.createTokenStorage().subscribe((data) =>{
         this.token = data;
-        console.log(this.token);
         sessionStorage.setItem('tokenSpotify', this.token);
         this.getNewReleases(this.token).subscribe(()=> {return} );
       });
       
     }
     else{
-      console.log("ELSE BLOCK");
-      console.log(this.token);
-      
       this.getNewReleases(this.token).subscribe(()=> {return});
     }
     

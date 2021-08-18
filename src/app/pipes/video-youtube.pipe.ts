@@ -11,8 +11,6 @@ export class VideoYoutubePipe implements PipeTransform {
 
   transform(value: string): any {
     let urlYoutube = "https://www.youtube.com/embed/";
-    console.log(this.domSanitizer.bypassSecurityTrustResourceUrl(urlYoutube + value));
-    
     return this.domSanitizer.bypassSecurityTrustResourceUrl(urlYoutube + value);
   }
 

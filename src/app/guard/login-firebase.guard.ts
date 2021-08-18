@@ -15,7 +15,6 @@ export class LoginFirebaseGuard implements CanActivate {
 
   canActivate() : Observable<boolean> | Promise<boolean> | boolean{
     if(this.authService.isLoggedIn === true){
-      console.log("Navigate to dashboard");
       this.router.navigate(['/dashboard']);
     }
     return true;

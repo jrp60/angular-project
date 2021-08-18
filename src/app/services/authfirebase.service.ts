@@ -1,10 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from "../services/user";
 import { AngularFireAuth } from "@angular/fire/auth";
-//import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import firebase from 'firebase/app';
-import {Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'platform'
@@ -20,8 +18,6 @@ export class AuthFirebaseService {
   ) {    
     /* Saving user data in localstorage when logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
-      console.log("AuthFirebaseService User Constructor",user);
-      
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -36,10 +32,8 @@ export class AuthFirebaseService {
   SignIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log("set uer");
         if(this.SetUserData(result.user)){
           this.ngZone.run(() => {
-            console.log("navigate");
             this.router.navigate(['dashboard']);
           });
         }
@@ -90,8 +84,6 @@ export class AuthFirebaseService {
     })
   }
 
-
-
   // Reset Forggot password
   ForgotPassword(passwordResetEmail) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
@@ -110,7 +102,6 @@ export class AuthFirebaseService {
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     if(user !==null){
       return true;
     }else{
@@ -121,7 +112,7 @@ export class AuthFirebaseService {
   // Sign in with Google
   GoogleAuth() {
     this.AuthLogin(new firebase.auth.GoogleAuthProvider());
-    this.router.navigate(['dashboard']);
+    //this.router.navigate(['dashboard']);
   }
 
   // Sign in with Google
@@ -130,22 +121,15 @@ export class AuthFirebaseService {
   }
 
   // Auth logic to run auth providers
-  AuthLogin(provider) {
-    console.log("authlogin");
-    
+  AuthLogin(provider) { 
     return this.afAuth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
-          console.log("navigate dashborad");
-          
-          
         })
       this.SetUserData(result.user);
-      window.location.reload();
-      console.log("window reload");
-      this.router.navigate(['dashboard']);
-          console.log("navigate dashborad");
+      //window.location.reload();
+      //this.router.navigate(['dashboard']);
     }).catch((error) => {
       window.alert(error)
     })
@@ -171,7 +155,6 @@ export class AuthFirebaseService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }
-    console.log("set user");
     this.userData = user;
     localStorage.setItem('user', JSON.stringify(this.userData));
     return true;
@@ -183,7 +166,6 @@ export class AuthFirebaseService {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
       window.location.reload();
-      console.log("window reload");
     })
   }
 

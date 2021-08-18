@@ -42,6 +42,8 @@ import { VideoYoutubePipe } from './pipes/video-youtube.pipe';
 import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 import { environment } from '../environments/environment';
+import firebase from 'firebase/app';
+firebase.initializeApp(environment.FIREBASE); 
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import { environment } from '../environments/environment';
     VerifyEmailComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.FIREBASE),
     BrowserModule,
     AppRoutingModule,
     AuthModule.forRoot({
@@ -80,7 +83,6 @@ import { environment } from '../environments/environment';
     AgmCoreModule.forRoot({
       apiKey: environment.AGM_APIKEY
     }),
-    AngularFireModule.initializeApp(environment.FIREBASE),
     AngularFireDatabaseModule,
     CommonModule,
     AngularFireAuthModule,

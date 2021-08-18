@@ -13,7 +13,7 @@ export class FotosComponent {
   images = [];
   cargadas:number = 0;
   startAt:number = 0;
-
+  noData:boolean = false;
 
   constructor(public _cargaImagenes:CargaImagenesService){
     _cargaImagenes.getAllImages().then(value =>{ 
@@ -29,12 +29,16 @@ export class FotosComponent {
         this.cargadas += this.images.length;
       } 
     });
+
+    setTimeout(() => {
+      if(this.cargadas == 0){
+        this.noData = true;
+      }
+    }, 1000);
     
   }
 
-  /* 
-  *Not used
-  */
+  /*Not used*/
   cargarMasImagenes(){
     this.startAt = this.cargadas;
     this._cargaImagenes.fromStartToEnd(this.startAt.toString()).then(value =>{ 
@@ -51,7 +55,6 @@ export class FotosComponent {
           firstTime = false;
         }
         i=count;
-        
         arr.push({[i]:this.files[key]});
         i++;
         count++; 

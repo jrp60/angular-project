@@ -26,7 +26,6 @@ export class ChatService {
   }
 
   cargarMasMensajes(){
-    console.log("CARGAR MAS");
     this.cargados +=10;
     this.itemsCollection = this.afs.collection<Mensaje>('chats', ref=> ref.orderBy('fecha', 'desc').limit(this.cargados));
     return this.itemsCollection.valueChanges().pipe(map((mensajes: Mensaje[] )=>{
