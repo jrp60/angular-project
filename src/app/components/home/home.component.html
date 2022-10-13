@@ -1,237 +1,313 @@
 <div class="container pinkContainer fadeIn slow">
-    <div class="h1container">
-        <div class="alert alert-warning text-center mx-5 mb-4 mt-2" role="alert">
-            Si eres muy Backend Developer también puedes descargarlo en un formato menos colorido 
-            <a (click)="downloadAndOpenPDF()" class="btn btn-outline-danger">CLICKANDO AQUÍ</a>
-        </div>
-        <h1 class="h1cv mt-4 mb-5">Javier Ródenas Pérez CV</h1>
+  <div class="h1container">
+    <div class="alert alert-warning text-center mx-5 mb-4 mt-2" role="alert">
+      Si eres muy Backend Developer también puedes descargarlo en un formato
+      menos colorido
+      <a (click)="downloadAndOpenPDF()" class="btn btn-outline-danger"
+        >CLICKANDO AQUÍ</a
+      >
     </div>
-    <div class="personalInfo row py-4 animated fadeIn">
-        <div class="col-md-4 circularImageDiv fadeIn slow">
-            <img [src]="cvImageUrl" alt="Foto de Javier Ródenas" class="cvImage">
-        </div>
-        <div class="col-md-8 personalInfoData">
-            <div class="wavecomen"></div>
-            <div class="row salmonContainer">
-                <!-- <a class="col-md-4"><b>Fecha de Nacimiento: </b>26/04/1996</a> -->
-                <b>Calle Sierra Mariola, 10, 03610, Petrer, Alicante, España</b>
-                <b>javirodenas.javirodenas@gmail.com</b>
-                <b>608 682 831</b>
-            </div>
-            <div class="wavecomen2"></div>
-            <div class="wavecomen"></div>
-            <div class="row salmonContainer">
-                <b>26/04/1996; Elda, Alicante, España</b>
-                <b>Nacionalidad: Española</b>
-                <b>Sexo: Masculino</b>
-            </div>
-            <div class="wavecomen2"></div>
-            <div class="wavecomen"></div>
-            <div class="row salmonContainer">
-                <b>Permiso de conducción: B</b>
-                <a href="https://www.linkedin.com/in/javier-rodenas-perez-28409118b/"><b>Linkedin</b></a>
-            </div>
-            <div class="wavecomen2"></div>
-        </div>
+    <h1 class="h1cv mt-4 mb-5">Javier Ródenas Pérez CV!!</h1>
+  </div>
+  <div class="personalInfo row py-4 animated fadeIn">
+    <div class="col-md-4 circularImageDiv fadeIn slow">
+      <img [src]="cvImageUrl" alt="Foto de Javier Ródenas" class="cvImage" />
     </div>
-    <div class="body">
-        <div class="waveBody"></div>
-        <div class="sectionBody row">
-            <div class="headerBody">
-                <h2>Experiencia laboral</h2>
-            </div>
-            <div class="waveHeaderSection"></div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody"><b>Programador web</b> - Nicripsia Internet SL</p>
-                <p class="dateContainer">05/2020 - 09/2020</p>
-                <ul class="infoContainer">
-                    <li>Desarrollo de móodulos para PrestaShop mediante PHP, JavaScript, jQuery, MySQL, HTML5.</li>
-                    <li>Maquetación HTML5, Sass, Bootstrap.</li>
-                    <li>Mantenimiento de Bases de Datos (phpMyAdmin)</li>
-                    <li>Gestión de CMS's (WordPress y PrestaShop</li>
-                </ul> 
-            </div>
-        </div>
-        <div class="sectionBody row">
-            <div class="headerBody">
-                <h2>Educación y Formación</h2>
-            </div>
-            <div class="waveHeaderSection"></div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody"><b>Educación Secundaria Obligatoria</b> - IES Poeta Paco Mollá</p>
-                <p class="dateContainer">2008 - 2012</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody"><b>Bachillerato de Ciencias</b> - IES Poeta Paco Mollá</p>
-                <p class="dateContainer">2012 - 2014</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody"><b>Grado en Ingeniería Multimedia, especialización Gestión de Contenidos</b> - Universidad de Alicante</p>
-                <p class="dateContainer">2014 - 2019</p>
-            </div>
-        </div>
-        <div class="sectionBody row">
-            <div class="headerBody">
-                <h2>Competencias de Idiomas</h2>
-            </div>
-            <div class="waveHeaderSection"></div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody"><b>Español, Valenciano</b> - Lenguas Maternas</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody"><b>Inglés</b> - First Certificate of Cambridge Assessment</p>
-                <p class="dateContainer">06/2019</p>
-            </div>
-        </div>
-        <div class="sectionBody row">
-            <div class="headerBody">
-                <h2>Habilidades Técnicas</h2>
-            </div>
-            <div class="waveHeaderSection"></div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>Web</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>PHP <span class="fs-1 pr-top5">●●●</span></li>
-                    <li>JavaScript <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                    <li>TypeScript <span class="fs-1 pr-top7">●</span><span class="fs-5 pr-bottom">◯◯</span></li>
-                    <li>jQuery <span class="fs-1 pr-top7">●</span><span class="fs-5 pr-bottom">◯◯</span></li>
-                    <li>HTML5 <span class="fs-1 pr-top6">●●●</span></li>
-                    <li>CSS <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                    <li>Sass <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                    <li>Bootstrap <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                </ul> 
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>Frameworks</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>Angular <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                    <li>Laravel <span class="fs-1 pr-top7">●</span><span class="fs-5 pr-bottom">◯◯</span></li>
-                </ul> 
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>Bases de Datos</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>MySql <span class="fs-1 pr-top5">●●●</span></li>
-                    <li>MongoDB <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                </ul> 
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>CMS</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>WordPress <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                    <li>PrestaShop <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                </ul> 
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>Git</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>CMD <span class="fs-1 pr-top7">●</span><span class="fs-5 pr-bottom">◯◯</span></li>
-                    <li>Github <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                    <li>Gitkraken <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                </ul> 
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>Metdologías Ágiles</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>SCRUM, Kanban, XP <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                </ul> 
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody mbNegative20"><b>Otros Lenguajes</b></p>
-                <ul class="infoContainer lh30px">
-                    <li>Java <span class="fs-1 pr-top5">●●●</span></li>
-                    <li>C++ <span class="fs-1 pr-top5">●●●</span></li>
-                    <li>Python <span class="fs-1 pr-top6">●●</span><span class="fs-5 pr-bottom">◯</span></li>
-                </ul> 
-            </div>
-        </div>
-        <div class="sectionBody row">
-            <div class="headerBody">
-                <h2>Otros Cursos</h2>
-            </div>
-            <div class="waveHeaderSection"></div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Introducción al Desarrollo Web (primera parte)</b>
-                     - Google Actívate (40H)
-                </p>
-                <p class="dateContainer">10/2017</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Introducción al Desarrollo Web (segunda parte)</b>
-                     - Google Actívate (40H)
-                </p>
-                <p class="dateContainer">10/2017</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Fundamentos del Marketing Digital</b>
-                     - Google Actívate (40H)
-                </p>
-                <p class="dateContainer">02/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Desarrollo de Módulos para PrestaShop</b>
-                     - Udemy (2H)
-                </p>
-                <p class="dateContainer">4/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Complete Python Course-Learn From Scratch</b>
-                     - Udemy (3H)
-                </p>
-                <p class="dateContainer">4/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Learn PHP - For Beginners</b>
-                     - Udemy (2H)
-                </p>
-                <p class="dateContainer">4/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Aprende a dominar Git de cero a expero!</b>
-                     - Udemy (3H)
-                </p>
-                <p class="dateContainer">4/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Curso de Coronavirus COVID-19</b>
-                     - IDUE (2H)
-                </p>
-                <p class="dateContainer">7/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Aprende Edición de Video con Adobe Premiere desde cero</b>
-                     - Udemy (3.5H)
-                </p>
-                <p class="dateContainer">9/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Aprende Javascript y crea APIs con NodeJS, Angular y MongoDB - Udemy</b>
-                     - Udemy (30H)
-                </p>
-                <p class="dateContainer">12/2020</p>
-            </div>
-            <div class="containerBody text-start">
-                <p class="headerContainerBody">
-                    <b>Angular: De cero a experto (Legacy) por Fernando Herrera</b>
-                     - Udemy (30H)
-                </p>
-                <p class="dateContainer">4/2021</p>
-            </div>
-            
-        </div>
+    <div class="col-md-8 personalInfoData">
+      <div class="wavecomen"></div>
+      <div class="row salmonContainer">
+        <!-- <a class="col-md-4"><b>Fecha de Nacimiento: </b>26/04/1996</a> -->
+        <b>Calle Sierra Mariola, 10, 03610, Petrer, Alicante, España</b>
+        <b>javirodenas.javirodenas@gmail.com</b>
+        <b>608 682 831</b>
+      </div>
+      <div class="wavecomen2"></div>
+      <div class="wavecomen"></div>
+      <div class="row salmonContainer">
+        <b>26/04/1996; Elda, Alicante, España</b>
+        <b>Nacionalidad: Española</b>
+        <b>Sexo: Masculino</b>
+      </div>
+      <div class="wavecomen2"></div>
+      <div class="wavecomen"></div>
+      <div class="row salmonContainer">
+        <b>Permiso de conducción: B</b>
+        <a href="https://www.linkedin.com/in/javier-rodenas-perez-28409118b/"
+          ><b>Linkedin</b></a
+        >
+      </div>
+      <div class="wavecomen2"></div>
     </div>
-    <div class="waveFooter"></div>
-    <div class="footer fs-3">
-        <p>© 2021 Javier Ródenas Pérez</p>
-    </div> 
+  </div>
+  <div class="body">
+    <div class="waveBody"></div>
+    <div class="sectionBody row">
+      <div class="headerBody">
+        <h2>Experiencia laboral</h2>
+      </div>
+      <div class="waveHeaderSection"></div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Programador web</b> - Nicripsia Internet SL
+        </p>
+        <p class="dateContainer">05/2020 - 09/2020</p>
+        <ul class="infoContainer">
+          <li>
+            Desarrollo de móodulos para PrestaShop mediante PHP, JavaScript,
+            jQuery, MySQL, HTML5.
+          </li>
+          <li>Maquetación HTML5, Sass, Bootstrap.</li>
+          <li>Mantenimiento de Bases de Datos (phpMyAdmin)</li>
+          <li>Gestión de CMS's (WordPress y PrestaShop</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sectionBody row">
+      <div class="headerBody">
+        <h2>Educación y Formación</h2>
+      </div>
+      <div class="waveHeaderSection"></div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Educación Secundaria Obligatoria</b> - IES Poeta Paco Mollá
+        </p>
+        <p class="dateContainer">2008 - 2012</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Bachillerato de Ciencias</b> - IES Poeta Paco Mollá
+        </p>
+        <p class="dateContainer">2012 - 2014</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b
+            >Grado en Ingeniería Multimedia, especialización Gestión de
+            Contenidos</b
+          >
+          - Universidad de Alicante
+        </p>
+        <p class="dateContainer">2014 - 2019</p>
+      </div>
+    </div>
+    <div class="sectionBody row">
+      <div class="headerBody">
+        <h2>Competencias de Idiomas</h2>
+      </div>
+      <div class="waveHeaderSection"></div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Español, Valenciano</b> - Lenguas Maternas
+        </p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Inglés</b> - First Certificate of Cambridge Assessment
+        </p>
+        <p class="dateContainer">06/2019</p>
+      </div>
+    </div>
+    <div class="sectionBody row">
+      <div class="headerBody">
+        <h2>Habilidades Técnicas</h2>
+      </div>
+      <div class="waveHeaderSection"></div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20"><b>Web</b></p>
+        <ul class="infoContainer lh30px">
+          <li>PHP <span class="fs-1 pr-top5">●●●</span></li>
+          <li>
+            JavaScript <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+          <li>
+            TypeScript <span class="fs-1 pr-top7">●</span
+            ><span class="fs-5 pr-bottom">◯◯</span>
+          </li>
+          <li>
+            jQuery <span class="fs-1 pr-top7">●</span
+            ><span class="fs-5 pr-bottom">◯◯</span>
+          </li>
+          <li>HTML5 <span class="fs-1 pr-top6">●●●</span></li>
+          <li>
+            CSS <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+          <li>
+            Sass <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+          <li>
+            Bootstrap <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+        </ul>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20"><b>Frameworks</b></p>
+        <ul class="infoContainer lh30px">
+          <li>
+            Angular <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+          <li>
+            Laravel <span class="fs-1 pr-top7">●</span
+            ><span class="fs-5 pr-bottom">◯◯</span>
+          </li>
+        </ul>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20"><b>Bases de Datos</b></p>
+        <ul class="infoContainer lh30px">
+          <li>MySql <span class="fs-1 pr-top5">●●●</span></li>
+          <li>
+            MongoDB <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+        </ul>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20"><b>CMS</b></p>
+        <ul class="infoContainer lh30px">
+          <li>
+            WordPress <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+          <li>
+            PrestaShop <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+        </ul>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20"><b>Git</b></p>
+        <ul class="infoContainer lh30px">
+          <li>
+            CMD <span class="fs-1 pr-top7">●</span
+            ><span class="fs-5 pr-bottom">◯◯</span>
+          </li>
+          <li>
+            Github <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+          <li>
+            Gitkraken <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+        </ul>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20">
+          <b>Metdologías Ágiles</b>
+        </p>
+        <ul class="infoContainer lh30px">
+          <li>
+            SCRUM, Kanban, XP <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+        </ul>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody mbNegative20"><b>Otros Lenguajes</b></p>
+        <ul class="infoContainer lh30px">
+          <li>Java <span class="fs-1 pr-top5">●●●</span></li>
+          <li>C++ <span class="fs-1 pr-top5">●●●</span></li>
+          <li>
+            Python <span class="fs-1 pr-top6">●●</span
+            ><span class="fs-5 pr-bottom">◯</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sectionBody row">
+      <div class="headerBody">
+        <h2>Otros Cursos</h2>
+      </div>
+      <div class="waveHeaderSection"></div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Introducción al Desarrollo Web (primera parte)</b>
+          - Google Actívate (40H)
+        </p>
+        <p class="dateContainer">10/2017</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Introducción al Desarrollo Web (segunda parte)</b>
+          - Google Actívate (40H)
+        </p>
+        <p class="dateContainer">10/2017</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Fundamentos del Marketing Digital</b>
+          - Google Actívate (40H)
+        </p>
+        <p class="dateContainer">02/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Desarrollo de Módulos para PrestaShop</b>
+          - Udemy (2H)
+        </p>
+        <p class="dateContainer">4/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Complete Python Course-Learn From Scratch</b>
+          - Udemy (3H)
+        </p>
+        <p class="dateContainer">4/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Learn PHP - For Beginners</b>
+          - Udemy (2H)
+        </p>
+        <p class="dateContainer">4/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Aprende a dominar Git de cero a expero!</b>
+          - Udemy (3H)
+        </p>
+        <p class="dateContainer">4/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Curso de Coronavirus COVID-19</b>
+          - IDUE (2H)
+        </p>
+        <p class="dateContainer">7/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Aprende Edición de Video con Adobe Premiere desde cero</b>
+          - Udemy (3.5H)
+        </p>
+        <p class="dateContainer">9/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b
+            >Aprende Javascript y crea APIs con NodeJS, Angular y MongoDB -
+            Udemy</b
+          >
+          - Udemy (30H)
+        </p>
+        <p class="dateContainer">12/2020</p>
+      </div>
+      <div class="containerBody text-start">
+        <p class="headerContainerBody">
+          <b>Angular: De cero a experto (Legacy) por Fernando Herrera</b>
+          - Udemy (30H)
+        </p>
+        <p class="dateContainer">4/2021</p>
+      </div>
+    </div>
+  </div>
+  <div class="waveFooter"></div>
+  <div class="footer fs-3">
+    <p>© 2021 Javier Ródenas Pérez</p>
+  </div>
 </div>
