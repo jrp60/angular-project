@@ -45,12 +45,7 @@ import { environment } from "../environments/environment";
 import firebase from "firebase/app";
 import "firebase/storage";
 //firebase.initializeApp(environment.FIREBASE);
-
-const firebaseConfig = {
-  storageBucket: "gs://fotos-app-779cb.appspot.com",
-};
-
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(environment.FIREBASE);
 export const storage = firebase.storage();
 
 @NgModule({
