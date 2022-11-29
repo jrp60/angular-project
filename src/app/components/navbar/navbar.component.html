@@ -1,33 +1,109 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand"  [routerLink]="['home']" routerLinkActive="router-link-active">Quién soy</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      class="navbar-brand"
+      [routerLink]="['jrp60.github.io/angular-project/home']"
+      routerLinkActive="router-link-active"
+      >Quién soy</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-link"><a class="nav-link" [routerLink]="['chat']" routerLinkActive="router-link-active" >Chat</a></li>
+        <li class="nav-link">
+          <a
+            class="nav-link"
+            [routerLink]="['chat']"
+            routerLinkActive="router-link-active"
+            >Chat</a
+          >
+        </li>
         <li class="nav-link dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="['spotify']" routerLinkActive="router-link-active" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLink]="['spotify']"
+            routerLinkActive="router-link-active"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Api Spotify
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="['spotify']" routerLinkActive="router-link-active" >Home</a></li>
-            <li><a class="dropdown-item" [routerLink]="['spotify/search']" routerLinkActive="router-link-active" >Search</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['spotify']"
+                routerLinkActive="router-link-active"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['spotify/search']"
+                routerLinkActive="router-link-active"
+                >Search</a
+              >
+            </li>
           </ul>
         </li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['youtube']" routerLinkActive="router-link-active" >Api YouTube</a></li>
-        <li class="nav-link"><a class="nav-link" [routerLink]="['maps']" routerLinkActive="router-link-active" >Api Maps</a></li>
+        <li class="nav-link">
+          <a
+            class="nav-link"
+            [routerLink]="['youtube']"
+            routerLinkActive="router-link-active"
+            >Api YouTube</a
+          >
+        </li>
+        <li class="nav-link">
+          <a
+            class="nav-link"
+            [routerLink]="['maps']"
+            routerLinkActive="router-link-active"
+            >Api Maps</a
+          >
+        </li>
         <li class="nav-link dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="['fotos']" routerLinkActive="router-link-active" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            [routerLink]="['fotos']"
+            routerLinkActive="router-link-active"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Gestor imágenes
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="['fotos/subir-imagen']" routerLinkActive="router-link-active" >Subir imágen</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['fotos/subir-imagen']"
+                routerLinkActive="router-link-active"
+                >Subir imágen</a
+              >
+            </li>
           </ul>
         </li>
-        <li class="nav-link"  *ngIf="auth.isAuthenticated$ | async">
-          <a class="nav-link" [routerLink]="['perfil']" routerLinkActive="router-link-active" >Mi perfil Auth0</a>
+        <li class="nav-link" *ngIf="auth.isAuthenticated$ | async">
+          <a
+            class="nav-link"
+            [routerLink]="['perfil']"
+            routerLinkActive="router-link-active"
+            >Mi perfil Auth0</a
+          >
         </li>
       </ul>
     </div>
@@ -35,14 +111,23 @@
       <ul class="nav justify-content-end w-100">
         <li class="nav-item w-100">
           <span class="navbar-text">
-            <div *ngIf="isLogged;else loggin">
-              <button type="button" class="btn btn-outline-success w-100 mb-1"  [routerLink]="'/dashboard'">
-                Dashboard 
+            <div *ngIf="isLogged; else loggin">
+              <button
+                type="button"
+                class="btn btn-outline-success w-100 mb-1"
+                [routerLink]="'/dashboard'"
+              >
+                Dashboard
               </button>
             </div>
             <ng-template #loggin>
-              <button type="button" class="btn btn-outline-primary w-100 mb-1"  [routerLink]="'/sign-in'"><i class="fa fa-plus"></i>
-                Login with Firebase Auth  
+              <button
+                type="button"
+                class="btn btn-outline-primary w-100 mb-1"
+                [routerLink]="'/sign-in'"
+              >
+                <i class="fa fa-plus"></i>
+                Login with Firebase Auth
               </button>
             </ng-template>
           </span>
