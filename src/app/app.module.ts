@@ -8,6 +8,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { CommonModule } from "@angular/common";
+import { APP_BASE_HREF } from "@angular/common";
 
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
@@ -97,6 +98,7 @@ export const storage = firebase.storage();
     YoutubeService,
     CargaImagenesService,
     AuthFirebaseService,
+    { provide: APP_BASE_HREF, useValue: "/" },
   ],
   bootstrap: [AppComponent],
 })
