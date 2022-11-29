@@ -98,7 +98,7 @@ export const storage = firebase.storage();
     YoutubeService,
     CargaImagenesService,
     AuthFirebaseService,
-    { provide: APP_BASE_HREF, useValue: "/" },
+    { provide: APP_BASE_HREF, useValue: "/angular-project/" },
   ],
   bootstrap: [AppComponent],
 })
