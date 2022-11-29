@@ -31,6 +31,10 @@ export const APP_ROUTES: Routes = [
     path: "jrp60.github.io/angular-project/home",
     component: HomeComponent,
   },
+  {
+    path: "home",
+    component: HomeComponent,
+  },
   { path: "perfil", component: AutenticadoComponent, canActivate: [AuthGuard] },
   {
     path: "sign-in",
