@@ -11,6 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "homepage": "https://jrp60.github.io/angular-project",
   "private": true,
   "dependencies": {
     "@agm/core": "^1.1.0",
