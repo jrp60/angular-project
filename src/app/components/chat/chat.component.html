@@ -1,68 +1,133 @@
 <div class="main-container text-center container">
-    <h1>Chat with firestore database</h1>
-    <div class="chat-window mt-4" *ngIf="isLogged;else loggin">
-        <h2>Chat</h2>
-        <hr>
-        <div class="app-mensajes text-start" id="app-mensajes" #myOverlay>
-            <div class="text-center" (click)="cargarMasMensajes()"><h1><button class="btn btn-outline-light"><b>+</b></button></h1></div>
-            <div [ngClass]="{'text-end': usuario.id == chat.uid}" *ngFor="let chat of _cs.chats">
-                <span class="badge" [ngClass]="{'bg-primary': usuario.id == chat.uid, 'bg-success': usuario.id != chat.uid}">
-                    {{chat.nombre}}
-                </span>
-                <p>{{chat.mensaje}}</p>
-            </div>
-        </div>
-        <input type="text" class="form-control inputChat" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()" placeholder="Enviar mensaje">
+  <h1>Chat with firestore database</h1>
+  <div class="chat-window mt-4" *ngIf="isLogged; else loggin">
+    <h2>Chat</h2>
+    <hr />
+    <div class="app-mensajes text-start" id="app-mensajes" #myOverlay>
+      <div class="text-center" (click)="cargarMasMensajes()">
+        <h1>
+          <button class="btn btn-outline-light"><b>+</b></button>
+        </h1>
+      </div>
+      <div
+        [ngClass]="{ 'text-end': usuario.id == chat.uid }"
+        *ngFor="let chat of _cs.chats"
+      >
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-primary': usuario.id == chat.uid,
+            'bg-success': usuario.id != chat.uid
+          }"
+        >
+          {{ chat.nombre }}
+        </span>
+        <p>{{ chat.mensaje }}</p>
+      </div>
     </div>
+    <input
+      type="text"
+      class="form-control inputChat"
+      name="mensaje"
+      [(ngModel)]="mensaje"
+      (keyup.enter)="enviar_mensaje()"
+      placeholder="Send message"
+    />
+  </div>
 
-    <ng-template #loggin>
-        <div class="alert alert-warning w-75 margin0 mb-3" role="alert">
-            <h1>You have to be logged in to chat!</h1>
+  <ng-template #loggin>
+    <div class="alert alert-warning w-75 margin0 mb-3" role="alert">
+      <h1>You have to be logged in to chat!</h1>
+    </div>
+    <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-outline-primary w-100"
+          (click)="authService.GoogleAuthWithReload()"
+        >
+          <i class="fab fa-google-plus-g"></i>
+          Log in with Google
+        </button>
+      </div>
+    </div>
+    <br />
+    <div class="card text-white bg-dark text-center margin0 w40rem mb-4">
+      <div class="card-body">
+        <h2 class="mb-3">Enter into your account</h2>
+        <div class="formGroup">
+          <input
+            type="text"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Email Address"
+            #userName
+            required
+          />
         </div>
-        <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
-            <div class="card-body">
-                <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuthWithReload()">
-                <i class="fab fa-google-plus-g"></i>
-                    Log in with Google
-                </button>
-            </div>
-        </div>
-        <br>
-        <div class="card text-white bg-dark text-center margin0 w40rem mb-4">
-            <div class="card-body">
-                <h2 class="mb-3">Enter into your account</h2>
-                <div class="formGroup">
-                    <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userName required>
-                </div>
-        
-                <div class="formGroup  mb-2">
-                    <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPassword required>
-                    <a class="d-block" [routerLink]="['/forgot-password']">Forgot Password?</a>
-                </div>
-                <div class="formGroup">
-                    <button type="button" class="btn btn-primary w-75" (click)="authService.SignInFileWithReload(userName.value, userPassword.value)">Enter</button>
-                </div>
-            </div>
-            <div class="card-body">
-            </div>
-        </div>
-        <h4 class="mb-4">Or</h4>
-        <div class="card text-white bg-dark text-center margin0 w40rem">
-            <div class="card-body mb-4">
-              <h2 class="mb-3">Create a new account</h2>
-              <div class="formGroup">
-                <input type="email" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userEmail required>
-              </div>
-              <div class="formGroup  mb-2">
-                <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPwd required>
-              </div>
-              <div class="formGroup">
-                <button type="button" class="btn btn-primary w-75" (click)="authService.SignUpFileWithReload(userEmail.value, userPwd.value)">
-                  Create account
-                </button>
-              </div>
-            </div>
-        </div>
-    </ng-template>
 
+        <div class="formGroup mb-2">
+          <input
+            type="password"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Password"
+            #userPassword
+            required
+          />
+          <a class="d-block" [routerLink]="['/forgot-password']"
+            >Forgot Password?</a
+          >
+        </div>
+        <div class="formGroup">
+          <button
+            type="button"
+            class="btn btn-primary w-75"
+            (click)="
+              authService.SignInFileWithReload(
+                userName.value,
+                userPassword.value
+              )
+            "
+          >
+            Enter
+          </button>
+        </div>
+      </div>
+      <div class="card-body"></div>
+    </div>
+    <h4 class="mb-4">Or</h4>
+    <div class="card text-white bg-dark text-center margin0 w40rem">
+      <div class="card-body mb-4">
+        <h2 class="mb-3">Create a new account</h2>
+        <div class="formGroup">
+          <input
+            type="email"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Email Address"
+            #userEmail
+            required
+          />
+        </div>
+        <div class="formGroup mb-2">
+          <input
+            type="password"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Password"
+            #userPwd
+            required
+          />
+        </div>
+        <div class="formGroup">
+          <button
+            type="button"
+            class="btn btn-primary w-75"
+            (click)="
+              authService.SignUpFileWithReload(userEmail.value, userPwd.value)
+            "
+          >
+            Create account
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>

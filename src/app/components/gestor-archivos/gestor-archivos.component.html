@@ -1,91 +1,149 @@
 <div class="main-container text-center">
-    <div class="row" *ngIf="isLogged;else loggin">
-        <div class="row">
-            <h3>Seleccione y arrastre los archivos que desea subir</h3>
-            <div NgDropFiles 
-                [ngClass]="{'file-over': estaSobreDropZone}" 
-                (archivoSobre)="archivoSobreDropZone($event)" 
-                [archivos]="archivos" 
-                class="well drop-zone">
-                    <h4>Suelte los archivos aquí</h4>
-                    <img src="/assets/img/drop-image.png">
-            </div>
-        </div>
-        <div class="col-md-12 mt-4 mb-3">
-            <button (click)="cargarImagenesFirebase()" [disabled]="archivos.length == 0" type="button" class="btn btn-success ms-3">
-                Subir
-            </button>
-            <table class="table table-dark table-striped" *ngIf="archivos.length > 0">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tamaño</th>
-                        <th>Progreso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let archivo of archivos">
-                        <td [ngClass]="{'text-green': archivo.estaSubiendo}">
-                            <strong>{{archivo.nombreArchivo}}</strong>
-                        </td>
-                        <td>{{archivo.archivo.size / 1024 / 1024 | number:'0.2'}}MB</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': archivo.progreso + '%'}" style="width: 25%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="row" *ngIf="isLogged; else loggin">
+    <div class="row">
+      <h3>Drag and drop some image</h3>
+      <div
+        NgDropFiles
+        [ngClass]="{ 'file-over': estaSobreDropZone }"
+        (archivoSobre)="archivoSobreDropZone($event)"
+        [archivos]="archivos"
+        class="well drop-zone"
+      >
+        <h4>Drop image here</h4>
+        <img src="/assets/img/drop-image.png" />
+      </div>
     </div>
-    <ng-template #loggin>
-        <div class="alert alert-warning w-75 margin0 mb-3" role="alert">
-            <h1>You have to be logged in to upload images!</h1>
-        </div>
-        <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
-            <div class="card-body">
-                <button type="button" class="btn btn-outline-primary w-100" (click)="authService.GoogleAuthWithReload()">
-                <i class="fab fa-google-plus-g"></i>
-                    Log in with Google
-                </button>
-            </div>
-        </div>
-        <br>
-        <div class="card text-white bg-dark text-center margin0 w40rem mb-4">
-            <div class="card-body">
-                <h2 class="mb-3">Enter into your account</h2>
-                <div class="formGroup">
-                    <input type="text" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userName required>
-                </div>
-        
-                <div class="formGroup  mb-2">
-                    <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPassword required>
-                    <a class="d-block" [routerLink]="['/forgot-password']">Forgot Password?</a>
-                </div>
-                <div class="formGroup">
-                    <button type="button" class="btn btn-primary w-75" (click)="authService.SignInFileWithReload(userName.value, userPassword.value)">Enter</button>
-                </div>
-            </div>
-            <div class="card-body">
-            </div>
-        </div>
-        <h4 class="mb-4">Or</h4>
-        <div class="card text-white bg-dark text-center margin0 w40rem">
-            <div class="card-body mb-4">
-              <h2 class="mb-3">Create a new account</h2>
-              <div class="formGroup">
-                <input type="email" class="formControl w-75 py-1 mb-1" placeholder="Email Address" #userEmail required>
+    <div class="col-md-12 mt-4 mb-3">
+      <button
+        (click)="cargarImagenesFirebase()"
+        [disabled]="archivos.length == 0"
+        type="button"
+        class="btn btn-success ms-3"
+      >
+        Upload
+      </button>
+      <table class="table table-dark table-striped" *ngIf="archivos.length > 0">
+        <thead class="table-dark">
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Progress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let archivo of archivos">
+            <td [ngClass]="{ 'text-green': archivo.estaSubiendo }">
+              <strong>{{ archivo.nombreArchivo }}</strong>
+            </td>
+            <td>{{ archivo.archivo.size / 1024 / 1024 | number : "0.2" }}MB</td>
+            <td>
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  [ngStyle]="{ width: archivo.progreso + '%' }"
+                  style="width: 25%"
+                ></div>
               </div>
-              <div class="formGroup  mb-2">
-                <input type="password" class="formControl w-75 py-1 mb-1" placeholder="Password" #userPwd required>
-              </div>
-              <div class="formGroup">
-                <button type="button" class="btn btn-primary w-75" (click)="authService.SignUpFileWithReload(userEmail.value, userPwd.value)">
-                  Create account
-                </button>
-              </div>
-            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #loggin>
+    <div class="alert alert-warning w-75 margin0 mb-3" role="alert">
+      <h1>You have to be logged in to upload images!</h1>
+    </div>
+    <div class="card text-white bg-dark text-center margin0 mb-3 w40rem">
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-outline-primary w-100"
+          (click)="authService.GoogleAuthWithReload()"
+        >
+          <i class="fab fa-google-plus-g"></i>
+          Log in with Google
+        </button>
+      </div>
+    </div>
+    <br />
+    <div class="card text-white bg-dark text-center margin0 w40rem mb-4">
+      <div class="card-body">
+        <h2 class="mb-3">Enter into your account</h2>
+        <div class="formGroup">
+          <input
+            type="text"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Email Address"
+            #userName
+            required
+          />
         </div>
-    </ng-template>
+
+        <div class="formGroup mb-2">
+          <input
+            type="password"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Password"
+            #userPassword
+            required
+          />
+          <a class="d-block" [routerLink]="['/forgot-password']"
+            >Forgot Password?</a
+          >
+        </div>
+        <div class="formGroup">
+          <button
+            type="button"
+            class="btn btn-primary w-75"
+            (click)="
+              authService.SignInFileWithReload(
+                userName.value,
+                userPassword.value
+              )
+            "
+          >
+            Enter
+          </button>
+        </div>
+      </div>
+      <div class="card-body"></div>
+    </div>
+    <h4 class="mb-4">Or</h4>
+    <div class="card text-white bg-dark text-center margin0 w40rem">
+      <div class="card-body mb-4">
+        <h2 class="mb-3">Create a new account</h2>
+        <div class="formGroup">
+          <input
+            type="email"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Email Address"
+            #userEmail
+            required
+          />
+        </div>
+        <div class="formGroup mb-2">
+          <input
+            type="password"
+            class="formControl w-75 py-1 mb-1"
+            placeholder="Password"
+            #userPwd
+            required
+          />
+        </div>
+        <div class="formGroup">
+          <button
+            type="button"
+            class="btn btn-primary w-75"
+            (click)="
+              authService.SignUpFileWithReload(userEmail.value, userPwd.value)
+            "
+          >
+            Create account
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
