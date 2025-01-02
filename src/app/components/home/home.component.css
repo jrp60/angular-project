@@ -213,8 +213,8 @@ background-color: #A4c869;*/
   bottom: 0;
   right: 0;
   background-repeat: repeat;
-  height: 20px;
-  background-size: 20px 20px;
+  height: 40px;
+  background-size: 20px 40px;
   background-image: radial-gradient(
     circle at 10px -5px,
     transparent 12px,
