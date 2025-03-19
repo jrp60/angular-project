@@ -1,0 +1,194 @@
+.poll-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.boundary-vote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: rgb(240, 239, 237);
+  border: 2px;
+  border-radius: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 22px;
+  min-height: 100px;
+  justify-content: center;
+  font-weight: bold;
+  color: #0d0d0e;
+}
+
+/* vote box */
+.vote-box {
+  width: 250px;
+  height: 180px;
+  background: #f8f9fa;
+  border: 4px solid #333;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding-top: 40px;
+  font-weight: bold;
+}
+
+/* slot in the vote box */
+.vote-box::before {
+  content: "";
+  width: 120px;
+  height: 10px;
+  background: black;
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+}
+
+.vote-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* show the X when voted */
+.vote-box.voted::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+.vote-box.voted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+.vote-box.voted::after,
+.vote-box.voted::before {
+  content: "";
+  position: absolute;
+  width: 102%;
+  height: 4px;
+  background: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.vote-box.voted::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/*envelopes container*/
+.options-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap; /* ✅ This allows items to move to a new row if needed */
+  gap: 2px; /* ✅ Adjust spacing between items */
+
+  overflow-x: hidden; /* Prevents horizontal scroll */
+  max-width: 100%; /* Prevents container from exceeding screen width */
+  padding: 0 10px; /* Optional: adds horizontal padding for better alignment */
+  box-sizing: border-box;
+}
+
+/* envelope */
+.vote-option {
+  width: 120px;
+  height: 80px;
+  margin: 10px;
+  background: #f4c542;
+  position: relative;
+  border: 2px solid #d1a029;
+  border-radius: 5px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
+  padding-top: 28px; /* ✅ Adds padding to the box */
+  font-size: 10px; /* ✅ Makes text smaller */
+  word-wrap: break-word; /* ✅ Ensures long words don't break layout */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* envelope flap */
+.vote-option::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 30px solid #d1a029;
+}
+
+.vote-option:active {
+  cursor: grabbing;
+}
+
+/* hide envelopes when voted */
+.options-list.voted {
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/******** PODIUM **********/
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.podium-place {
+  width: 120px;
+  text-align: center;
+  padding: 10px 2px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gold {
+  background: gold;
+  height: 220px;
+}
+.silver {
+  background: silver;
+  height: 200px;
+}
+.bronze {
+  background: #cd7f32;
+  height: 185px;
+}
+.no-podium {
+  background: #5e5e5e;
+  height: 170px;
+}

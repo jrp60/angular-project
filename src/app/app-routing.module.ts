@@ -21,6 +21,7 @@ import { SignUpComponent } from "./components/firebaselogin/sign-up/sign-up.comp
 import { DashboardComponent } from "./components/firebaselogin/dashboard/dashboard.component";
 import { ForgotPasswordComponent } from "./components/firebaselogin/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/firebaselogin/verify-email/verify-email.component";
+import { TestsComponent } from "./components/tests/tests.component";
 
 export const APP_ROUTES: Routes = [
   {
@@ -57,6 +58,7 @@ export const APP_ROUTES: Routes = [
   { path: "maps", component: MapsComponent },
   { path: "fotos/subir-imagen", component: GestorArchivosComponent },
   { path: "fotos", component: FotosComponent },
+  { path: "tests", component: TestsComponent },
   { path: "**", pathMatch: "full", redirectTo: "home" },
 ];
 

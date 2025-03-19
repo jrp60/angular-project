@@ -97,6 +97,14 @@
             </li>
           </ul>
         </li>
+        <li class="nav-link">
+          <a
+            class="nav-link"
+            [routerLink]="['tests']"
+            routerLinkActive="router-link-active"
+            >Tests Zone</a
+          >
+        </li>
         <li class="nav-link" *ngIf="auth.isAuthenticated$ | async">
           <a
             class="nav-link"

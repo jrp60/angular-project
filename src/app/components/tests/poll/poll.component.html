@@ -1,0 +1,50 @@
+<div class="poll-container">
+  <h2>Chose your favourite option</h2>
+  <div class="boundary-vote" cdkDropListGroup>
+    <div
+      cdkDropList
+      [cdkDropListData]="votes"
+      class="vote-box"
+      (cdkDropListDropped)="vote($event)"
+    >
+      <p *ngIf="votes.length == 0">VOTE</p>
+    </div>
+
+    <div class="d-flex options-list" cdkDropList [cdkDropListData]="options">
+      <ng-container *ngFor="let option of options">
+        <div
+          *ngIf="!option.voted"
+          cdkDrag
+          class="vote-option"
+          cdkDragBoundary=".boundary-vote"
+        >
+          {{ option.name }}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="results mt-4">
+    <h3>
+      Results -
+      <button type="button" (click)="randomizeData()" class="btn btn-primary">
+        Random Data
+      </button>
+      <button type="button" (click)="resetVotes()" class="btn btn-primary">
+        Reset Votes
+      </button>
+    </h3>
+
+    <div class="podium">
+      <div
+        *ngFor="let option of options; let i = index"
+        class="podium-place"
+        [ngClass]="getPodiumClass(i)"
+      >
+        <span class="name">{{ option.name }}</span>
+        <br />
+        <span class="votes">{{ option.votes }} votes</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { CommonModule } from "@angular/common";
 import { APP_BASE_HREF } from "@angular/common";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
@@ -45,6 +46,8 @@ import { NgDropFilesDirective } from "./directives/ng-drop-files.directive";
 import { environment } from "../environments/environment";
 import firebase from "firebase/app";
 import "firebase/storage";
+import { TestsComponent } from "./components/tests/tests.component";
+import { PollComponent } from "./components/tests/poll/poll.component";
 //firebase.initializeApp(environment.FIREBASE);
 firebase.initializeApp(environment.FIREBASE);
 export const storage = firebase.storage();
@@ -73,6 +76,8 @@ export const storage = firebase.storage();
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    TestsComponent,
+    PollComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.FIREBASE),
@@ -91,6 +96,7 @@ export const storage = firebase.storage();
     CommonModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
+    DragDropModule,
   ],
   providers: [
     MapasService,
