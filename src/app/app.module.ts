@@ -48,6 +48,7 @@ import firebase from "firebase/app";
 import "firebase/storage";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
+import { ImageGeneratorComponent } from './components/tests/image-generator/image-generator/image-generator.component';
 //firebase.initializeApp(environment.FIREBASE);
 firebase.initializeApp(environment.FIREBASE);
 export const storage = firebase.storage();
@@ -78,6 +79,7 @@ export const storage = firebase.storage();
     VerifyEmailComponent,
     TestsComponent,
     PollComponent,
+    ImageGeneratorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.FIREBASE),

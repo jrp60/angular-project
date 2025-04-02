@@ -1,0 +1,20 @@
+<button (click)="generate()" class="btn btn-outline-primary">
+  Generate Image
+</button>
+<!-- <img *ngIf="imageUrl" [src]="imageUrl" alt="Generated Image" /> -->
+
+<div *ngIf="imageUrl; else AIimage">
+  <img [src]="imageUrl" alt="Generated Image" />
+</div>
+
+<ng-template #AIimage>
+  <div class="loading-placeholder">
+    <p *ngIf="!isLoading">Here will be displayed the AI image</p>
+    <img
+      *ngIf="isLoading"
+      class="loadingImg"
+      src="../../../../../assets/img/loading.gif"
+      alt="Loading..."
+    />
+  </div>
+</ng-template>
