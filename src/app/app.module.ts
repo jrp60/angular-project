@@ -3,13 +3,13 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthModule } from "@auth0/auth0-angular";
 import { HttpClientModule } from "@angular/common/http";
-import { AgmCoreModule } from "@agm/core";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { CommonModule } from "@angular/common";
 import { APP_BASE_HREF } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
@@ -91,14 +91,15 @@ export const storage = firebase.storage();
     }),
     HttpClientModule,
     FormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.AGM_APIKEY,
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: environment.AGM_APIKEY,
+    // }),
     AngularFireDatabaseModule,
     CommonModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
     DragDropModule,
+    GoogleMapsModule,
   ],
   providers: [
     MapasService,

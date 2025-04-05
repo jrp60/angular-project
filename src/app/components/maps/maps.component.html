@@ -4,22 +4,24 @@
     free (and is not currently being paid for).
   </div>
 
-  <agm-map
-    [latitude]="lat"
-    [longitude]="lng"
+
+  <!-- (mapDragEnd)="onMapDragEnd($event)" 
+    (mapClick)="onMapClick($event)"
+   
+    -->
+  <google-map    
     [zoom]="zoom"
     (mapClick)="clickMapa($event)"
-  >
-    <agm-marker
-      *ngFor="let marcador of _ms.marcadores; let i = index"
-      [latitude]="marcador.lat"
-      [longitude]="marcador.lng"
-      [title]="marcador.titulo"
-      [markerDraggable]="marcador.draggable"
-      (markerClick)="clickMarcador(marcador, i)"
-      (dragEnd)="dragEndMarcador(marcador, $event)"
+    height="500px" width="100%"
+    [options]="mapOptions"
     >
-      <agm-info-window [disableAutoPan]="true">
+    <map-marker
+      *ngFor="let marcador of _ms.marcadores; let i = index"
+      [position]="marcador.position"
+      [options]="marcador.options"
+      (mapClick)="clickMarcador(marcador, i)"
+    >
+      <map-info-window>
         <strong>{{ marcador.titulo }}</strong>
         <p *ngIf="marcador.desc">{{ marcador.desc }}</p>
         <p class="puntero">
@@ -30,9 +32,9 @@
             Delete Marker
           </a>
         </p>
-      </agm-info-window>
-    </agm-marker>
-  </agm-map>
+      </map-info-window>
+    </map-marker>
+  </google-map>
 </div>
 <div class="container mt-2" *ngIf="!marcadorSel">
   <div class="alert alert-info">
@@ -46,7 +48,7 @@
     <label for="">Title</label>
     <input
       type="text"
-      [(ngModel)]="marcadorSel.titulo"
+      [(ngModel)]="marcadorSel.options.titulo"
       name="titulo"
       class="form-control"
     />

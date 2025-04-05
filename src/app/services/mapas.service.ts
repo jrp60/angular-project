@@ -6,13 +6,24 @@ import { Marcador } from "../interfaces/marcador.interface";
 })
 export class MapasService {
 
-  marcadores:Marcador[] = [];
+  // marcadores:Marcador[] = [];
+  marcadores = [
+    {
+      position: { lat: 38.484202837, lng: -0.7677831 },
+      options: { titulo: "Explanada de Petrer", draggable: true }
+    },
+    {
+      position: { lat: 38.490, lng: -0.770 },
+      options: { titulo: "Otro marcador", draggable: false }
+    }
+  ];
   constructor(){
     let nuevoMarcador:Marcador = {
-      lat:38.484202837,
-      lng:-0.7677831,
+      position: { lat:38.484202837, lng:-0.7677831 },
+      options: {
       titulo: "Explanada de Petrer",
       draggable: true
+      },
     }
 
     this.marcadores.push(nuevoMarcador);

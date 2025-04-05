@@ -1,63 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from "@angular/core";
 import { MapasService } from "../../services/mapas.service";
-import { Marcador } from 'src/app/interfaces/marcador.interface';
+import { Marcador } from "src/app/interfaces/marcador.interface";
+import { GoogleMapsModule } from "@angular/google-maps";
 
 @Component({
-  selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styles: [
-  ]
+  selector: "app-maps",
+  templateUrl: "./maps.component.html",
+  styles: [],
 })
- 
 export class MapsComponent {
+  mapOptions: google.maps.MapOptions;
 
-  constructor(public _ms:MapasService) {
+  constructor(public _ms: MapasService) {
     this._ms.cargarMarcadores();
-   }
 
-  lat:number = 38.48420283763195;
-  lng:number = -0.7677831619109627;
-  zoom:number = 15;
+    this.mapOptions = {
+      center: {
+        lat: this._ms.marcadores[0]?.position.lat || 38.484202837,
+        lng: this._ms.marcadores[0]?.position.lng || -0.7677831,
+      },
+      zoom: 15,
+      mapTypeId: "roadmap",
+    };
+  }
 
-  marcadorSel:Marcador = null;
-  draggable:string = "1";
+  lat: number = 38.48420283763195;
+  lng: number = -0.7677831619109627;
+  zoom: number = 15;
 
-  clickMapa(evento){
-    let nuevoMarcador:Marcador = {
-      lat: evento.coords.lat,
-      lng: evento.coords.lng,
-      titulo: "sin titulo",
-      draggable: true
-    }
+  marcadorSel: Marcador = null;
+  draggable: string = "1";
+
+  clickMapa(evento) {
+    let nuevoMarcador: Marcador = {
+      position: {
+        lat: evento.latLng.lat(),
+        lng: evento.latLng.lng(),
+      },
+      options: {
+        titulo: "sin titulo",
+        draggable: true,
+      },
+    };
     this._ms.insertarMarcador(nuevoMarcador);
   }
 
-  clickMarcador(marcador:Marcador, i:number){
+  /* FIX and fix modal */
+  clickMarcador(marcador: Marcador, i: number) {
     this.marcadorSel = marcador;
-    
-    if(this.marcadorSel.draggable){
+
+    if (this.marcadorSel.options.draggable) {
       this.draggable = "1";
-    }else{
+    } else {
       this.draggable = "0";
     }
   }
 
-  dragEndMarcador(marcador:Marcador, event){
+  dragEndMarcador(marcador: Marcador, event) {
     let lat = event.coords.lat;
     let lng = event.coords.lng;
 
-    marcador.lat = lat;
-    marcador.lng = lng;
+    marcador.position = { lat: lat, lng: lng };
+    // marcador.lat = lat;
+    // marcador.lng = lng;
 
     this._ms.guardarMarcadores();
   }
 
-  cambiarDraggable(){
-    if(this.draggable == "1"){
-      this.marcadorSel.draggable = true;
-    }else{
-      this.marcadorSel.draggable = false;
+  cambiarDraggable() {
+    if (this.draggable == "1") {
+      this.marcadorSel.options.draggable = true;
+    } else {
+      this.marcadorSel.options.draggable = false;
     }
   }
-
 }

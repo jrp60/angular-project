@@ -1,8 +1,11 @@
-export interface Marcador{
-    lat:number;
+export interface Marcador {
+  position: {
+    lat: number;
     lng: number;
-    draggable:boolean;
-
-    titulo:string;
-    desc?:string;
+  };
+  options: {
+    draggable: boolean;
+    titulo: string;
+  };
+  desc?: string;
 }
