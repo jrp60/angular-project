@@ -1,32 +1,45 @@
-import { Component, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 
 // Import the AuthService type from the SDK
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
-  selector: 'app-auth-button',
-  template:
-  `
+  selector: "app-auth-button",
+  template: `
     <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-      <button class="btn btn-outline-danger  w-100" (click)="auth.logout({ returnTo: document.location.origin })">
+      <button
+        class="btn btn-outline-danger  w-100"
+        (click)="
+          auth.logout({ logoutParams: { returnTo: document.location.origin } })
+        "
+      >
         Log out
       </button>
     </ng-container>
 
     <ng-template #loggedOut>
-      <button class="btn btn-outline-primary  w-100" (click)="loginWithRedirect()">Login con Auth0</button>
+      <button
+        class="btn btn-outline-primary  w-100"
+        (click)="loginWithRedirect()"
+      >
+        Login con Auth0
+      </button>
     </ng-template>
   `,
   styles: [],
 })
-export class AuthButtonComponent{
+export class AuthButtonComponent {
   // Inject the authentication service into your component through the constructor
-  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {
-  }
+  constructor(
+    @Inject(DOCUMENT) public document: Document,
+    public auth: AuthService
+  ) {}
 
   loginWithRedirect(): void {
-    this.auth.loginWithRedirect({ redirect_uri: 'http://localhost:4200/perfil/',appState: { target: '/perfil' } });
+    this.auth.loginWithRedirect({
+      authorizationParams: { redirect_uri: "http://localhost:4200/perfil/" },
+      appState: { target: "/perfil" },
+    });
   }
-
 }
