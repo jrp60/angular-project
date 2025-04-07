@@ -1,11 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import "firebase/storage";
-import firebase from "firebase/app";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
-
-declare var require: any;
-const FileSaver = require("file-saver");
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: "app-home",
@@ -18,19 +15,19 @@ export class HomeComponent implements OnInit {
   year: string;
 
   constructor(private http: HttpClient) {
-    let fbStorage = firebase.storage();
-    fbStorage
-      .ref("CV/jrp-cv.jpg")
-      .getDownloadURL()
-      .then((downloadURL) => {
-        this.cvImageUrl = downloadURL;
-      });
-    fbStorage
-      .ref("CV/jrpCV.pdf")
-      .getDownloadURL()
-      .then((downloadURL) => {
-        this.cvURL = downloadURL;
-      });
+    const storage = getStorage(); // Initialize Firebase storage
+
+    // Fetch the CV image URL
+    const imageRef = ref(storage, "CV/jrp-cv.jpg");
+    getDownloadURL(imageRef).then((downloadURL) => {
+      this.cvImageUrl = downloadURL;
+    });
+
+    // Fetch the CV PDF URL
+    const pdfRef = ref(storage, "CV/jrpCV.pdf");
+    getDownloadURL(pdfRef).then((downloadURL) => {
+      this.cvURL = downloadURL;
+    });
   }
 
   ngOnInit() {

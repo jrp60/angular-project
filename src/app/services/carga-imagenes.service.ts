@@ -1,144 +1,112 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import firebase from 'firebase/app';
-import { FileItem } from '../models/file-item';
-import 'firebase/storage';  
+import { Injectable } from "@angular/core";
+import { getDatabase, ref, set, get, push } from "firebase/database"; // For Database
+import {
+  getStorage,
+  ref as storageRef,
+  getDownloadURL,
+  UploadTaskSnapshot,
+  uploadBytesResumable,
+} from "firebase/storage"; // For Storage
+import { FileItem } from "../models/file-item";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CargaImagenesService {
-  private CARPETA_IMAGENES:string = 'img';
+  private CARPETA_IMAGENES: string = "img";
+  private db = getDatabase(); // Initialize Firebase Realtime Database
+  private storage = getStorage(); // Initialize Firebase Storage
 
-  constructor(public af:AngularFireDatabase){}
+  constructor() {}
 
-  getAllImages():Promise<any>{
-    const query = this.af.database.ref('img').orderByKey();
-    return query.once('value', function (){});
-  }
+  getAllImages(): Promise<any> {
+    const dbRef = ref(this.db, `/${this.CARPETA_IMAGENES}`);
 
-  /* Not used */
-  fromStartToEnd(startAt:string):Promise<any>{
-    const query = this.af.database.ref('img').orderByKey().startAt(startAt).limitToLast(9);
-    return query.once('value', function (){});
-  }
+    return get(dbRef)
+      .then(async (snapshot) => {
+        if (snapshot.exists()) {
+          const imagesData = snapshot.val();
+          const imageKeys = Object.keys(imagesData);
 
-  /* Not used */
-  listaUltimasImagenes(){
-    const dbRef = firebase.database().ref();
-    let a = dbRef.get().then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  }
+          const imagesWithUrls = imageKeys.map((key) => {
+            const imageData = imagesData[key];
+            return imageData;
+          });
 
-  /* Not used */
-  newcharge(archivos: FileItem[]){
-    const promises = archivos.map((file, index) => {
-      let ref = firebase.storage().ref(`img/${file.archivo.name}`);
-      return ref.put(file[index]).then(() => ref.getDownloadURL());
-    })
-    Promise.all(promises)
-      .then((uploadedMediaList) => {
-        console.log(uploadedMediaList, 'all');
-      })
-      .catch((err) => alert(err.code));
-  }
-
-  charge_images(archivos: FileItem[]){
-    archivos.map((file, index) => {
-      const shortid = require('shortid');
-      file.nombreArchivo = shortid.generate();
-      let ref = firebase.storage().ref().child(`${this.CARPETA_IMAGENES}/${file.nombreArchivo}`);
-      ref.put(file.archivo).on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-      (snapshot) =>{
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        file.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
-        switch (snapshot.state) {
-          case firebase.storage.TaskState.PAUSED: // or 'paused'
-            console.log('Upload is paused');
-            break;
-          case firebase.storage.TaskState.RUNNING: // or 'running'
-            console.log('Upload is running');
-            break;
+          return imagesWithUrls;
+        } else {
+          throw new Error("No images found in Firebase Database.");
         }
-      }, function(error) {
-        console.log("Error: ", error);
-      }, ()=> {
-        // Upload completed successfully, now we can get the download URL
-        console.log("upload completed successfully");
-        ref.getDownloadURL().then((downloadURL)=> {
-          file.url = downloadURL;
-          this.guardarImagen({nombre:file.nombreArchivo, url:file.url, user:file.user});
-          file.estaSubiendo = false;
-        });
-      }
-    );
-    })
+      })
+      .catch((error) => {
+        console.error("Error fetching images:", error);
+        throw error;
+      });
   }
 
-  /**  NOT USED 
-   * Add images to the firebase
-   * 
-   * first charges the reference of the storage of firebase, the loops all the files we want to upload, for each one sets the estaSubiendo to true
-   * and then we do a reference to the upload task of firebse with our img folder and the name of the file. We use the reference(uploadTask) to get 
-   * information of the upload status(snapshot-current status of the upload),(error-to manage if some error happens),()-when everything goes ok we get
-   * the url when the image is saved and finally call to guardarImagen()
+  /**
+   * Uploads images to Firebase Storage and saves metadata to Firebase Realtime Database.
    *
-   * @param FileItem   $archivos 
-   * 
-   * @return boolean
+   * For each file:
+   * - Generates a unique filename using `shortid`
+   * - Creates a Firebase Storage reference inside the 'img' folder
+   * - Uploads the file using `uploadBytesResumable` to track progress
+   * - Listens to the upload state to update progress and handle errors
+   * - On successful upload, retrieves the download URL
+   * - Calls `guardarImagen()` to store image metadata (name, URL, user) in the Realtime Database
+   *
+   * @param archivos Array of FileItem objects to upload
    */
-  old_charge_images(archivos: FileItem[]){
-    let storageRef = firebase.storage().ref();
-    for(let item of archivos){
-      item.estaSubiendo = true;
-      var uploadTask = storageRef.child(`${this.CARPETA_IMAGENES}/${item.nombreArchivo}`).put(item.archivo);
+  uploadImages(archivos: FileItem[]) {
+    archivos.map((file) => {
+      const shortid = require("shortid");
+      file.nombreArchivo = shortid.generate();
+      const fileRef = storageRef(
+        this.storage,
+        `${this.CARPETA_IMAGENES}/${file.nombreArchivo}`
+      );
 
-      // Listen for state changes, errors, and completion of the upload.
-      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-        (snapshot)=> {
-          item.progreso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-              console.log('Upload is paused');
-              break;
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-              console.log('Upload is running');
-              break;
-            case firebase.storage.TaskState.SUCCESS:
-              console.log('Upload is SUCCESS');
-              break;
-          }
-        }, function(error) {
+      // Upload file with progress tracking (using uploadBytesResumable)
+      const uploadTask = uploadBytesResumable(fileRef, file.archivo);
+
+      // Tracking progress during upload
+      uploadTask.on(
+        "state_changed",
+        (snapshot: UploadTaskSnapshot) => {
+          // Tracking the progress of the upload
+          file.progreso =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          // Handle any errors during upload
           console.log("Error: ", error);
-        }, ()=> {
-          // Upload completed successfully, now we can get the download URL
-          console.log("upload completed successfully");
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL)=> {
-            item.url = downloadURL;
-            this.guardarImagen({nombre:item.nombreArchivo, url:item.url, user:item.user});
-            item.estaSubiendo = false;
+        },
+        () => {
+          // On successful upload completion, retrieve the download URL
+          getDownloadURL(fileRef).then((downloadURL) => {
+            file.url = downloadURL;
+            this.guardarImagen({
+              nombre: file.nombreArchivo,
+              url: file.url,
+              user: file.user,
+            });
+            file.estaSubiendo = false;
           });
         }
       );
-    }
+    });
   }
 
   /**
    * Saves the routes of the images in the database
    *
-   * @param any   $imagen 
-   * 
+   * @param any   $imagen
+   *
    * @return void
-  */
-  guardarImagen(imagen:any){
-    this.af.list(`/${this.CARPETA_IMAGENES}`).push(imagen);
+   */
+  guardarImagen(imagen: any) {
+    const dbRef = ref(this.db, `/${this.CARPETA_IMAGENES}`); //get the 'img' tree
+    const newImageRef = push(dbRef); // Create a new node in 'img' tree with a unique key
+    set(newImageRef, imagen); // Save image under that unique key
   }
 }

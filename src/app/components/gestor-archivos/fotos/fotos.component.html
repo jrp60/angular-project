@@ -20,10 +20,10 @@
       class="card text-white bg-dark"
       *ngFor="let imagen of images; let i = index"
     >
-      <img [src]="imagen[i]['url']" alt="" class="card-img-top img-fluid" />
+      <img [src]="imagen.url" alt="" class="card-img-top img-fluid" />
       <div class="card-body">
-        <h4 class="card-title">{{ imagen[i]["nombre"] }}</h4>
-        <i>{{ imagen[i]["user"] }}</i>
+        <h4 class="card-title">{{ imagen.nombre }}</h4>
+        <i>{{ imagen.user }}</i>
       </div>
     </div>
   </div>

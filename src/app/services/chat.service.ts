@@ -1,49 +1,78 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 import { Mensaje } from "../interfaces/mensaje.interface";
+import {
+  Firestore,
+  collection,
+  query,
+  orderBy,
+  limit,
+  collectionData,
+  addDoc,
+  DocumentReference,
+} from "@angular/fire/firestore";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ChatService {
-  private itemsCollection: AngularFirestoreCollection<Mensaje>;
   public chats: Mensaje[] = [];
   public usuario: any = {};
-  public cargados:number = 0;
+  public cargados: number = 0;
 
-  constructor(private afs: AngularFirestore){}
+  private chatsCollectionRef;
 
-  cargarMensajes(){
-    this.itemsCollection = this.afs.collection<Mensaje>('chats', ref=> ref.orderBy('fecha', 'desc').limit(10));
-    this.cargados = 10;
-    return this.itemsCollection.valueChanges().pipe(map((mensajes: Mensaje[] )=>{
-      this.chats = [];
-      for(let mensaje of mensajes){
-        this.chats.unshift(mensaje);
-      }
-    }));
+  constructor(private firestore: Firestore) {
+    this.chatsCollectionRef = collection(this.firestore, "chats");
   }
 
-  cargarMasMensajes(){
-    this.cargados +=10;
-    this.itemsCollection = this.afs.collection<Mensaje>('chats', ref=> ref.orderBy('fecha', 'desc').limit(this.cargados));
-    return this.itemsCollection.valueChanges().pipe(map((mensajes: Mensaje[] )=>{
-      this.chats = [];
-      for(let mensaje of mensajes){
-        this.chats.unshift(mensaje);
-      }
-    }));
+  cargarMensajes(): Observable<Mensaje[]> {
+    const q = query(
+      this.chatsCollectionRef,
+      orderBy("fecha", "desc"),
+      limit(10)
+    );
+    return collectionData(q).pipe(
+      map((mensajes: Mensaje[]) => {
+        this.chats = [];
+        for (let mensaje of mensajes) {
+          this.chats.unshift(mensaje);
+        }
+        return this.chats;
+      })
+    );
   }
 
-  agregarMensaje(texto:string, usuario:string, uid:string){
+  cargarMasMensajes(): Observable<Mensaje[]> {
+    this.cargados += 10;
+    const q = query(
+      this.chatsCollectionRef,
+      orderBy("fecha", "desc"),
+      limit(this.cargados)
+    );
+    return collectionData(q).pipe(
+      map((mensajes: Mensaje[]) => {
+        this.chats = [];
+        for (let mensaje of mensajes) {
+          this.chats.unshift(mensaje);
+        }
+        return this.chats;
+      })
+    );
+  }
+
+  async agregarMensaje(
+    texto: string,
+    usuario: string,
+    uid: string
+  ): Promise<DocumentReference> {
     let mensaje: Mensaje = {
       nombre: usuario,
       mensaje: texto,
       fecha: new Date().getTime(),
-      uid: uid
-    }
-    return this.itemsCollection.add(mensaje);
+      uid: uid,
+    };
+    return await addDoc(this.chatsCollectionRef, mensaje);
   }
-
 }

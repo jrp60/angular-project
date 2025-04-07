@@ -3,13 +3,13 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthModule } from "@auth0/auth0-angular";
 import { HttpClientModule } from "@angular/common/http";
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { provideFirebaseApp, initializeApp } from "@angular/fire/app";
+import { provideAuth, getAuth } from "@angular/fire/auth";
+import { provideFirestore, getFirestore } from "@angular/fire/firestore";
+import { provideDatabase, getDatabase } from "@angular/fire/database";
 import { CommonModule } from "@angular/common";
-import { APP_BASE_HREF } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsModule } from "@angular/google-maps";
 
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
@@ -44,14 +44,10 @@ import { VideoYoutubePipe } from "./pipes/video-youtube.pipe";
 import { NgDropFilesDirective } from "./directives/ng-drop-files.directive";
 
 import { environment } from "../environments/environment";
-import firebase from "firebase/app";
 import "firebase/storage";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
-import { ImageGeneratorComponent } from './components/tests/image-generator/image-generator/image-generator.component';
-//firebase.initializeApp(environment.FIREBASE);
-firebase.initializeApp(environment.FIREBASE);
-export const storage = firebase.storage();
+import { ImageGeneratorComponent } from "./components/tests/image-generator/image-generator/image-generator.component";
 
 @NgModule({
   declarations: [
@@ -82,7 +78,6 @@ export const storage = firebase.storage();
     ImageGeneratorComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.FIREBASE),
     BrowserModule,
     AppRoutingModule,
     AuthModule.forRoot({
@@ -91,15 +86,14 @@ export const storage = firebase.storage();
     }),
     HttpClientModule,
     FormsModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey: environment.AGM_APIKEY,
-    // }),
-    AngularFireDatabaseModule,
     CommonModule,
-    AngularFireAuthModule,
     ReactiveFormsModule,
     DragDropModule,
     GoogleMapsModule,
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
   ],
   providers: [
     MapasService,
@@ -107,7 +101,6 @@ export const storage = firebase.storage();
     YoutubeService,
     CargaImagenesService,
     AuthFirebaseService,
-    // { provide: APP_BASE_HREF, useValue: "/angular-project/" },
   ],
   bootstrap: [AppComponent],
 })
