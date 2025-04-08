@@ -54,3 +54,7 @@ environment.ts
 
 #.env
 .env
+
+# Other common files to ignore
+*.log
+*.tmp
