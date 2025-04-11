@@ -1,7 +1,7 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Toast } from "bootstrap";
 import { MapasService } from "../../services/mapas.service";
 import { Marcador } from "src/app/interfaces/marcador.interface";
-import { GoogleMapsModule } from "@angular/google-maps";
 
 @Component({
   selector: "app-maps",
@@ -9,6 +9,7 @@ import { GoogleMapsModule } from "@angular/google-maps";
   styles: [],
 })
 export class MapsComponent {
+  @ViewChild("toastElement") toastElement!: ElementRef;
   mapOptions: google.maps.MapOptions;
 
   constructor(public _ms: MapasService) {
@@ -61,9 +62,6 @@ export class MapsComponent {
     let lng = event.coords.lng;
 
     marcador.position = { lat: lat, lng: lng };
-    // marcador.lat = lat;
-    // marcador.lng = lng;
-
     this._ms.guardarMarcadores();
   }
 
@@ -73,5 +71,15 @@ export class MapsComponent {
     } else {
       this.marcadorSel.options.draggable = false;
     }
+  }
+
+  saveMarcador() {
+    this._ms.guardarMarcadores();
+    this.mostrarToast();
+  }
+
+  mostrarToast() {
+    const toast = new Toast(this.toastElement.nativeElement);
+    toast.show();
   }
 }

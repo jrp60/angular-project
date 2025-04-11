@@ -1,20 +1,20 @@
 <div class="">
-  <div class="alert alert-warning text-center mx-5 mb-4 mt-2" role="alert">
+  <div class="alert alert-warning text-center mx-5 mb-4 mt-4" role="alert">
     The page may not work correctly because the Google Maps API is no longer
     free (and is not currently being paid for).
   </div>
-
 
   <!-- (mapDragEnd)="onMapDragEnd($event)" 
     (mapClick)="onMapClick($event)"
    
     -->
-  <google-map    
+  <google-map
     [zoom]="zoom"
     (mapClick)="clickMapa($event)"
-    height="500px" width="100%"
+    height="500px"
+    width="100%"
     [options]="mapOptions"
-    >
+  >
     <map-marker
       *ngFor="let marcador of _ms.marcadores; let i = index"
       [position]="marcador.position"
@@ -36,7 +36,7 @@
     </map-marker>
   </google-map>
 </div>
-<div class="container mt-2" *ngIf="!marcadorSel">
+<div class="container mt-4" *ngIf="!marcadorSel">
   <div class="alert alert-info">
     Click in the map to create a Marker or select one.
   </div>
@@ -44,6 +44,23 @@
 <div class="container mt-2" *ngIf="marcadorSel">
   <h5>Marker</h5>
   <hr />
+  <div
+    class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    #toastElement
+  >
+    <div class="d-flex">
+      <div class="toast-body">✅ Markers saved properly.</div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+  </div>
   <div class="form-group">
     <label for="">Title</label>
     <input
@@ -79,7 +96,7 @@
   <button
     type="button"
     class="btn btn-outline-primary w-100"
-    (click)="_ms.guardarMarcadores()"
+    (click)="saveMarcador()"
   >
     Save
   </button>

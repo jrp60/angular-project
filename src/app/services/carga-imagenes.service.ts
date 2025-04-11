@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { getDatabase, ref, set, get, push } from "firebase/database"; // For Database
+import { getDatabase, ref, set, get, push } from "firebase/database";
 import {
   getStorage,
   ref as storageRef,
   getDownloadURL,
   UploadTaskSnapshot,
   uploadBytesResumable,
-} from "firebase/storage"; // For Storage
+} from "firebase/storage";
 import { FileItem } from "../models/file-item";
 
 @Injectable({
@@ -78,7 +78,6 @@ export class CargaImagenesService {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-          // Handle any errors during upload
           console.log("Error: ", error);
         },
         () => {
@@ -99,10 +98,6 @@ export class CargaImagenesService {
 
   /**
    * Saves the routes of the images in the database
-   *
-   * @param any   $imagen
-   *
-   * @return void
    */
   guardarImagen(imagen: any) {
     const dbRef = ref(this.db, `/${this.CARPETA_IMAGENES}`); //get the 'img' tree

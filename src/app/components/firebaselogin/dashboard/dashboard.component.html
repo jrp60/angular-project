@@ -2,28 +2,54 @@
   <div class="card text-white bg-dark text-center centered w40rem">
     <div class="card-body">
       <h1 class="h2">User Profile</h1>
-      <ul class="list-group list-group-flush" *ngIf="authService.userData as user">
+      <ul
+        class="list-group list-group-flush"
+        *ngIf="authService.userData as user"
+      >
         <li class="list-group-item bg-dark text-white border-light">
           <h3>
-            <img *ngIf="user.photoURL != null" class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
-            {{(user.displayName) ? user.displayName : 'User'}}
-          </h3>   
+            <img
+              *ngIf="user.photoURL != null"
+              class="align-self-start mr-5 img-thumbnail rounded-circle"
+              src="{{
+                user.photoURL ? user.photoURL : '/assets/dummy-user.png'
+              }}"
+              alt="{{ user.displayName }}"
+              referrerpolicy="no-referrer"
+            />
+            {{ user.displayName ? user.displayName : "User" }}
+          </h3>
         </li>
-        <li class="list-group-item  bg-dark text-white border-light">User ID: <strong>{{user.uid}}</strong></li>
-        <li class="list-group-item  bg-dark text-white border-light">Email: <strong>{{user.email}}</strong></li>
-        <li class="list-group-item  bg-dark text-white border-light">Email Verified: <strong>{{user.emailVerified}}</strong></li>
-        <li  class="list-group-item  bg-dark text-white border-light" *ngIf="!user.emailVerified">
-          <button class="btn btn-outline-primary w-50 mb-1 mt-1" [routerLink]="'/verify-email'">
+        <li class="list-group-item bg-dark text-white border-light">
+          User ID: <strong>{{ user.uid }}</strong>
+        </li>
+        <li class="list-group-item bg-dark text-white border-light">
+          Email: <strong>{{ user.email }}</strong>
+        </li>
+        <li class="list-group-item bg-dark text-white border-light">
+          Email Verified: <strong>{{ user.emailVerified }}</strong>
+        </li>
+        <li
+          class="list-group-item bg-dark text-white border-light"
+          *ngIf="!user.emailVerified"
+        >
+          <button
+            class="btn btn-outline-primary w-50 mb-1 mt-1"
+            [routerLink]="'/verify-email'"
+          >
             Verify Email
           </button>
         </li>
       </ul>
     </div>
-    
+
     <div class="card-body">
-      
       <div class="redirectToLogin">
-        <button type="button" (click)="authService.SignOut()" class="btn btn-danger w-100">
+        <button
+          type="button"
+          (click)="authService.SignOut()"
+          class="btn btn-danger w-100"
+        >
           Log Out
         </button>
       </div>

@@ -1,5 +1,4 @@
-import * as querystring from 'querystring-es3';
-
+import * as querystring from "querystring-es3";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -28,8 +27,6 @@ export class SpotifyService {
       client_secret: environment.SPOTIFY_CLIENT_SECRET,
       grant_type: "client_credentials",
     };
-
-    // var querystring = require("querystring");
 
     return this.http
       .post<any>(

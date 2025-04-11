@@ -1,0 +1,20 @@
+.construction-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1.7rem;
+  color: #ffef14;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgba(255, 204, 0, 0.1);
+  padding: 12px 20px;
+  border: 2px dashed #ffcc00;
+  border-radius: 8px;
+  width: fit-content;
+  box-shadow: 0 0 20px rgba(255, 215, 53, 0.822);
+}
+
+.wip-gif {
+  height: 80px;
+}

@@ -5,7 +5,6 @@ import { AuthGuard } from "@auth0/auth0-angular";
 import { AuthFirebaseGuard } from "./guard/auth-firebase.guard";
 import { LoginFirebaseGuard } from "./guard/login-firebase.guard";
 
-/* import { AppRoutingModule } from './app-routing.module'; */
 import { HomeComponent } from "./components/home/home.component";
 import { AutenticadoComponent } from "./components/autenticado/autenticado.component";
 import { ChatComponent } from "./components/chat/chat.component";
@@ -24,18 +23,20 @@ import { VerifyEmailComponent } from "./components/firebaselogin/verify-email/ve
 import { TestsComponent } from "./components/tests/tests.component";
 
 export const APP_ROUTES: Routes = [
-  {
-    path: "https://jrp60.github.io/angular-project/home",
-    component: HomeComponent,
-  },
-  {
-    path: "jrp60.github.io/angular-project/home",
-    component: HomeComponent,
-  },
-  {
-    path: "home",
-    component: HomeComponent,
-  },
+  // {
+  //   path: "https://jrp60.github.io/angular-project/home",
+  //   component: HomeComponent,
+  // },
+  // {
+  //   path: "jrp60.github.io/angular-project/home",
+  //   component: HomeComponent,
+  // },
+  // {
+  //   path: "home",
+  //   component: HomeComponent,
+  // },
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "home", component: HomeComponent },
   { path: "perfil", component: AutenticadoComponent, canActivate: [AuthGuard] },
   {
     path: "sign-in",
@@ -61,21 +62,6 @@ export const APP_ROUTES: Routes = [
   { path: "tests", component: TestsComponent },
   { path: "**", pathMatch: "full", redirectTo: "home" },
 ];
-
-/* @NgModule({ 
-  declarations: [
-    MapsComponent,
-  ],
-  imports: [
-    RouterModule.forRoot(APP_ROUTES),
-    AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyDThwGxJqFsSN-etU1MGnLsXBc66dIRYsU'
-      }),
-    ],
-  exports: [RouterModule],
-  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
-}) */
-
 @NgModule({
   imports: [RouterModule.forRoot(APP_ROUTES)],
   exports: [RouterModule],

@@ -221,6 +221,13 @@ background-color: #A4c869;*/
     #bbded6 13px
   );
 }
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
 .sectionBody {
   background-color: #61c0bf;
   margin: 5em;

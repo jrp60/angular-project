@@ -1,7 +1,5 @@
 import { Component, Inject } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
-
-// Import the AuthService type from the SDK
 import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
@@ -30,7 +28,6 @@ import { AuthService } from "@auth0/auth0-angular";
   styles: [],
 })
 export class AuthButtonComponent {
-  // Inject the authentication service into your component through the constructor
   constructor(
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService
@@ -38,7 +35,9 @@ export class AuthButtonComponent {
 
   loginWithRedirect(): void {
     this.auth.loginWithRedirect({
-      authorizationParams: { redirect_uri: "http://localhost:4200/perfil/" },
+      authorizationParams: {
+        redirect_uri: `${window.location.origin}/perfil/`,
+      },
       appState: { target: "/perfil" },
     });
   }

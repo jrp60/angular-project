@@ -1,21 +1,23 @@
-body{
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+body {
   background-color: black;
   color: white !important;
 }
-.row{
+.row {
   margin-left: 0;
   margin-right: 0;
 }
-hr{
+hr {
   border-color: white;
 }
-.jumbotron{
+.jumbotron {
   background-color: #171717;
 }
-.puntero{
+.puntero {
   cursor: pointer;
 }
-.carousel-item{
+.carousel-item {
   width: 100%;
   height: auto;
   -webkit-background-size: cover;
@@ -23,29 +25,29 @@ hr{
   -o-background-size: cover;
   background-size: cover;
 }
-.carouselName{
+.carouselName {
   background-color: rgba(23, 23, 23, 0.613);
   padding: 0.6em 0em 0.6em 0em;
   width: 50%;
   margin: auto;
   margin-bottom: 1em;
 }
-li.nav-link > a.router-link-active{
-  color:aquamarine !important;
+li.nav-link > a.router-link-active {
+  color: aquamarine !important;
 }
-.navbar > div > a.router-link-active{
-  color:aquamarine !important;
+.navbar > div > a.router-link-active {
+  color: aquamarine !important;
 }
 @media (max-width: 600px) {
   .carousel-item {
     height: 280px;
   }
 }
-.main-container{
+.main-container {
   margin-top: 30px;
   margin-bottom: 3em;
 }
-.img-circle{
+.img-circle {
   border-radius: 100%;
 }
 .animated {
@@ -60,7 +62,7 @@ li.nav-link > a.router-link-active{
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
-.slow{
+.slow {
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-fill-mode: both;
@@ -78,54 +80,54 @@ li.nav-link > a.router-link-active{
 .fadeIn {
   animation-name: fadeIn;
 }
-.spotiLogo{
+.spotiLogo {
   margin-bottom: 10px;
 }
 .imgContainer {
-  width:auto; 
+  width: auto;
 }
 .flexibleImg {
   width: auto;
   height: 40px;
 }
-.img-50{
+.img-50 {
   height: 50px;
   width: 50px;
 }
-.carousel-img{
+.carousel-img {
   width: auto;
-  height:700px;
+  height: 700px;
   margin-left: auto;
   margin-right: auto;
 }
-.m-right-10{
+.m-right-10 {
   margin-right: 10px;
 }
 agm-map {
   height: 300px;
 }
-.agm-info-window-content{
+.agm-info-window-content {
   color: black !important;
 }
-.c-black{
+.c-black {
   color: black !important;
 }
-.drop-zone{
+.drop-zone {
   border: dotted 3px lightblue;
   opacity: 0.5;
   color: #666;
   text-align: center;
 }
-.file-over{
+.file-over {
   border: dotted 3px dodgerblue;
 }
-.table{
+.table {
   margin-top: 30px;
 }
-text-green{
+text-green {
   color: green;
 }
-.card{
+.card {
   display: inline-block;
   margin-bottom: 1em;
 }
@@ -138,30 +140,30 @@ text-green{
   left: 50%;
   transform: translate(-50%, 0%);
 }
-.margin0{
+.margin0 {
   margin: 0 auto;
 }
-.w26rem{
+.w26rem {
   width: 26rem;
 }
-.w40rem{
+.w40rem {
   width: 40rem;
 }
-@media (max-width:640px){
+@media (max-width: 640px) {
   .card-columns {
     column-count: 1;
   }
-  .card{
+  .card {
     margin-bottom: 0.7em;
   }
-  .w26rem{
+  .w26rem {
     width: 94%;
   }
-  .w40rem{
+  .w40rem {
     width: 95%;
   }
 }
-.chat-window{
+.chat-window {
   padding: 10px;
   padding-bottom: 15px;
   max-width: 400px;
@@ -170,11 +172,11 @@ text-green{
   border-radius: 20px;
   margin: 0 auto;
 }
-.app-mensajes{
-  overflow-y:scroll;
-  height:270px;
+.app-mensajes {
+  overflow-y: scroll;
+  height: 270px;
   padding: 5px;
 }
-.inputChat{
+.inputChat {
   margin-top: 1em;
 }

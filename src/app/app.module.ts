@@ -48,6 +48,7 @@ import "firebase/storage";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
 import { ImageGeneratorComponent } from "./components/tests/image-generator/image-generator/image-generator.component";
+import { WipBannerComponent } from './components/shared/wip-banner/wip-banner.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { ImageGeneratorComponent } from "./components/tests/image-generator/imag
     TestsComponent,
     PollComponent,
     ImageGeneratorComponent,
+    WipBannerComponent,
   ],
   imports: [
     BrowserModule,
