@@ -58,7 +58,9 @@ const environmentFileContent = `
         AGM_APIKEY: '${process.env.AGM_APIKEY}',
         AUTH_CLIENT_ID: '${process.env.AUTH_CLIENT_ID}',
         AUTH_DOMAIN: '${process.env.AUTH_DOMAIN}',
-        FIREBASE: {${process.env.FIREBASE}}
+        FIREBASE: {${process.env.FIREBASE}},
+        HUGGINGFACE_API_TOKEN: '${process.env.HUGGINGFACE_API_TOKEN}',
+        HUGGINGFACE_API_PRIVATE_TOKEN: '${process.env.HUGGINGFACE_API_PRIVATE_TOKEN}',
     };
 `;
 
@@ -72,7 +74,9 @@ const environmentFileContentProd = `
         AGM_APIKEY: '${process.env.AGM_APIKEY}',
         AUTH_CLIENT_ID: '${process.env.AUTH_CLIENT_ID}',
         AUTH_DOMAIN: '${process.env.AUTH_DOMAIN}',
-        FIREBASE: {${process.env.FIREBASE}}
+        FIREBASE: {${process.env.FIREBASE}},
+        HUGGINGFACE_API_TOKEN: '${process.env.HUGGINGFACE_API_TOKEN}',
+        HUGGINGFACE_API_PRIVATE_TOKEN: '${process.env.HUGGINGFACE_API_PRIVATE_TOKEN}',
     };
 `;
 
