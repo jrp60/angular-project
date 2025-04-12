@@ -6,9 +6,8 @@
     "config": "ts-node ./src/assets/setEnv.ts",
     "start": "npm run config -- --environment=dev && ng serve --open",
     "build": "npm run config -- --environment=prod && ng build --configuration production",
-    "olddeploy": "npm run config -- --environment=prod && ng build --configuration production && ng deploy --base-href=/angular-project/ && angular-cli-ghpages --branch gh-pages",
-    "build:prod": "ng build --configuration production --base-href=/angular-project/",
-    "deploy": "npm run build:prod && npx angular-cli-ghpages --dir=dist/personalApp --branch=gh-pages",
+    "deploy": "npm run config -- --environment=prod && ng build --configuration production && ng deploy --base-href=/angular-project/ && angular-cli-ghpages --branch gh-pages",
+    "wrongdeploy": "npm run build:prod && npx angular-cli-ghpages --dir=dist/personalApp --branch=gh-pages",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
