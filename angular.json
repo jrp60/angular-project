@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "personalApp:build:development"
+            "buildTarget": "personalApp:build:development"
           },
           "configurations": {
             "production": {
-              "browserTarget": "personalApp:build:production"
+              "buildTarget": "personalApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "personalApp:build"
+            "buildTarget": "personalApp:build"
           }
         },
         "test": {
