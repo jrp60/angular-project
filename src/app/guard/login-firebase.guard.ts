@@ -1,23 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CanActivate, Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 import { AuthFirebaseService } from "../services/authfirebase.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class LoginFirebaseGuard implements CanActivate {
+export class LoginFirebaseGuard {
+  constructor(public authService: AuthFirebaseService, public router: Router) {}
 
-  constructor(
-    public authService: AuthFirebaseService,
-    public router: Router
-  ){ }
-
-  canActivate() : Observable<boolean> | Promise<boolean> | boolean{
-    if(this.authService.isLoggedIn === true){
-      this.router.navigate(['/dashboard']);
-    }
-    return true;
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return this.authService.isLoggedIn
+      ? true
+      : this.router.navigate(["/dashboard"]);
   }
-  
 }
