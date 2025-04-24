@@ -7,6 +7,7 @@ import { provideFirebaseApp, initializeApp } from "@angular/fire/app";
 import { provideAuth, getAuth } from "@angular/fire/auth";
 import { provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { provideDatabase, getDatabase } from "@angular/fire/database";
+import { provideStorage, getStorage } from "@angular/fire/storage";
 import { CommonModule } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { GoogleMapsModule } from "@angular/google-maps";
@@ -16,6 +17,7 @@ import { SpotifyService } from "./services/spotify.service";
 import { YoutubeService } from "./services/youtube.service";
 import { CargaImagenesService } from "./services/carga-imagenes.service";
 import { AuthFirebaseService } from "./services/authfirebase.service";
+import { ChatService } from "./services/chat.service";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -44,11 +46,11 @@ import { VideoYoutubePipe } from "./pipes/video-youtube.pipe";
 import { NgDropFilesDirective } from "./directives/ng-drop-files.directive";
 
 import { environment } from "../environments/environment";
-import "firebase/storage";
+// import "firebase/storage";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
 import { ImageGeneratorComponent } from "./components/tests/image-generator/image-generator/image-generator.component";
-import { WipBannerComponent } from './components/shared/wip-banner/wip-banner.component';
+import { WipBannerComponent } from "./components/shared/wip-banner/wip-banner.component";
 
 @NgModule({
   declarations: [
@@ -92,10 +94,6 @@ import { WipBannerComponent } from './components/shared/wip-banner/wip-banner.co
     ReactiveFormsModule,
     DragDropModule,
     GoogleMapsModule,
-    provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideDatabase(() => getDatabase()),
   ],
   providers: [
     MapasService,
@@ -103,6 +101,12 @@ import { WipBannerComponent } from './components/shared/wip-banner/wip-banner.co
     YoutubeService,
     CargaImagenesService,
     AuthFirebaseService,
+    ChatService,
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
   ],
   bootstrap: [AppComponent],
 })

@@ -7,13 +7,14 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
+  browserPopupRedirectResolver,
 } from "firebase/auth";
 import { User as FirebaseUser } from "../services/user";
 import { Auth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: "platform",
+  providedIn: "root",
 })
 export class AuthFirebaseService {
   userData: any;
@@ -73,9 +74,25 @@ export class AuthFirebaseService {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
+  GoogleAuthWithReload2(): Promise<any> {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.auth, provider, browserPopupRedirectResolver);
+  }
+
   GoogleAuthWithReload(): Promise<any> {
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(this.auth, provider);
+
+    return signInWithPopup(this.auth, provider, browserPopupRedirectResolver)
+      .then((result) => {
+        this.SetUserData(result.user);
+        this.ngZone.run(() => {
+          window.location.reload();
+        });
+      })
+      .catch((error) => {
+        console.error("Google login failed:", error);
+        window.alert(error.message);
+      });
   }
 
   SignUpFileWithReload(email, password) {
@@ -119,7 +136,7 @@ export class AuthFirebaseService {
   // Sign in with Google
   GoogleAuth() {
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(this.auth, provider)
+    return signInWithPopup(this.auth, provider, browserPopupRedirectResolver)
       .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(["dashboard"]);

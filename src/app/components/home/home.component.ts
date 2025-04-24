@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import * as FileSaver from "file-saver";
+
+import { Storage, ref, getDownloadURL } from "@angular/fire/storage";
+import { inject } from "@angular/core";
 
 @Component({
   selector: "app-home",
@@ -13,25 +15,26 @@ export class HomeComponent implements OnInit {
   cvImageUrl: string;
   cvURL: string;
   year: string;
+  private storage = inject(Storage); // ✅ inject storage
 
-  constructor(private http: HttpClient) {
-    const storage = getStorage(); // Initialize Firebase storage
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    // const storage = getStorage(); // Initialize Firebase storage
 
     // Fetch the CV image URL
-    const imageRef = ref(storage, "CV/jrp-cv.jpg");
+    const imageRef = ref(this.storage, "CV/jrp-cv.jpg");
     getDownloadURL(imageRef).then((downloadURL) => {
       this.cvImageUrl = downloadURL;
     });
 
     // Fetch the CV PDF URL
-    const pdfRef = ref(storage, "CV/jrpCV.pdf");
+    const pdfRef = ref(this.storage, "CV/jrpCV.pdf");
     getDownloadURL(pdfRef).then((downloadURL) => {
       this.cvURL = downloadURL;
     });
-  }
-
-  ngOnInit() {
     this.year = new Date().getFullYear().toString();
+    console.log("HomeComponent loaded");
   }
 
   downloadPDF(): any {

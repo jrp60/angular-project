@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { AuthFirebaseService } from "../services/authfirebase.service";
 
@@ -9,9 +8,11 @@ import { AuthFirebaseService } from "../services/authfirebase.service";
 export class LoginFirebaseGuard {
   constructor(public authService: AuthFirebaseService, public router: Router) {}
 
-  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authService.isLoggedIn
-      ? true
-      : this.router.navigate(["/dashboard"]);
+  canActivate(): boolean {
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(["/dashboard"]);
+      return false;
+    }
+    return true;
   }
 }
