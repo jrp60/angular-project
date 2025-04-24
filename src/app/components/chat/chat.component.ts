@@ -21,43 +21,14 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this._cs.mensajes$.subscribe((mensajes) => {
-    //   console.log("Desde el componente:", mensajes);
-    // });
-
-    // this._cs.getChats();
-    console.log("probandooo");
-
-    this._cs.escucharMensajes().subscribe((mensajes) => {
-      console.log("MENSAJES DE ESCUCHAR MENSAJES: ", mensajes);
-      
+    this._cs.cargarMasMensajes().subscribe(() => {
+      setTimeout(() => {
+        this.elemento = document.getElementById("app-mensajes");
+        if (this.elemento != null) {
+          this.elemento.scrollTop = this.elemento.scrollHeight;
+        }
+      }, 20);
     });
-
-    // this._cs.cargarMasMensajesManual().then(() => {
-    //   setTimeout(() => {
-    //     this.elemento = document.getElementById("app-mensajes");
-    //     if (this.elemento != null) {
-    //       this.elemento.scrollTop = this.elemento.scrollHeight;
-    //     }
-    //   }, 20);
-    // });
-
-    this._cs.cargarTest().subscribe((res) => {
-      console.log("Resultado de cargarTest:", res);
-    });
-
-    this._cs.cargarTest2().subscribe((res) => {
-      console.log("🔥 Mensajes desde cargarTest2():", res);
-    });
-
-    // this._cs.cargarMasMensajes().subscribe((mensajes) => {
-    //   setTimeout(() => {
-    //     this.elemento = document.getElementById("app-mensajes");
-    //     if (this.elemento != null) {
-    //       this.elemento.scrollTop = this.elemento.scrollHeight;
-    //     }
-    //   }, 20);
-    // });
 
     let userAux = JSON.parse(localStorage.getItem("user"));
     if (userAux != null) {
@@ -70,7 +41,7 @@ export class ChatComponent implements OnInit {
   }
 
   cargarMasMensajes() {
-    this._cs.cargarMasMensajes();
+    this._cs.cargarMasMensajes().subscribe();
   }
 
   enviar_mensaje() {
