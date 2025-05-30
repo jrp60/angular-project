@@ -2,18 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": [
-      "jasmine",
-      "node",
-      "googlemaps"
-    ]
+    "types": ["node", "jest", "googlemaps"],
+    "esModuleInterop": true,
+    "allowJs": true
   },
-  "files": [
-    "src/test.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/test.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "**/*.cy.ts", "**/*.e2e.ts"]
 }

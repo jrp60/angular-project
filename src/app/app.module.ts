@@ -49,7 +49,7 @@ import { environment } from "../environments/environment";
 // import "firebase/storage";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
-import { ImageGeneratorComponent } from "./components/tests/image-generator/image-generator/image-generator.component";
+import { ImageGeneratorComponent } from "./components/tests/image-generator/image-generator.component";
 import { WipBannerComponent } from "./components/shared/wip-banner/wip-banner.component";
 
 @NgModule({

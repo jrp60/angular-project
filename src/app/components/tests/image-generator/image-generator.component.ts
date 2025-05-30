@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { HuggingfaceService } from "../../../../services/huggingface.service";
+import { HuggingfaceService } from "../../../services/huggingface.service";
 
 @Component({
   selector: "app-image-generator",
-  templateUrl: "./image-generator.component.html",
-  styleUrls: ["./image-generator.component.css"],
+  template: `<div>Image Generator Works!</div>`, // ✅ inline HTML
+  styles: [], // ✅ empty or inline styles
 })
 export class ImageGeneratorComponent {
   imageUrl: string | ArrayBuffer | null = null;
