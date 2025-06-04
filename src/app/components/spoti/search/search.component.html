@@ -24,7 +24,7 @@
             class="col-md-3 text-center puntero"
             [routerLink]="['/spotify/search/', artista.id]"
             routerLinkActive="router-link-active"
-            *ngFor="let artista of _spotifyService.artistas"
+            *ngFor="let artista of this.artistas"
           >
             <img
               [src]="artista.images | sinfoto"

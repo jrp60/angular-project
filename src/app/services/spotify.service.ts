@@ -1,7 +1,7 @@
 import * as querystring from "querystring-es3";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -9,7 +9,7 @@ import { environment } from "../../environments/environment";
 })
 export class SpotifyService {
   private token: string = "";
-  artistas: any[] = [];
+  // artistas: any[] = [];
   releases: any[] = [];
   urlBusqueda: string = "https://api.spotify.com/v1/search";
   urlArtista: string = "	https://api.spotify.com/v1/artists/";
@@ -43,16 +43,13 @@ export class SpotifyService {
   }
 
   getArtistas(termino: string) {
-    let headers = new HttpHeaders();
-    headers = headers.append("Authorization", this.token);
-    let query = `?query=${termino}&type=artist`;
-    let url = this.urlBusqueda + query;
+    const headers = new HttpHeaders().append("Authorization", this.token);
+    const query = `?query=${termino}&type=artist`;
+    const url = this.urlBusqueda + query;
 
-    return this.http.get(url, { headers }).pipe(
-      map((res) => {
-        this.artistas = res["artists"]["items"];
-      })
-    );
+    return this.http
+      .get(url, { headers })
+      .pipe(map((res) => res["artists"]["items"]));
   }
 
   getNewReleasesS(token?: string) {
@@ -77,11 +74,7 @@ export class SpotifyService {
     let query = `${id}`;
     let url = this.urlArtista + query;
 
-    return this.http.get(url, { headers }).pipe(
-      map((res) => {
-        return res;
-      })
-    );
+    return this.http.get(url, { headers });
   }
 
   getTop(id: string) {
