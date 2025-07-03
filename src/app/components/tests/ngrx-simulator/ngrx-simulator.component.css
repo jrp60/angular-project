@@ -1,0 +1,190 @@
+.diagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-rows: 50px 80px 50px 80px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Nodos */
+.node {
+  padding: 8px; /* o incluso 0 si quieres que toque */
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+}
+
+.node.highlight {
+  border: 3px solid #64ffda;
+  box-shadow: 0 0 15px #64ffda;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Flechas (barra de progreso animada) */
+
+.arrow {
+  margin: 0;
+  height: 6px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: rgba(
+    100,
+    255,
+    218,
+    0.2
+  ); /* faint always-visible background */
+  overflow: hidden;
+  position: relative;
+}
+
+.arrow.vertical {
+  transform: rotate(90deg);
+  height: 6px;
+}
+
+.arrow::after {
+  content: "";
+  display: block;
+  height: 100%;
+  background-color: #64ffda;
+  width: 0%;
+  transition: width 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.arrow.no-transition::after {
+  transition: none !important;
+}
+
+.arrow.active::after {
+  width: 100%;
+}
+
+.store-to-selector {
+  rotate: 180deg;
+  width: 126%;
+  left: -16%;
+}
+.reducer-to-store {
+  rotate: 180deg;
+  width: 76%;
+  left: 10%;
+}
+.selector-to-component {
+  width: 178%;
+  margin-left: -40%;
+}
+.action-to-reducer {
+  rotate: 180deg;
+  width: 76%;
+  left: 10%;
+}
+.effects-to-service {
+  rotate: 180deg;
+  left: 26px;
+  width: 80% !important;
+}
+.service-to-effects {
+  right: -5px;
+  width: 80% !important;
+}
+.component-to-action {
+  width: 126%;
+  left: -16%;
+}
+.effects-to-action {
+  rotate: 180deg;
+  width: 130px;
+  bottom: 10px;
+  width: 202px;
+  left: -16%;
+}
+.action-to-effects {
+  top: 10px;
+  width: 130px;
+  width: 202px;
+  left: -16%;
+}
+
+/* TESTINGGGGGG */
+.simulator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  gap: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.simulator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.active-step {
+  font-weight: bold;
+  color: #ffd54f;
+}
+
+/*SLOT*/
+.slot-wrapper {
+  height: 60px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin: 1rem 0;
+  border-radius: 30px; /* mitad del height para esquinas totalmente redondeadas */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.slot-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  height: 60px;
+}
+
+.explanation-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  /* min-height: 100vh; */
+  padding: 0 24px; /* Margen lateral */
+  box-sizing: border-box;
+  margin-top: 1em;
+}
+
+.explanation {
+  max-width: 600px;
+  font-size: 15px;
+  line-height: 1.6;
+  background: #64ffdb6d;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}

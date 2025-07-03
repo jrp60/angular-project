@@ -1,0 +1,188 @@
+<div class="row">
+  <div class="col-7 ms-5">
+    <div class="diagram-grid">
+      <!-- Fila 1 -->
+      <mat-card
+        class="node selector"
+        [ngClass]="{ highlight: highlightStep === 'SELECTOR' }"
+        style="grid-column: 1; grid-row: 1"
+        >SELECTOR</mat-card
+      >
+      <mat-progress-bar
+        class="arrow store-to-selector"
+        [value]="progressMap['store-to-selector'] || 0"
+        [class.no-transition]="shouldSkipTransition['store-to-selector']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 2; grid-row: 1"
+      ></mat-progress-bar>
+      <mat-card
+        class="node store"
+        [ngClass]="{ highlight: highlightStep === 'STORE' }"
+        style="grid-column: 3; grid-row: 1"
+        >STORE</mat-card
+      >
+
+      <!-- Fila 2 -->
+      <mat-progress-bar
+        class="arrow vertical reducer-to-store"
+        [value]="progressMap['reducer-to-store'] || 0"
+        [class.no-transition]="shouldSkipTransition['reducer-to-store']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 3; grid-row: 2"
+      ></mat-progress-bar>
+
+      <!-- Fila 3 -->
+
+      <mat-card
+        class="node reducer"
+        [ngClass]="{ highlight: highlightStep === 'REDUCER' }"
+        style="grid-column: 3; grid-row: 3"
+        >REDUCER</mat-card
+      >
+      <mat-progress-bar
+        class="arrow vertical selector-to-component"
+        [value]="progressMap['selector-to-component'] || 0"
+        [class.no-transition]="shouldSkipTransition['selector-to-component']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 1; grid-row: 3"
+      ></mat-progress-bar>
+      <mat-card
+        class="node service"
+        [ngClass]="{ highlight: highlightStep === 'SERVICE' }"
+        style="grid-column: 5; grid-row: 3"
+        >SERVICE</mat-card
+      >
+
+      <!-- Fila 4 -->
+      <mat-progress-bar
+        class="arrow vertical action-to-reducer"
+        [value]="progressMap['action-to-reducer'] || 0"
+        [class.no-transition]="shouldSkipTransition['action-to-reducer']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 3; grid-row: 4"
+      ></mat-progress-bar>
+      <mat-progress-bar
+        class="arrow vertical effects-to-service"
+        [value]="progressMap['effects-to-service'] || 0"
+        [class.no-transition]="shouldSkipTransition['effects-to-service']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 5; grid-row: 4"
+      ></mat-progress-bar>
+      <mat-progress-bar
+        class="arrow vertical service-to-effects"
+        [value]="progressMap['service-to-effects'] || 0"
+        [class.no-transition]="shouldSkipTransition['service-to-effects']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 5; grid-row: 4"
+      ></mat-progress-bar>
+
+      <!-- Fila 5 -->
+      <mat-card
+        class="node component"
+        [ngClass]="{ highlight: highlightStep === 'COMPONENT' }"
+        style="grid-column: 1; grid-row: 5"
+        >COMPONENT</mat-card
+      >
+      <mat-progress-bar
+        class="arrow component-to-action"
+        [value]="progressMap['component-to-action'] || 0"
+        [class.no-transition]="shouldSkipTransition['component-to-action']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 2; grid-row: 5"
+      ></mat-progress-bar>
+      <mat-card
+        class="node action"
+        [ngClass]="{ highlight: highlightStep === 'ACTION' }"
+        style="grid-column: 3; grid-row: 5"
+        >ACTION</mat-card
+      >
+      <mat-progress-bar
+        class="arrow action-to-effects"
+        [value]="progressMap['action-to-effects'] || 0"
+        [class.no-transition]="shouldSkipTransition['action-to-effects']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 4; grid-row: 5"
+      ></mat-progress-bar>
+      <mat-progress-bar
+        class="arrow effects-to-action"
+        [value]="progressMap['effects-to-action'] || 0"
+        [class.no-transition]="shouldSkipTransition['effects-to-action']"
+        mode="determinate"
+        color="accent"
+        style="grid-column: 4; grid-row: 5"
+      ></mat-progress-bar>
+      <mat-card
+        class="node effects"
+        [ngClass]="{ highlight: highlightStep === 'EFFECTS' }"
+        style="grid-column: 5; grid-row: 5"
+        >EFFECTS</mat-card
+      >
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="explanation-container">
+      <div class="explanation">
+        <p>
+          Esta simulación representa visualmente el ciclo de flujo de datos de
+          una arquitectura basada en <strong>NgRx</strong> en Angular.
+        </p>
+        <p>
+          Cada <strong>nodo</strong> es una etapa del ciclo ( <em>Store</em>,
+          <em>Reducer</em>, <em>Effects...</em>). El
+          <strong>estado actual del flujo</strong> se guarda haciendo uso de la
+          <code>store</code>
+        </p>
+        <p>
+          Cada vez que se pulsa el botón <em>Next Step</em>, se despacha una
+          acción que dispara un <strong>effect</strong>, y este va avanzando el
+          progreso visual mediante una animación.
+        </p>
+        <p>
+          El ciclo se repite automáticamente una vez se completan todos los
+          pasos, mostrando cómo fluye la información de forma reactiva.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="simulator-container">
+  <!-- Ruleta visual -->
+  <div class="slotstate">
+    <div class="slot-item">
+      {{ currentReduxCycleStep }}
+    </div>
+  </div>
+  <!-- <div
+    class="slot"
+    [style.transform]="'translateY(-' + currentVisualIndex * slotHeight + 'px)'"
+    [class.animated]="animate"
+  >
+    <div
+      class="slot-item"
+      *ngFor="let step of visibleSteps"
+      [style.height.px]="slotHeight"
+    >
+      {{ step }}
+    </div>
+  </div> -->
+
+  <div class="controls">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="advance()"
+      [disabled]="transitioning$ | async"
+    >
+      Next Step
+    </button>
+  </div>
+</div>
