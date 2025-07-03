@@ -49,9 +49,12 @@ background-color: #A4c869;*/
 }
 .h1container div {
   font-variant-caps: all-petite-caps;
-  font-size: 14.4px;
+  font-size: 18.5px;
   font-weight: bold;
   display: flex;
+  line-height: 1em;
+  font-family: "Arial", "Helvetica Neue", sans-serif;
+  font-weight: bold; /* Si aplica */
   flex-direction: column;
   align-items: center;
 }

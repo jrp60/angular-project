@@ -1,3 +1,4 @@
+//Angular
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -12,6 +13,7 @@ import { CommonModule } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { GoogleMapsModule } from "@angular/google-maps";
 
+//Services
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
 import { YoutubeService } from "./services/youtube.service";
@@ -19,6 +21,7 @@ import { CargaImagenesService } from "./services/carga-imagenes.service";
 import { AuthFirebaseService } from "./services/authfirebase.service";
 import { ChatService } from "./services/chat.service";
 
+//Components
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
@@ -38,19 +41,31 @@ import { SignUpComponent } from "./components/firebaselogin/sign-up/sign-up.comp
 import { ForgotPasswordComponent } from "./components/firebaselogin/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/firebaselogin/verify-email/verify-email.component";
 import { FotosComponent } from "./components/gestor-archivos/fotos/fotos.component";
-
-import { SinfotoPipe } from "./pipes/sinfoto.pipe";
-import { DomseguroPipe } from "./pipes/domseguro.pipe";
-import { VideoYoutubePipe } from "./pipes/video-youtube.pipe";
-
-import { NgDropFilesDirective } from "./directives/ng-drop-files.directive";
-
-import { environment } from "../environments/environment";
-// import "firebase/storage";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
 import { ImageGeneratorComponent } from "./components/tests/image-generator/image-generator.component";
 import { WipBannerComponent } from "./components/shared/wip-banner/wip-banner.component";
+import { NgrxSimulatorComponent } from "./components/tests/ngrx-simulator/ngrx-simulator.component";
+
+//Pipes & Directives
+import { SinfotoPipe } from "./pipes/sinfoto.pipe";
+import { DomseguroPipe } from "./pipes/domseguro.pipe";
+import { VideoYoutubePipe } from "./pipes/video-youtube.pipe";
+import { NgDropFilesDirective } from "./directives/ng-drop-files.directive";
+
+//Material
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+
+//Store
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { simulationReducer } from "./state/ngrx-sim/ngrx-sim.reducer";
+import { SimEffects } from "./state/ngrx-sim/ngrx-sim.effects";
+
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -80,6 +95,7 @@ import { WipBannerComponent } from "./components/shared/wip-banner/wip-banner.co
     PollComponent,
     ImageGeneratorComponent,
     WipBannerComponent,
+    NgrxSimulatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +110,13 @@ import { WipBannerComponent } from "./components/shared/wip-banner/wip-banner.co
     ReactiveFormsModule,
     DragDropModule,
     GoogleMapsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressBarModule,
+    StoreModule.forRoot({
+      simulation: simulationReducer,
+    }),
+    EffectsModule.forRoot([SimEffects]),
   ],
   providers: [
     MapasService,
@@ -107,6 +130,7 @@ import { WipBannerComponent } from "./components/shared/wip-banner/wip-banner.co
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })
