@@ -10,8 +10,7 @@ export const setProgress = createAction(
   props<{ progress: number }>()
 );
 
-// actions.ts
-export const setTransitioning = createAction(
-  "[Simulation] Set Transitioning",
-  props<{ inProgress: boolean }>()
+export const setRunning = createAction(
+  "[Simulation] Set Running",
+  props<{ running: boolean }>()
 );

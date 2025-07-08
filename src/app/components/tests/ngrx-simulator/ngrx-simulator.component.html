@@ -11,7 +11,6 @@
       <mat-progress-bar
         class="arrow store-to-selector"
         [value]="progressMap['store-to-selector'] || 0"
-        [class.no-transition]="shouldSkipTransition['store-to-selector']"
         mode="determinate"
         color="accent"
         style="grid-column: 2; grid-row: 1"
@@ -27,7 +26,6 @@
       <mat-progress-bar
         class="arrow vertical reducer-to-store"
         [value]="progressMap['reducer-to-store'] || 0"
-        [class.no-transition]="shouldSkipTransition['reducer-to-store']"
         mode="determinate"
         color="accent"
         style="grid-column: 3; grid-row: 2"
@@ -44,7 +42,6 @@
       <mat-progress-bar
         class="arrow vertical selector-to-component"
         [value]="progressMap['selector-to-component'] || 0"
-        [class.no-transition]="shouldSkipTransition['selector-to-component']"
         mode="determinate"
         color="accent"
         style="grid-column: 1; grid-row: 3"
@@ -60,7 +57,6 @@
       <mat-progress-bar
         class="arrow vertical action-to-reducer"
         [value]="progressMap['action-to-reducer'] || 0"
-        [class.no-transition]="shouldSkipTransition['action-to-reducer']"
         mode="determinate"
         color="accent"
         style="grid-column: 3; grid-row: 4"
@@ -68,7 +64,6 @@
       <mat-progress-bar
         class="arrow vertical effects-to-service"
         [value]="progressMap['effects-to-service'] || 0"
-        [class.no-transition]="shouldSkipTransition['effects-to-service']"
         mode="determinate"
         color="accent"
         style="grid-column: 5; grid-row: 4"
@@ -76,7 +71,6 @@
       <mat-progress-bar
         class="arrow vertical service-to-effects"
         [value]="progressMap['service-to-effects'] || 0"
-        [class.no-transition]="shouldSkipTransition['service-to-effects']"
         mode="determinate"
         color="accent"
         style="grid-column: 5; grid-row: 4"
@@ -92,7 +86,6 @@
       <mat-progress-bar
         class="arrow component-to-action"
         [value]="progressMap['component-to-action'] || 0"
-        [class.no-transition]="shouldSkipTransition['component-to-action']"
         mode="determinate"
         color="accent"
         style="grid-column: 2; grid-row: 5"
@@ -106,7 +99,6 @@
       <mat-progress-bar
         class="arrow action-to-effects"
         [value]="progressMap['action-to-effects'] || 0"
-        [class.no-transition]="shouldSkipTransition['action-to-effects']"
         mode="determinate"
         color="accent"
         style="grid-column: 4; grid-row: 5"
@@ -114,7 +106,6 @@
       <mat-progress-bar
         class="arrow effects-to-action"
         [value]="progressMap['effects-to-action'] || 0"
-        [class.no-transition]="shouldSkipTransition['effects-to-action']"
         mode="determinate"
         color="accent"
         style="grid-column: 4; grid-row: 5"
@@ -126,63 +117,60 @@
         >EFFECTS</mat-card
       >
     </div>
+    <div class="simulator-container">
+      <div class="slotstate">
+        <div class="slot-frame">
+          <div class="slot-window">
+            <div *ngIf="!fadeOut" @slideVertical class="slot-item">
+              {{ currentStepText }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="advance()"
+          [disabled]="running$ | async"
+        >
+          Next Step
+        </button>
+      </div>
+    </div>
   </div>
   <div class="col-4">
     <div class="explanation-container">
       <div class="explanation">
         <p>
-          Esta simulación representa visualmente el ciclo de flujo de datos de
-          una arquitectura basada en <strong>NgRx</strong> en Angular.
+          This simulation visually represents the data flow cycle of an Angular
+          architecture based on <strong>NgRx</strong>.
         </p>
         <p>
-          Cada <strong>nodo</strong> es una etapa del ciclo ( <em>Store</em>,
-          <em>Reducer</em>, <em>Effects...</em>). El
-          <strong>estado actual del flujo</strong> se guarda haciendo uso de la
-          <code>store</code>
+          Each <strong>node</strong> represents a stage in the reactive flow
+          (<em>Store</em>, <em>Reducer</em>, <em>Effects</em>...). The state of
+          the simulation is managed centrally through the <code>Store</code>.
         </p>
         <p>
-          Cada vez que se pulsa el botón <em>Next Step</em>, se despacha una
-          acción que dispara un <strong>effect</strong>, y este va avanzando el
-          progreso visual mediante una animación.
+          When the <em>Next Step</em> button is clicked, an
+          <strong>action</strong> is dispatched, triggering an
+          <strong>effect</strong>. The effect simulates an asynchronous process
+          with a visual delay, gradually advancing the flow between nodes.
         </p>
         <p>
-          El ciclo se repite automáticamente una vez se completan todos los
-          pasos, mostrando cómo fluye la información de forma reactiva.
+          Below the simulation, a text panel slides in from the bottom to
+          describe each step. As the next step begins, the current explanation
+          fades upward and is replaced by the next — in sync with the flow of
+          data.
+        </p>
+        <p>
+          The app uses <strong>selectors</strong> to extract state,
+          <strong>reducers</strong> to compute state changes immutably, and
+          <strong>effects</strong> to handle asynchronous side effects — all
+          coordinated via the <strong>Store</strong>.
         </p>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="simulator-container">
-  <!-- Ruleta visual -->
-  <div class="slotstate">
-    <div class="slot-item">
-      {{ currentReduxCycleStep }}
-    </div>
-  </div>
-  <!-- <div
-    class="slot"
-    [style.transform]="'translateY(-' + currentVisualIndex * slotHeight + 'px)'"
-    [class.animated]="animate"
-  >
-    <div
-      class="slot-item"
-      *ngFor="let step of visibleSteps"
-      [style.height.px]="slotHeight"
-    >
-      {{ step }}
-    </div>
-  </div> -->
-
-  <div class="controls">
-    <button
-      mat-raised-button
-      color="accent"
-      (click)="advance()"
-      [disabled]="transitioning$ | async"
-    >
-      Next Step
-    </button>
   </div>
 </div>

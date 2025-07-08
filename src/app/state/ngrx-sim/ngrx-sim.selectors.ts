@@ -9,11 +9,6 @@ export const selectCurrentStepIndex = createSelector(
   (state) => state.currentStepIndex
 );
 
-export const selectCurrentStep = createSelector(
-  selectSimState,
-  (state) => state.steps[state.currentStepIndex]
-);
-
 export const selectSteps = createSelector(
   selectSimState,
   (state) => state.steps
@@ -24,12 +19,7 @@ export const selectProgress = createSelector(
   (state) => state.progress
 );
 
-export const selectTransitioning = createSelector(
+export const selectRunning = createSelector(
   selectSimState,
   (state) => state.running
 );
-
-// export const selectIsRunning = createSelector(
-//   selectSimState,
-//   (state) => state.running
-// );

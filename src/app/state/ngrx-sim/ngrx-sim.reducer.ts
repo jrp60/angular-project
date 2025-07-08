@@ -1,7 +1,7 @@
 // src/app/state/ngrx-simulation/ngrx-simulation.reducer.ts
 import { createReducer, on } from "@ngrx/store";
 import * as SimulationActions from "./ngrx-sim.actions";
-import { setTransitioning } from "./ngrx-sim.actions";
+import { setRunning } from "./ngrx-sim.actions";
 
 export interface SimulationState {
   currentStepIndex: number;
@@ -15,14 +15,14 @@ export const initialState: SimulationState = {
   steps: [
     "Component Dispatches Action",
     "Effect Triggered",
-    "Call Service",
     "API Request",
     "API Response",
+    "Effect Dispatches New Action",
     "Reducer Updates State",
+    "Store Emits New State",
     "Selector Emits Change",
-    "Component Updates",
+    "Component Reacts to State Changes",
   ],
-
   progress: 0,
   running: false,
 };
@@ -45,8 +45,8 @@ export const simulationReducer = createReducer(
     ...state,
     progress,
   })),
-  on(setTransitioning, (state, { inProgress }) => ({
+  on(setRunning, (state, { running }) => ({
     ...state,
-    isTransitioning: inProgress,
+    running: running,
   }))
 );
