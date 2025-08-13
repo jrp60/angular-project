@@ -3,6 +3,43 @@
   <div>
     <app-ngrx-simulator></app-ngrx-simulator>
   </div>
+  <div class="message-container">
+    <h2>Send a Message</h2>
+
+    <div class="input-with-info">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="newMessage"
+          placeholder="Type your message..."
+          class="message-input"
+        />
+        <button (click)="sendMessage()" class="send-button">Send</button>
+      </div>
+
+      <!-- Explicación siempre visible -->
+      <div class="flow-info">
+        <small>
+          What happens behind the scenes? → POST → <strong>Micro A</strong> →
+          <strong>RabbitMQ</strong> → <strong>Micro B</strong> → SignalR → This
+          page
+        </small>
+      </div>
+    </div>
+
+    <!-- Solo aparece si hay error al enviar -->
+    <div *ngIf="attemptedSend && !rabbitAlive" class="error-message">
+      RabbitMQ or backend not available
+    </div>
+
+    <div *ngIf="receivedMessages.length > 0" class="received-messages">
+      <h3>Received Messages:</h3>
+      <ul>
+        <li *ngFor="let msg of receivedMessages">{{ msg }}</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="poll text-center mb-4 mt-3">
     <app-poll></app-poll>
   </div>
