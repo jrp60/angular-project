@@ -4,14 +4,14 @@
     <h2>Chat</h2>
     <hr />
     <div class="app-mensajes text-start" id="app-mensajes" #myOverlay>
-      <div class="text-center" (click)="cargarMasMensajes()">
+      <div class="text-center" (click)="loadMore()">
         <h1>
           <button class="btn btn-outline-light"><b>+</b></button>
         </h1>
       </div>
       <div
         [ngClass]="{ 'text-end': usuario.id == chat.uid }"
-        *ngFor="let chat of _cs.chats"
+        *ngFor="let chat of this.chats$ | async"
       >
         <span
           class="badge"

@@ -5,62 +5,71 @@ import {
   query,
   orderBy,
   limit,
-  collectionData,
   addDoc,
   DocumentReference,
+  collectionSnapshots,
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { Mensaje } from "../interfaces/mensaje.interface";
+import {
+  DocumentData,
+  getDocs,
+  QueryDocumentSnapshot,
+  startAfter,
+} from "firebase/firestore";
 
 @Injectable({
   providedIn: "root",
 })
 export class ChatService {
-  public chats: Mensaje[] = [];
-  public usuario: any = {};
-  public cargados: number = 0;
-
   private firestore = inject(Firestore);
   private chatsCollectionRef = collection(this.firestore, "chats");
 
+  private lastDoc: QueryDocumentSnapshot<DocumentData> | null = null; //QueryDocumentSnapshot from firestore
+  private readonly loadLimit = 10;
+
   constructor() {}
 
-  cargarMensajes(): Observable<Mensaje[]> {
-    const q = query(
+  listenMessages(): Observable<Mensaje[]> {
+    const messageQuery = query(
       this.chatsCollectionRef,
       orderBy("fecha", "desc"),
-      limit(10)
+      limit(this.loadLimit)
     );
-    return collectionData(q).pipe(
-      map((mensajes: Mensaje[]) => {
-        this.chats = [];
-        for (let mensaje of mensajes) {
-          this.chats.unshift(mensaje);
+
+    return collectionSnapshots(messageQuery).pipe(
+      //map because with collectionSnapshot we get the raw data, need to transform QueryDocumentSnapshot[] in Mensaje[]
+      //QueryDocumentSnapshot -> docs -> data -> Mensaje
+      map((docs) => {
+        if (docs.length > 0) {
+          this.lastDoc = docs[docs.length - 1];
         }
-        return this.chats;
+        return docs.map((doc) => doc.data() as Mensaje).reverse();
       })
     );
   }
 
-  cargarMasMensajes(): Observable<Mensaje[]> {
-    this.cargados += 10;
-    const q = query(
-      collection(this.firestore, "chats"),
-      orderBy("fecha", "desc"),
-      limit(this.cargados)
-    );
+  async loadMoreMessages() {
+    const messageQuery = this.lastDoc
+      ? query(
+          this.chatsCollectionRef,
+          orderBy("fecha", "desc"),
+          startAfter(this.lastDoc),
+          limit(this.loadLimit)
+        )
+      : query(
+          this.chatsCollectionRef,
+          orderBy("fecha", "desc"),
+          limit(this.loadLimit)
+        );
 
-    return collectionData(q, { idField: "id" }).pipe(
-      map((mensajes: Mensaje[]) => {
-        this.chats = [...mensajes].reverse(); // reverse for newest at bottom
-        return this.chats;
-      }),
-      catchError((error) => {
-        console.error("Error in cargarMasMensajes (observable):", error);
-        return [];
-      })
-    );
+    const snap = await getDocs(messageQuery);
+    if (snap.empty) return [];
+
+    this.lastDoc = snap.docs[snap.docs.length - 1];
+
+    return snap.docs.map((doc) => doc.data() as Mensaje).reverse();
   }
 
   async agregarMensaje(
