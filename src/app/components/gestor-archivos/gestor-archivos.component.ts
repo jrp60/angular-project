@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FileItem } from "src/app/models/file-item";
 import { CargaImagenesService } from "src/app/services/carga-imagenes.service";
-import { AuthFirebaseService } from "../../services/authfirebase.service";
+import { AuthFirebaseService } from "../../my-auth-module/services/authfirebase.service";
 
 @Component({
   selector: "app-gestor-archivos",

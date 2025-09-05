@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ChatService } from "../../services/chat.service";
-import { AuthFirebaseService } from "../../services/authfirebase.service";
+import { AuthFirebaseService } from "../../my-auth-module/services/authfirebase.service";
 import { Mensaje } from "../../interfaces/mensaje.interface";
 import { map, Observable, of } from "rxjs";
 

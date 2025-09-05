@@ -2,11 +2,11 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 import { AuthGuard } from "@auth0/auth0-angular";
-import { AuthFirebaseGuard } from "./guard/auth-firebase.guard";
-import { LoginFirebaseGuard } from "./guard/login-firebase.guard";
+import { AuthFirebaseGuard } from "./my-auth-module/guard/auth-firebase.guard";
+import { LoginFirebaseGuard } from "./my-auth-module/guard/login-firebase.guard";
 
 import { HomeComponent } from "./components/home/home.component";
-import { AutenticadoComponent } from "./components/autenticado/autenticado.component";
+import { AutenticadoComponent } from "./my-auth-module/autenticado/autenticado.component";
 import { ChatComponent } from "./components/chat/chat.component";
 import { SpotiComponent } from "./components/spoti/spoti.component";
 import { YoutubeComponent } from "./components/youtube/youtube.component";
@@ -15,11 +15,11 @@ import { GestorArchivosComponent } from "./components/gestor-archivos/gestor-arc
 import { SearchComponent } from "./components/spoti/search/search.component";
 import { ArtistComponent } from "./components/spoti/artist/artist.component";
 import { FotosComponent } from "./components/gestor-archivos/fotos/fotos.component";
-import { SignInComponent } from "./components/firebaselogin/sign-in/sign-in.component";
-import { SignUpComponent } from "./components/firebaselogin/sign-up/sign-up.component";
-import { DashboardComponent } from "./components/firebaselogin/dashboard/dashboard.component";
-import { ForgotPasswordComponent } from "./components/firebaselogin/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "./components/firebaselogin/verify-email/verify-email.component";
+import { SignInComponent } from "./my-auth-module/firebaselogin/sign-in/sign-in.component";
+import { SignUpComponent } from "./my-auth-module/firebaselogin/sign-up/sign-up.component";
+import { DashboardComponent } from "./my-auth-module/firebaselogin/dashboard/dashboard.component";
+import { ForgotPasswordComponent } from "./my-auth-module/firebaselogin/forgot-password/forgot-password.component";
+import { VerifyEmailComponent } from "./my-auth-module/firebaselogin/verify-email/verify-email.component";
 import { TestsComponent } from "./components/tests/tests.component";
 
 export const APP_ROUTES: Routes = [

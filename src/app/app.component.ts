@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AuthFirebaseService } from "./services/authfirebase.service";
+import { AuthFirebaseService } from "./my-auth-module/services/authfirebase.service";
 
 @Component({
   selector: "app-root",

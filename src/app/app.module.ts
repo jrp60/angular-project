@@ -12,13 +12,15 @@ import { provideStorage, getStorage } from "@angular/fire/storage";
 import { CommonModule } from "@angular/common";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { GoogleMapsModule } from "@angular/google-maps";
+//My Modules
+import { MyAuthModule } from "./my-auth-module/my-auth.module";
 
 //Services
 import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
 import { YoutubeService } from "./services/youtube.service";
 import { CargaImagenesService } from "./services/carga-imagenes.service";
-import { AuthFirebaseService } from "./services/authfirebase.service";
+// import { AuthFirebaseService } from "./authModule/services/authfirebase.service";
 import { ChatService } from "./services/chat.service";
 
 //Components
@@ -27,7 +29,7 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthButtonComponent } from "./components/auth-button/auth-button.component";
-import { AutenticadoComponent } from "./components/autenticado/autenticado.component";
+// import { AutenticadoComponent } from "./authModule/autenticado/autenticado.component";
 import { ChatComponent } from "./components/chat/chat.component";
 import { SpotiComponent } from "./components/spoti/spoti.component";
 import { YoutubeComponent } from "./components/youtube/youtube.component";
@@ -35,11 +37,11 @@ import { MapsComponent } from "./components/maps/maps.component";
 import { GestorArchivosComponent } from "./components/gestor-archivos/gestor-archivos.component";
 import { SearchComponent } from "./components/spoti/search/search.component";
 import { ArtistComponent } from "./components/spoti/artist/artist.component";
-import { DashboardComponent } from "./components/firebaselogin/dashboard/dashboard.component";
-import { SignInComponent } from "./components/firebaselogin/sign-in/sign-in.component";
-import { SignUpComponent } from "./components/firebaselogin/sign-up/sign-up.component";
-import { ForgotPasswordComponent } from "./components/firebaselogin/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "./components/firebaselogin/verify-email/verify-email.component";
+// import { DashboardComponent } from "./authModule/firebaselogin/dashboard/dashboard.component";
+// import { SignInComponent } from "./authModule/firebaselogin/sign-in/sign-in.component";
+// import { SignUpComponent } from "./authModule/firebaselogin/sign-up/sign-up.component";
+// import { ForgotPasswordComponent } from "./authModule/firebaselogin/forgot-password/forgot-password.component";
+// import { VerifyEmailComponent } from "./authModule/firebaselogin/verify-email/verify-email.component";
 import { FotosComponent } from "./components/gestor-archivos/fotos/fotos.component";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
@@ -73,7 +75,6 @@ import { environment } from "../environments/environment";
     NavbarComponent,
     HomeComponent,
     AuthButtonComponent,
-    AutenticadoComponent,
     ChatComponent,
     SpotiComponent,
     YoutubeComponent,
@@ -86,11 +87,6 @@ import { environment } from "../environments/environment";
     VideoYoutubePipe,
     FotosComponent,
     NgDropFilesDirective,
-    DashboardComponent,
-    SignInComponent,
-    SignUpComponent,
-    ForgotPasswordComponent,
-    VerifyEmailComponent,
     TestsComponent,
     PollComponent,
     ImageGeneratorComponent,
@@ -117,13 +113,13 @@ import { environment } from "../environments/environment";
       simulation: simulationReducer,
     }),
     EffectsModule.forRoot([SimEffects]),
+    MyAuthModule,
   ],
   providers: [
     MapasService,
     SpotifyService,
     YoutubeService,
     CargaImagenesService,
-    AuthFirebaseService,
     ChatService,
     provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
     provideAuth(() => getAuth()),
