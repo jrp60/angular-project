@@ -68,6 +68,7 @@ import { simulationReducer } from "./state/ngrx-sim/ngrx-sim.reducer";
 import { SimEffects } from "./state/ngrx-sim/ngrx-sim.effects";
 
 import { environment } from "../environments/environment";
+import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-standalone.component";
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { environment } from "../environments/environment";
     }),
     EffectsModule.forRoot([SimEffects]),
     MyAuthModule,
+    MyStandaloneComponent,
   ],
   providers: [
     MapasService,

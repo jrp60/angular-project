@@ -21,6 +21,7 @@ import { DashboardComponent } from "./my-auth-module/firebaselogin/dashboard/das
 import { ForgotPasswordComponent } from "./my-auth-module/firebaselogin/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./my-auth-module/firebaselogin/verify-email/verify-email.component";
 import { TestsComponent } from "./components/tests/tests.component";
+import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-standalone.component";
 
 export const APP_ROUTES: Routes = [
   // {
@@ -60,6 +61,7 @@ export const APP_ROUTES: Routes = [
   { path: "fotos/subir-imagen", component: GestorArchivosComponent },
   { path: "fotos", component: FotosComponent },
   { path: "tests", component: TestsComponent },
+  { path: "standalone", component: MyStandaloneComponent },
   { path: "**", pathMatch: "full", redirectTo: "home" },
 ];
 @NgModule({
