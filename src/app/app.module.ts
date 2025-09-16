@@ -61,7 +61,6 @@ import { simulationReducer } from "./state/ngrx-sim/ngrx-sim.reducer";
 import { SimEffects } from "./state/ngrx-sim/ngrx-sim.effects";
 
 import { environment } from "../environments/environment";
-import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-standalone.component";
 
 @NgModule({
   declarations: [
@@ -83,7 +82,6 @@ import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-s
     TestsComponent,
     PollComponent,
     ImageGeneratorComponent,
-    WipBannerComponent,
     NgrxSimulatorComponent,
   ],
   imports: [
@@ -107,8 +105,8 @@ import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-s
     }),
     EffectsModule.forRoot([SimEffects]),
     MyAuthModule,
-    MyStandaloneComponent,
     AuthButtonComponent,
+    WipBannerComponent,
   ],
   providers: [
     MapasService,
