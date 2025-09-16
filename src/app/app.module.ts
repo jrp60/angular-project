@@ -20,7 +20,6 @@ import { MapasService } from "./services/mapas.service";
 import { SpotifyService } from "./services/spotify.service";
 import { YoutubeService } from "./services/youtube.service";
 import { CargaImagenesService } from "./services/carga-imagenes.service";
-// import { AuthFirebaseService } from "./authModule/services/authfirebase.service";
 import { ChatService } from "./services/chat.service";
 
 //Components
@@ -28,8 +27,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { HomeComponent } from "./components/home/home.component";
-import { AuthButtonComponent } from "./components/auth-button/auth-button.component";
-// import { AutenticadoComponent } from "./authModule/autenticado/autenticado.component";
+import { AuthButtonComponent } from "./my-auth-module/auth-button/auth-button.component";
 import { ChatComponent } from "./components/chat/chat.component";
 import { SpotiComponent } from "./components/spoti/spoti.component";
 import { YoutubeComponent } from "./components/youtube/youtube.component";
@@ -37,11 +35,6 @@ import { MapsComponent } from "./components/maps/maps.component";
 import { GestorArchivosComponent } from "./components/gestor-archivos/gestor-archivos.component";
 import { SearchComponent } from "./components/spoti/search/search.component";
 import { ArtistComponent } from "./components/spoti/artist/artist.component";
-// import { DashboardComponent } from "./authModule/firebaselogin/dashboard/dashboard.component";
-// import { SignInComponent } from "./authModule/firebaselogin/sign-in/sign-in.component";
-// import { SignUpComponent } from "./authModule/firebaselogin/sign-up/sign-up.component";
-// import { ForgotPasswordComponent } from "./authModule/firebaselogin/forgot-password/forgot-password.component";
-// import { VerifyEmailComponent } from "./authModule/firebaselogin/verify-email/verify-email.component";
 import { FotosComponent } from "./components/gestor-archivos/fotos/fotos.component";
 import { TestsComponent } from "./components/tests/tests.component";
 import { PollComponent } from "./components/tests/poll/poll.component";
@@ -75,7 +68,6 @@ import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-s
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    AuthButtonComponent,
     ChatComponent,
     SpotiComponent,
     YoutubeComponent,
@@ -116,6 +108,7 @@ import { MyStandaloneComponent } from "./components/standlone/my-standalone/my-s
     EffectsModule.forRoot([SimEffects]),
     MyAuthModule,
     MyStandaloneComponent,
+    AuthButtonComponent,
   ],
   providers: [
     MapasService,
